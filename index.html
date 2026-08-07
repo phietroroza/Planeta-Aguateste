@@ -14,7 +14,7 @@
         }
         * { margin: 0; padding: 0; box-sizing: border-box; }
         html { scroll-behavior: smooth; }
-        body { background: var(--primary-dark); color: var(--text); line-height: 1.6; font-family: 'Inter', sans-serif; }
+        body { background: var(--primary-dark); color: var(--text); line-height: 1.6; font-family: 'Inter', sans-serif; transition: background 0.8s ease; }
 
        .sidebar { position: fixed; left: 0; top: 0; width: 280px; height: 100vh; background: #002244; padding: 30px 0; overflow-y: auto; z-index: 1000; border-right: 1px solid rgba(0, 191, 255, 0.2); }
        .sidebar-header { padding: 0 20px 30px; border-bottom: 1px solid rgba(0, 191, 255, 0.3); margin-bottom: 20px; }
@@ -92,8 +92,18 @@
        .grid-container,.equipes-grid,.dicas-container { grid-template-columns: 1fr; }
         }
     
-body::before{ content:"";position:fixed;inset:0;pointer-events:none; background: radial-gradient(circle at 20% 120%,rgba(255,255,255,.08) 0 2px,transparent 3px) 0 0/120px 120px, radial-gradient(circle at 70% 130%,rgba(255,255,255,.06) 0 3px,transparent 4px) 0 0/180px 180px; animation:bubbles 20s linear infinite; opacity:.8;z-index:-1}
+body::before{ content:"";position:fixed;inset:0;pointer-events:none; background: radial-gradient(circle at 20% 120%,rgba(255,255,255,.08) 0 2px,transparent 3px) 0 0/120px 120px, radial-gradient(circle at 70% 130%,rgba(255,255,255,.06) 0 3px,transparent 4px) 0 0/180px 180px; animation:bubbles 20s linear infinite; opacity:.8;z-index:-1; transition: all 0.8s ease;}
 @keyframes bubbles{from{transform:translateY(0)}to{transform:translateY(-220px)}}
+
+/* NOVO: FUNDO FLORESTA */
+body.tema-floresta::before {
+    background: 
+        radial-gradient(circle at 30% 20%, rgba(34,139,34,0.3) 0, transparent 50%),
+        radial-gradient(circle at 70% 80%, rgba(85,107,47,0.3) 0, transparent 50%),
+        linear-gradient(180deg, #0a2a0a 0%, #1a3a1a 100%);
+    animation: none;
+}
+
 section,header,.info-card,.dica-card,.equipe-card{ animation:fadeUp .8s ease both}
 @keyframes fadeUp{from{opacity:0;transform:translateY(30px)}to{opacity:1;transform:none}}
 .info-card,.dica-card,.equipe-card{position:relative;overflow:hidden}
@@ -111,6 +121,18 @@ main,header,section,nav,.container{position:relative;z-index:2}
 .s1{top:12%;left:-15%;animation:sharkR 32s linear infinite} .s2{top:68%;left:115%;animation:sharkL 40s linear infinite}
 .glow{filter:drop-shadow(0 0 8px #7df9ff) drop-shadow(0 0 18px #7df9ff)}
 @keyframes sharkR{from{transform:translateX(0)}to{transform:translateX(130vw)}} @keyframes sharkL{from{transform:translateX(0) scaleX(-1)}to{transform:translateX(-130vw) scaleX(-1)}}
+
+/* NOVO: FOLHAS CAINDO */
+.folhas {position:fixed;inset:0;overflow:hidden;pointer-events:none;z-index:0;display:none;}
+body.tema-floresta .folhas {display:block;}
+.folhas span {
+    position:absolute; top:-100px; font-size:24px; opacity:0.6;
+    animation: cair 15s linear infinite;
+}
+@keyframes cair {
+    0% { transform: translateY(0) rotate(0deg); }
+    100% { transform: translateY(120vh) rotate(360deg); }
+}
 </style>
 </head>
 <body>
@@ -189,7 +211,32 @@ main,header,section,nav,.container{position:relative;z-index:2}
     </main>
 
     <footer><p>&copy; 2026 Projeto Planeta Agua| <span data-key="footer">Gestão Sustentável da Água</span></p></footer>
-    <script>
+
+<div class="bubbles"><span style="--i:11"></span><span style="--i:18"></span><span style="--i:25"></span><span style="--i:14"></span><span style="--i:22"></span><span style="--i:9"></span><span style="--i:27"></span><span style="--i:16"></span><span style="--i:30"></span><span style="--i:12"></span><span style="--i:21"></span><span style="--i:15"></span><span style="--i:24"></span><span style="--i:19"></span><span style="--i:28"></span><span style="--i:13"></span><span style="--i:26"></span><span style="--i:17"></span><span style="--i:23"></span><span style="--i:10"></span></div>
+
+<div class="fish f1">🐬</div>
+<div class="fish f2">🐠</div>
+<div class="fish f3">🐳</div>
+
+<div class="shark s1">🦈</div>
+<div class="shark s2">🦈</div>
+<div class="fish f1 glow">🐠</div>
+<div class="fish f2 glow">🐬</div>
+<div class="fish f3 glow">🐳</div>
+
+<!-- NOVO: FOLHAS PARA O TEMA FLORESTA -->
+<div class="folhas">
+    <span style="left:10%; animation-delay:0s;">🍃</span>
+    <span style="left:20%; animation-delay:2s;">🍂</span>
+    <span style="left:30%; animation-delay:4s;">🌿</span>
+    <span style="left:40%; animation-delay:1s;">🍃</span>
+    <span style="left:50%; animation-delay:3s;">🍂</span>
+    <span style="left:60%; animation-delay:5s;">🌿</span>
+    <span style="left:70%; animation-delay:2.5s;">🍃</span>
+    <span style="left:80%; animation-delay:4.5s;">🍂</span>
+    <span style="left:90%; animation-delay:1.5s;">🌿</span>
+</div>
+<script>
         const equipesData = {
             gibi: {
                 pt: [
@@ -273,7 +320,7 @@ main,header,section,nav,.container{position:relative;z-index:2}
                     { id: 8, nome: "Team 8", participantes: ["Emanoel Felipe"], totalPaginas: 1 },
                     { id: 9, nome: "Team 9", participantes: ["Henrique Machado Brisola", "Gabriel Machado" ], totalPaginas: 1 },
                     { id: 10, nome: "Team 10", participantes: ["Emilly Cézar Zampier", "Nicolas slominisk Mello ","Lyandra Garcia "], totalPaginas: 1 },
-                    { id: 11, nome: "Team 11", participantes:  ["Anihelly Faria Pinheiro"], totalPaginas: 1 },
+                    { id: 11, nome: "Team 11", participantes: ["Anihelly Faria Pinheiro"], totalPaginas: 1 },
                     { id: 12, nome: "Team 12", participantes: ["Student 12-1", "Student 12-2"], totalPaginas: 1 },
                     { id: 13, nome: "Team 13", participantes: ["Student 13-1", "Student 13-2"], totalPaginas: 1 },
                     { id: 14, nome: "Team 14", participantes: ["Student 14-1", "Student 14-2"], totalPaginas: 1 },
@@ -297,7 +344,7 @@ main,header,section,nav,.container{position:relative;z-index:2}
                     { id: 15, nome: "Equipo 15", participantes: ["Alumno 15-1", "Alumno 15-2"], totalPaginas: 1 }
                 ]
             },
-            terrario: { // AGORA IGUAL AO GIBI/STOPMOTION
+            terrario: {
                 pt: [
                 { id: 1, nome: "Equipe 1", participantes: ["Phietro Emanuel","Henrique Brisola", "Juan", "Eduardo"], totalPaginas: 10 },
                     { id: 2, nome: "Equipe 2", participantes: ["Luana Marcondes", "Hallana Oliveira ", "Davi Peres"], totalPaginas: 13 },
@@ -343,7 +390,7 @@ main,header,section,nav,.container{position:relative;z-index:2}
                     { id: 8, nome: "Equipo 8", participantes: ["Emanoel Felipe", "Andrielly Ilza"], totalPaginas: 5 },
                     { id: 9, nome: "Equipo 9", participantes: ["Emilly Zampieri", "Nicolas","Anielly"], totalPaginas: 1 },
                     { id: 10, nome: "Equipo 10", participantes: ["Larissa Buture"], totalPaginas: 2 },
-                    { id: 11, nome: "Equipo 11", participantes:  ["Vitor Andrioli", "Anderson", "Luiz Fernando"], totalPaginas: 4 },
+                    { id: 11, nome: "Equipo 11", participantes: ["Vitor Andrioli", "Anderson", "Luiz Fernando"], totalPaginas: 4 },
                     { id: 12, nome: "Equipo 12", participantes: ["Anihelly Faria Pinheiro ", "Emilly Zampieri ", "Nicolas slonoski"], totalPaginas: 1 },
                     { id: 13, nome: "Equipo 13", participantes: ["Alumno 13-1", "Alumno 13-2"], totalPaginas: 6 },
                     { id: 14, nome: "Equipo 14", participantes: ["Alumno 14-1", "Alumno 14-2"], totalPaginas: 2 },
@@ -394,14 +441,23 @@ main,header,section,nav,.container{position:relative;z-index:2}
 
         function getIdiomaAtual() { return localStorage.getItem('idiomaSite') || 'pt'; }
 
+        // NOVAS FUNÇÕES DO TEMA
+        function ativarTemaFloresta() {
+            document.body.classList.add('tema-floresta');
+        }
+        function ativarTemaAgua() {
+            document.body.classList.remove('tema-floresta');
+        }
+
         function abrirTrabalho() {
             fecharOverlay('curiosidade-overlay');
             if (tipoTrabalhoAtual === 'gibi') abrirGibi(equipaAtual.id);
             else if (tipoTrabalhoAtual === 'stopmotion') abrirVideo(equipaAtual.id);
-            else if (tipoTrabalhoAtual === 'terrario') abrirTerrario(equipaAtual.id); // AGORA USA O MESMO SISTEMA
+            else if (tipoTrabalhoAtual === 'terrario') abrirTerrario(equipaAtual.id);
         }
 
         function abrirGibi(equipaId) {
+            ativarTemaAgua(); // VOLTA PRO TEMA ÁGUA
             const idioma = getIdiomaAtual();
             equipaAtual = equipesData.gibi[idioma].find(e => e.id === equipaId);
             paginaAtual = 0;
@@ -435,6 +491,7 @@ main,header,section,nav,.container{position:relative;z-index:2}
         }
 
         function abrirVideo(equipaId) {
+            ativarTemaAgua(); // VOLTA PRO TEMA ÁGUA
             const idioma = getIdiomaAtual();
             equipaAtual = equipesData.stopmotion[idioma].find(e => e.id === equipaId);
             const txt = idioma === 'en'? ' - Stop Motion' : idioma === 'es'? ' - Stop Motion' : ' - Stop Motion';
@@ -444,7 +501,8 @@ main,header,section,nav,.container{position:relative;z-index:2}
             document.body.style.overflow = 'hidden';
         }
 
-        function abrirTerrario(equipaId) { // AGORA IGUAL AO GIBI
+        function abrirTerrario(equipaId) {
+            ativarTemaFloresta(); // ATIVA O TEMA FLORESTA
             const idioma = getIdiomaAtual();
             equipaAtual = equipesData.terrario[idioma].find(e => e.id === equipaId);
             paginaAtual = 0;
@@ -454,7 +512,7 @@ main,header,section,nav,.container{position:relative;z-index:2}
             document.body.style.overflow = 'hidden';
             atualizarTerrario();
         }
-        function atualizarTerrario() { // AGORA IGUAL AO GIBI
+        function atualizarTerrario() {
             const nomeArquivo = `terrariop${paginaAtual + 1}equipe${equipaAtual.id}.png`;
             const img = document.getElementById("pagina");
             document.getElementById('img-erro').style.display = 'none';
@@ -462,7 +520,7 @@ main,header,section,nav,.container{position:relative;z-index:2}
             img.src = nomeArquivo;
             document.getElementById("contador").innerText = `${paginaAtual + 1} / ${equipaAtual.totalPaginas}`;
         }
-              const navLinks = document.querySelectorAll('.nav-link'); const sections = document.querySelectorAll('section');
+          const navLinks = document.querySelectorAll('.nav-link'); const sections = document.querySelectorAll('section');
         navLinks.forEach(link => { link.addEventListener('click', (e) => {
             e.preventDefault(); const sectionId = link.getAttribute('data-section');
             navLinks.forEach(l => l.classList.remove('active')); link.classList.add('active');
@@ -485,6 +543,7 @@ main,header,section,nav,.container{position:relative;z-index:2}
         }
 
         function fecharOverlay(id) {
+            if(id === 'gibi-overlay') ativarTemaAgua(); // VOLTA PRO TEMA ÁGUA AO FECHAR
             document.getElementById(id).style.display = 'none';
             document.body.style.overflow = 'auto';
             if(id === 'video-overlay') { const video = document.getElementById('video-player'); video.pause(); video.currentTime = 0; video.src = ""; }
@@ -511,7 +570,7 @@ main,header,section,nav,.container{position:relative;z-index:2}
         const traducoes = {
             pt: { inicio: "Início", curiosidades: "Curiosidades", trabalhos: "Trabalhos", dicas: "Dicas", quiz: "Quiz", titulo: "O PROJETO E A ÁGUA", idioma: "Idioma", cor_tema: "Cor do Tema", fatos_titulo: "Fatos e Curiosidades", trabalhos_titulo: "Nossos Trabalhos", dicas_titulo: "Dicas Práticas", quiz_titulo: "Quiz da Água", gibi_tit: "Gibi", stop_tit: "Stop Motion", terrario_tit: "Terrário", gibi_desc: "Veja as 15 equipes e seus gibis sobre a água", stop_desc: "Assista aos vídeos das 15 equipes", terrario_desc: "Veja as 15 equipes e seus terrários", clique: "Clique para ver →", anterior: "← Anterior", proxima: "Próxima →", ciclo_tit: "O Ciclo da Água", consumo_tit: "Consumo Industrial", conta_tit: "Contaminação", ciclo_resumo: "A água percorre um ciclo contínuo na natureza...", consumo_resumo: "A indústria consome aproximadamente 19% da água doce...", conta_resumo: "2 bilhões de pessoas vivem em regiões com escassez severa...", ciclo_txt: "A água circula continuamente através de evaporação, condensação e precipitação.", consumo_txt: "A agricultura consome 70% de toda a água doce do mundo.", conta_txt: "80% dos rios globais estão poluídos. 2 bilhões de pessoas vivem com escassez severa.", dica1_tit: "Banhos Rápidos", dica1_txt: "Reduzir o tempo de banho economiza até 100 litros por dia.", dica2_tit: "Conserte Vazamentos", dica2_txt: "Um vazamento pequeno desperdiça até 46 mil litros por ano.", dica3_tit: "Reutilize Água", dica3_txt: "Aproveite a água da chuva para regar plantas.", quiz_intro: "Teste seus conhecimentos com 10 perguntas!", btn_comecar: "Começar Quiz", pergunta: "Pergunta", de: "de", parabens: "Parabéns!", btn_tentar: "Tentar Novamente", footer: "Gestão Sustentável da Água" },
             en: { inicio: "Home", curiosidades: "Curiosities", trabalhos: "Projects", dicas: "Tips", quiz: "Quiz", titulo: "THE PROJECT AND WATER", idioma: "Language", cor_tema: "Theme Color", fatos_titulo: "Facts and Curiosities", trabalhos_titulo: "Our Projects", dicas_titulo: "Practical Tips", quiz_titulo: "Water Quiz", gibi_tit: "Comic", stop_tit: "Stop Motion", terrario_tit: "Terrarium", gibi_desc: "See the 15 teams and their water comics", stop_desc: "Watch the 15 teams' videos", terrario_desc: "See the 15 teams and their terrariums", clique: "Click to see →", anterior: "← Previous", proxima: "Next →", ciclo_tit: "The Water Cycle", consumo_tit: "Industrial Consumption", conta_tit: "Contamination", ciclo_resumo: "Water goes through a continuous cycle in nature...", consumo_resumo: "Industry consumes approximately 19% of fresh water...", conta_resumo: "2 billion people live in regions with severe water scarcity...", ciclo_txt: "Water circulates continuously through evaporation, condensation and precipitation.", consumo_txt: "Agriculture consumes 70% of all fresh water in the world.", conta_txt: "80% of the world's rivers are polluted. 2 billion people live with severe water scarcity.", dica1_tit: "Quick Showers", dica1_txt: "Reducing shower time saves up to 100 liters per day.", dica2_tit: "Fix Leaks", dica2_txt: "A small leak wastes up to 46 thousand liters per year.", dica3_tit: "Reuse Water", dica3_txt: "Use rainwater to water plants.", quiz_intro: "Test your knowledge with 10 questions!", btn_comecar: "Start Quiz", pergunta: "Question", de: "of", parabens: "Congratulations!", btn_tentar: "Try Again", footer: "Sustainable Water Management" },
-            es: { inicio: "Inicio", curiosidades: "Curiosidades", trabajos: "Trabajos", dicas: "Consejos", quiz: "Cuestionario", titulo: "EL PROYECTO Y EL AGUA", idioma: "Idioma", cor_tema: "Color del Tema", fatos_titulo: "Datos y Curiosidades", trabalhos_titulo: "Nuestros Trabajos", dicas_titulo: "Consejos Prácticos", quiz_titulo: "Cuestionario del Agua", gibi_tit: "Cómic", stop_tit: "Stop Motion", terrario_tit: "Terrario", gibi_desc: "Mira los 15 equipos y sus cómics sobre el agua", stop_desc: "Mira los videos de los 15 equipos", terrario_desc: "Mira los 15 equipos y sus terrarios", clique: "Haz clic para ver →", anterior: "← Anterior", proxima: "Siguiente →", ciclo_tit: "El Ciclo del Agua", consumo_tit: "Consumo Industrial", conta_tit: "Contaminación", ciclo_resumo: "El agua recorre un ciclo continuo en la naturaleza...", consumo_resumo: "La industria consume aproximadamente el 19% del agua dulce...", conta_resumo: "2 mil millones de personas viven en regiones con escasez severa...", ciclo_txt: "El agua circula continuamente a través de evaporación, condensación y precipitación.", consumo_txt: "La agricultura consume el 70% de toda el agua dulce del mundo.", conta_txt: "El 80% de los ríos del mundo están contaminados. 2 mil millones de personas viven con escasez severa.", dica1_tit: "Duchas Rápidas", dica1_txt: "Reducir el tiempo de ducha ahorra hasta 100 litros por día.", dica2_tit: "Repara Fugas", dica2_txt: "Una pequeña fuga desperdicia hasta 46 mil litros por año.", dica3_tit: "Reutiliza Agua", dica3_txt: "Aprovecha el agua de lluvia para regar plantas.", quiz_intro: "¡Pon a prueba tus conocimientos con 10 preguntas!", btn_comecar: "Comenzar Cuestionario", pergunta: "Pregunta", de: "de", parabens: "¡Felicidades!", btn_tentar: "Intentar de Nuevo", footer: "Gestión Sostenible del Agua" }
+            es: { inicio: "Inicio", curiosidades: "Curiosidades", trabalhos: "Trabajos", dicas: "Consejos", quiz: "Cuestionario", titulo: "EL PROYECTO Y EL AGUA", idioma: "Idioma", cor_tema: "Color del Tema", fatos_titulo: "Datos y Curiosidades", trabalhos_titulo: "Nuestros Trabajos", dicas_titulo: "Consejos Prácticos", quiz_titulo: "Cuestionario del Agua", gibi_tit: "Cómic", stop_tit: "Stop Motion", terrario_tit: "Terrario", gibi_desc: "Mira los 15 equipos y sus cómics sobre el agua", stop_desc: "Mira los videos de los 15 equipos", terrario_desc: "Mira los 15 equipos y sus terrarios", clique: "Haz clic para ver →", anterior: "← Anterior", proxima: "Siguiente →", ciclo_tit: "El Ciclo del Agua", consumo_tit: "Consumo Industrial", conta_tit: "Contaminación", ciclo_resumo: "El agua recorre un ciclo continuo en la naturaleza...", consumo_resumo: "La industria consume aproximadamente el 19% del agua dulce...", conta_resumo: "2 mil millones de personas viven en regiones con escasez severa...", ciclo_txt: "El agua circula continuamente a través de evaporación, condensación y precipitación.", consumo_txt: "La agricultura consume el 70% de toda el agua dulce del mundo.", conta_txt: "El 80% de los ríos del mundo están contaminados. 2 mil millones de personas viven con escasez severa.", dica1_tit: "Duchas Rápidas", dica1_txt: "Reducir el tiempo de ducha ahorra hasta 100 litros por día.", dica2_tit: "Repara Fugas", dica2_txt: "Una pequeña fuga desperdiça hasta 46 mil litros por año.", dica3_tit: "Reutiliza Agua", dica3_txt: "Aprovecha el agua de lluvia para regar plantas.", quiz_intro: "¡Pon a prueba tus conocimientos con 10 preguntas!", btn_comecar: "Comenzar Cuestionario", pergunta: "Pregunta", de: "de", parabens: "¡Felicidades!", btn_tentar: "Intentar de Nuevo", footer: "Gestión Sostenible del Agua" }
         };
 
         function aplicarTraducao() {
@@ -582,16 +641,5 @@ document.querySelectorAll('section,.info-card,.dica-card,.equipe-card').forEach(
 });
 
 </script>
-<div class="bubbles"><span style="--i:11"></span><span style="--i:18"></span><span style="--i:25"></span><span style="--i:14"></span><span style="--i:22"></span><span style="--i:9"></span><span style="--i:27"></span><span style="--i:16"></span><span style="--i:30"></span><span style="--i:12"></span><span style="--i:21"></span><span style="--i:15"></span><span style="--i:24"></span><span style="--i:19"></span><span style="--i:28"></span><span style="--i:13"></span><span style="--i:26"></span><span style="--i:17"></span><span style="--i:23"></span><span style="--i:10"></span></div>
-
-<div class="fish f1">🐬</div>
-<div class="fish f2">🐠</div>
-<div class="fish f3">🐳</div>
-
-<div class="shark s1">🦈</div>
-<div class="shark s2">🦈</div>
-<div class="fish f1 glow">🐠</div>
-<div class="fish f2 glow">🐬</div>
-<div class="fish f3 glow">🐳</div>
 </body>
 </html>
