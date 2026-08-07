@@ -138,16 +138,44 @@
         .glow{filter:drop-shadow(0 0 8px #7df9ff) drop-shadow(0 0 18px #7df9ff)}
         @keyframes sharkR{from{transform:translateX(0)}to{transform:translateX(130vw)}} @keyframes sharkL{from{transform:translateX(0) scaleX(-1)}to{transform:translateX(-130vw) scaleX(-1)}}
 
+      /* GRID BASE - VALE PRA TODOS: GIBI, STOP E TERRARIO */
+        #overlay-equipes-card .equipes-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr); /* SEMPRE 4 COLUNAS NO PC */
+            gap: 2rem; /* ESPAÇO IGUAL O TERRARIO */
+            max-width: 900px; /* PRA FICAR CENTRALIZADO E RESPIRAR */
+            margin: 0 auto; /* CENTRALIZA */
+            padding: 1rem;
+            position: relative;
+            z-index: 2;
+        }
+        #overlay-equipes-card .equipe-header { 
+            background: var(--secondary); 
+            color: #fff; 
+            padding: 0.8rem; 
+            font-size: 1.3rem; /* TAMANHO IGUAL TERRARIO */
+            font-weight: 800; 
+            text-align: center; 
+            height: 75px; /* ALTURA IGUAL TERRARIO */
+            display: flex; 
+            align-items: center; 
+            justify-content: center; 
+            letter-spacing: 1px; 
+            transition: background .3s; 
+        }
+
         /* TEMA OCEANO - GIBI E STOP */
         #overlay-equipes-card.tema-oceano { --secondary: #00B3FF!important; }
         #overlay-equipes-card.tema-oceano .equipe-header { background: #00B3FF!important; }
         #overlay-equipes-card.tema-oceano .equipe-card:hover { border-color: #00B3FF!important; }
 
-        /* TEMA EXCLUSIVO DO TERRARIO */
+        /* TEMA EXCLUSIVO DO TERRARIO - SÓ MUDA A COR E EFEITO */
         #overlay-equipes-card.tema-floresta {
-            background: linear-gradient(180deg, #0a1a0a 0%, #143214 100%); border: 2px solid #228B22;
-            box-shadow: 0 0 40px rgba(34,139,34,0.6); max-width: 1100px; padding: 60px 50px;
-            position: relative; overflow: hidden; --secondary: #228B22!important;
+            background: linear-gradient(180deg, #0a1a0a 0%, #143214 100%); 
+            border: 2px solid #228B22;
+            box-shadow: 0 0 40px rgba(34,139,34,0.6); 
+            --secondary: #228B22!important;
+            /* tirei o max-width e padding daqui pra não quebrar o padrão */
         }
         #overlay-equipes-card.tema-floresta::before { content: "🍃 🐞 🦋 🐢 🐸"; position: absolute; top: -50px; left: 0; width: 100%; font-size: 2rem; animation: cairFolhas 15s linear infinite; opacity: 0.4; z-index: 0; }
         @keyframes cairFolhas { 0% { transform: translateY(-50px) rotate(0deg); } 100% { transform: translateY(900px) rotate(360deg); } }
@@ -157,78 +185,16 @@
         #overlay-equipes-card.tema-floresta .i3 { bottom: 60%; left: -10%; animation: andarDireita 35s linear infinite; animation-delay: 10s; }
         @keyframes andarDireita { from { transform: translateX(0); } to { transform: translateX(120vw); } }
         @keyframes andarEsquerda { from { transform: translateX(0) scaleX(-1); } to { transform: translateX(-120vw) scaleX(-1); } }
-     #overlay-equipes-card .equipes-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); /* MAIS LIVRE */
-    gap: 2rem; /* AUMENTEI O ESPAÇO */
-    max-width: 1000px; /* PRA NÃO FICAR ESTICADO DEMAIS */
-    margin: 0 auto; /* CENTRALIZA */
-    position: relative;
-    z-index: 2;
-}
+        
         #overlay-equipes-card.tema-floresta .equipe-card { background: rgba(30, 58, 30, 0.8); border: 1px solid rgba(50,205,50,0.5); backdrop-filter: blur(3px); }
         #overlay-equipes-card.tema-floresta .equipe-card:hover { background: rgba(34, 139, 34, 0.8); border-color: #7CFC00; transform: translateY(-8px) scale(1.03); }
-        #overlay-equipes-card.tema-floresta .equipe-header { background: #228B22; font-size: 1.4rem; height: 80px; }
-        @media (max-width: 768px) { #overlay-equipes-card .equipes-grid { grid-template-columns: repeat(2, 1fr); } }
-    </style>
-</head>
-<body>
-  <aside class="sidebar">
-        <div class="sidebar-header">
-            <h1><i class="fas fa-droplet"></i> Planeta Água</h1>
-        </div>
-        <nav class="sidebar-nav">
-            <a href="#" class="nav-link active" data-section="home"><i class="fas fa-home"></i> <span data-key="inicio">Início</span></a>
-            <a href="#" class="nav-link" data-section="curiosidades"><i class="fas fa-lightbulb"></i> <span data-key="curiosidades">Curiosidades</span></a>
-            <a href="#" class="nav-link" data-section="trabalhos"><i class="fas fa-folder-open"></i> <span data-key="trabalhos">Trabalhos</span></a>
-            <a href="#" class="nav-link" data-section="dicas"><i class="fas fa-star"></i> <span data-key="dicas">Dicas</span></a>
-            <a href="#" class="nav-link" data-section="quiz"><i class="fas fa-question-circle"></i> <span data-key="quiz">Quiz</span></a>
-        </nav>
-    </aside>
-
-    <div class="config-btn" onclick="toggleConfig()"><i class="fas fa-ellipsis-vertical"></i></div>
-    <div id="config-menu" class="config-menu">
-        <h3><i class="fas fa-gear"></i> Configurações</h3>
-        <div class="config-item">
-            <label><i class="fas fa-language"></i> <span data-key="idioma">Idioma</span></label>
-            <select id="idioma-select" onchange="mudarIdioma(this.value)">
-                <option value="pt">Português</option><option value="en">English</option><option value="es">Español</option>
-            </select>
-        </div>
-        <div class="config-item">
-            <label><i class="fas fa-palette"></i> <span data-key="cor_tema">Cor do Tema</span></label>
-            <input type="color" id="colorPicker" class="color-picker" value="#00B3FF" onchange="mudarCor(this.value)">
-        </div>
-    </div>
-
-    <main>
-        <header id="home">
-            <div class="logo-circulo"></div>
-            <p data-key="titulo">O PROJETO E A ÁGUA</p>
-        </header>
-
-        <section id="curiosidades" class="active">
-            <h2 class="section-title" data-key="fatos_titulo">Fatos e Curiosidades</h2>
-            <div class="grid-container">
-                <div class="info-card" onclick="abrirCuriosidade('ciclo')"><h3>🌊 <span data-key="ciclo_tit">O Ciclo da Água</span></h3><p data-key="ciclo_resumo">A água percorre um ciclo contínuo na natureza...</p><span class="click-hint" data-key="clique">Clique para saber mais →</span></div>
-                <div class="info-card" onclick="abrirCuriosidade('consumo')"><h3>🏭 <span data-key="consumo_tit">Consumo Industrial</span></h3><p data-key="consumo_resumo">A indústria consome aproximadamente 19% da água doce...</p><span class="click-hint" data-key="clique">Clique para saber mais →</span></div>
-                <div class="info-card" onclick="abrirCuriosidade('contaminacao')"><h3>☠️ <span data-key="conta_tit">Contaminação</span></h3><p data-key="conta_resumo">2 bilhões de pessoas vivem em regiões com escassez severa...</p><span class="click-hint" data-key="clique">Clique para saber mais →</span></div>
-            </div>
-        </section>
-
-        <div id="curiosidade-overlay" class="content-overlay"><div class="overlay-card"><button class="close-btn" onclick="fecharOverlay('curiosidade-overlay')">&times;</button><div id="curiosidade-detalhe" class="overlay-content"></div></div></div>
-        <div id="gibi-overlay" class="content-overlay"><div class="overlay-card"><button class="close-btn" onclick="fecharOverlay('gibi-overlay')">&times;</button><h2 id="gibi-titulo" style="text-align:center; color:var(--secondary); margin-bottom:25px;"></h2><img id="pagina" src="" style="width:100%; max-width:600px; display:block; margin:20px auto; border-radius:8px;" onerror="this.style.display='none'; document.getElementById('img-erro').style.display='block';"><p id="img-erro" style="display:none; text-align:center; color:#ef476f; margin:20px 0;">Arquivo de imagem não encontrado. Coloque o arquivo na mesma pasta do site.</p><p id="contador" style="text-align:center; font-weight:600;"></p><div style="display:flex; justify-content:center; gap:1rem; margin-top:25px;"><button class="btn" onclick="anterior()" data-key="anterior">← Anterior</button><button class="btn" onclick="proxima()" data-key="proxima">Próxima →</button></div></div></div>
-        <div id="video-overlay" class="content-overlay"><div class="overlay-card"><button class="close-btn" onclick="fecharOverlay('video-overlay')">&times;</button><h2 id="video-titulo" style="text-align:center; color:var(--secondary); margin-bottom:25px;"></h2><video id="video-player" width="100%" controls style="border-radius:8px;"><source src="" type="video/mp4"></video></div></div>
-
-        <div id="equipes-overlay" class="content-overlay">
-            <div class="overlay-card" id="overlay-equipes-card">
-                <button class="close-btn" onclick="fecharOverlayEquipes()">&times;</button>
-                <div class="inseto i1">🦎</div>
-                <div class="inseto i2">🐌</div>
-                <div class="inseto i3">🐛</div>
-                <div id="equipes-overlay-conteudo"></div>
-            </div>
-        </div>
+        
+        @media (max-width: 768px) { 
+            #overlay-equipes-card .equipes-grid { 
+                grid-template-columns: repeat(2, 1fr); 
+                gap: 1.5rem;
+            } 
+        }
 
         <section id="trabalhos">
             <h2 class="section-title" data-key="trabalhos_titulo">Nossos Trabalhos</h2>
