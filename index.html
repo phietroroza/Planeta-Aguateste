@@ -14,7 +14,7 @@
         }
         * { margin: 0; padding: 0; box-sizing: border-box; }
         html { scroll-behavior: smooth; }
-        body { background: var(--primary-dark); color: var(--text); line-height: 1.6; font-family: 'Inter', sans-serif; transition: background 0.8s ease; }
+        body { background: var(--primary-dark); color: var(--text); line-height: 1.6; font-family: 'Inter', sans-serif; }
 
        .sidebar { position: fixed; left: 0; top: 0; width: 280px; height: 100vh; background: #002244; padding: 30px 0; overflow-y: auto; z-index: 1000; border-right: 1px solid rgba(0, 191, 255, 0.2); }
        .sidebar-header { padding: 0 20px 30px; border-bottom: 1px solid rgba(0, 191, 255, 0.3); margin-bottom: 20px; }
@@ -92,18 +92,8 @@
        .grid-container,.equipes-grid,.dicas-container { grid-template-columns: 1fr; }
         }
     
-body::before{ content:"";position:fixed;inset:0;pointer-events:none; background: radial-gradient(circle at 20% 120%,rgba(255,255,255,.08) 0 2px,transparent 3px) 0 0/120px 120px, radial-gradient(circle at 70% 130%,rgba(255,255,255,.06) 0 3px,transparent 4px) 0 0/180px 180px; animation:bubbles 20s linear infinite; opacity:.8;z-index:-1; transition: all 0.8s ease;}
+body::before{ content:"";position:fixed;inset:0;pointer-events:none; background: radial-gradient(circle at 20% 120%,rgba(255,255,255,.08) 0 2px,transparent 3px) 0 0/120px 120px, radial-gradient(circle at 70% 130%,rgba(255,255,255,.06) 0 3px,transparent 4px) 0 0/180px 180px; animation:bubbles 20s linear infinite; opacity:.8;z-index:-1}
 @keyframes bubbles{from{transform:translateY(0)}to{transform:translateY(-220px)}}
-
-/* NOVO: FUNDO FLORESTA */
-body.tema-floresta::before {
-    background: 
-        radial-gradient(circle at 30% 20%, rgba(34,139,34,0.3) 0, transparent 50%),
-        radial-gradient(circle at 70% 80%, rgba(85,107,47,0.3) 0, transparent 50%),
-        linear-gradient(180deg, #0a2a0a 0%, #1a3a1a 100%);
-    animation: none;
-}
-
 section,header,.info-card,.dica-card,.equipe-card{ animation:fadeUp .8s ease both}
 @keyframes fadeUp{from{opacity:0;transform:translateY(30px)}to{opacity:1;transform:none}}
 .info-card,.dica-card,.equipe-card{position:relative;overflow:hidden}
@@ -122,16 +112,22 @@ main,header,section,nav,.container{position:relative;z-index:2}
 .glow{filter:drop-shadow(0 0 8px #7df9ff) drop-shadow(0 0 18px #7df9ff)}
 @keyframes sharkR{from{transform:translateX(0)}to{transform:translateX(130vw)}} @keyframes sharkL{from{transform:translateX(0) scaleX(-1)}to{transform:translateX(-130vw) scaleX(-1)}}
 
-/* NOVO: FOLHAS CAINDO */
-.folhas {position:fixed;inset:0;overflow:hidden;pointer-events:none;z-index:0;display:none;}
-body.tema-floresta .folhas {display:block;}
-.folhas span {
-    position:absolute; top:-100px; font-size:24px; opacity:0.6;
-    animation: cair 15s linear infinite;
+/* NOVO: TEMA FLORESTA NO OVERLAY */
+#overlay-equipes-card.tema-floresta {
+    background: linear-gradient(180deg, #0a2a0a 0%, #1a3a1a 100%);
+    border: 1px solid #228B22;
+    box-shadow: 0 0 30px rgba(34,139,34,0.5);
 }
-@keyframes cair {
-    0% { transform: translateY(0) rotate(0deg); }
-    100% { transform: translateY(120vh) rotate(360deg); }
+#overlay-equipes-card.tema-floresta .equipe-card {
+    background: #1e3a1e;
+    border: 1px solid rgba(34,139,34,0.4);
+}
+#overlay-equipes-card.tema-floresta .equipe-card:hover {
+    border-color: #32CD32;
+    transform: translateY(-10px);
+}
+#overlay-equipes-card.tema-floresta .equipe-header {
+    background: #228B22;
 }
 </style>
 </head>
@@ -181,6 +177,14 @@ body.tema-floresta .folhas {display:block;}
         <div id="gibi-overlay" class="content-overlay"><div class="overlay-card"><button class="close-btn" onclick="fecharOverlay('gibi-overlay')">&times;</button><h2 id="gibi-titulo" style="text-align:center; color:var(--secondary); margin-bottom:25px;"></h2><img id="pagina" src="" style="width:100%; max-width:600px; display:block; margin:20px auto; border-radius:8px;" onerror="this.style.display='none'; document.getElementById('img-erro').style.display='block';"><p id="img-erro" style="display:none; text-align:center; color:#ef476f; margin:20px 0;">Arquivo de imagem não encontrado. Coloque o arquivo na mesma pasta do site.</p><p id="contador" style="text-align:center; font-weight:600;"></p><div style="display:flex; justify-content:center; gap:1rem; margin-top:25px;"><button class="btn" onclick="anterior()" data-key="anterior">← Anterior</button><button class="btn" onclick="proxima()" data-key="proxima">Próxima →</button></div></div></div>
         <div id="video-overlay" class="content-overlay"><div class="overlay-card"><button class="close-btn" onclick="fecharOverlay('video-overlay')">&times;</button><h2 id="video-titulo" style="text-align:center; color:var(--secondary); margin-bottom:25px;"></h2><video id="video-player" width="100%" controls style="border-radius:8px;"><source src="" type="video/mp4"></video></div></div>
 
+        <!-- NOVO: OVERLAY PARA LISTA DE EQUIPES -->
+        <div id="equipes-overlay" class="content-overlay">
+            <div class="overlay-card" id="overlay-equipes-card">
+                <button class="close-btn" onclick="fecharOverlayEquipes()">&times;</button>
+                <div id="equipes-overlay-conteudo"></div>
+            </div>
+        </div>
+
         <section id="trabalhos">
             <h2 class="section-title" data-key="trabalhos_titulo">Nossos Trabalhos</h2>
             <div class="grid-container">
@@ -223,19 +227,6 @@ body.tema-floresta .folhas {display:block;}
 <div class="fish f1 glow">🐠</div>
 <div class="fish f2 glow">🐬</div>
 <div class="fish f3 glow">🐳</div>
-
-<!-- NOVO: FOLHAS PARA O TEMA FLORESTA -->
-<div class="folhas">
-    <span style="left:10%; animation-delay:0s;">🍃</span>
-    <span style="left:20%; animation-delay:2s;">🍂</span>
-    <span style="left:30%; animation-delay:4s;">🌿</span>
-    <span style="left:40%; animation-delay:1s;">🍃</span>
-    <span style="left:50%; animation-delay:3s;">🍂</span>
-    <span style="left:60%; animation-delay:5s;">🌿</span>
-    <span style="left:70%; animation-delay:2.5s;">🍃</span>
-    <span style="left:80%; animation-delay:4.5s;">🍂</span>
-    <span style="left:90%; animation-delay:1.5s;">🌿</span>
-</div>
 <script>
         const equipesData = {
             gibi: {
@@ -441,14 +432,6 @@ body.tema-floresta .folhas {display:block;}
 
         function getIdiomaAtual() { return localStorage.getItem('idiomaSite') || 'pt'; }
 
-        // NOVAS FUNÇÕES DO TEMA
-        function ativarTemaFloresta() {
-            document.body.classList.add('tema-floresta');
-        }
-        function ativarTemaAgua() {
-            document.body.classList.remove('tema-floresta');
-        }
-
         function abrirTrabalho() {
             fecharOverlay('curiosidade-overlay');
             if (tipoTrabalhoAtual === 'gibi') abrirGibi(equipaAtual.id);
@@ -457,7 +440,6 @@ body.tema-floresta .folhas {display:block;}
         }
 
         function abrirGibi(equipaId) {
-            ativarTemaAgua(); // VOLTA PRO TEMA ÁGUA
             const idioma = getIdiomaAtual();
             equipaAtual = equipesData.gibi[idioma].find(e => e.id === equipaId);
             paginaAtual = 0;
@@ -491,7 +473,6 @@ body.tema-floresta .folhas {display:block;}
         }
 
         function abrirVideo(equipaId) {
-            ativarTemaAgua(); // VOLTA PRO TEMA ÁGUA
             const idioma = getIdiomaAtual();
             equipaAtual = equipesData.stopmotion[idioma].find(e => e.id === equipaId);
             const txt = idioma === 'en'? ' - Stop Motion' : idioma === 'es'? ' - Stop Motion' : ' - Stop Motion';
@@ -502,7 +483,6 @@ body.tema-floresta .folhas {display:block;}
         }
 
         function abrirTerrario(equipaId) {
-            ativarTemaFloresta(); // ATIVA O TEMA FLORESTA
             const idioma = getIdiomaAtual();
             equipaAtual = equipesData.terrario[idioma].find(e => e.id === equipaId);
             paginaAtual = 0;
@@ -543,10 +523,50 @@ body.tema-floresta .folhas {display:block;}
         }
 
         function fecharOverlay(id) {
-            if(id === 'gibi-overlay') ativarTemaAgua(); // VOLTA PRO TEMA ÁGUA AO FECHAR
             document.getElementById(id).style.display = 'none';
             document.body.style.overflow = 'auto';
             if(id === 'video-overlay') { const video = document.getElementById('video-player'); video.pause(); video.currentTime = 0; video.src = ""; }
+        }
+
+        // NOVAS FUNÇÕES DO OVERLAY DE EQUIPES
+        function mostrarListaEquipes(tipo) {
+            tipoTrabalhoAtual = tipo;
+            const idioma = getIdiomaAtual();
+            const dados = equipesData[tipo][idioma];
+            const overlayCard = document.getElementById('overlay-equipes-card');
+            const conteudo = document.getElementById('equipes-overlay-conteudo');
+
+            // SE FOR TERRARIO ATIVA TEMA FLORESTA
+            if(tipo === 'terrario') {
+                overlayCard.classList.add('tema-floresta');
+            } else {
+                overlayCard.classList.remove('tema-floresta');
+            }
+
+            let titulo = tipo === 'gibi'? 'Gibi - Escolha uma Equipe' : tipo === 'stopmotion'? 'Stop Motion - Escolha uma Equipe' : 'Terrário - Escolha uma Equipe';
+            if (idioma === 'en') titulo = tipo === 'gibi'? 'Comic - Choose a Team' : tipo === 'stopmotion'? 'Stop Motion - Choose a Team' : 'Terrarium - Choose a Team';
+            if (idioma === 'es') titulo = tipo === 'gibi'? 'Cómic - Elige un Equipo' : tipo === 'stopmotion'? 'Stop Motion - Elige un Equipo' : 'Terrario - Elige un Equipo';
+
+            conteudo.innerHTML = `<h3 style="text-align:center; color:var(--secondary); font-size:2rem; margin-bottom:2rem;">${titulo}</h3><div class="equipes-grid" id="equipes-dinamicas"></div>`;
+            const grid = document.getElementById('equipes-dinamicas');
+            dados.forEach(equipe => {
+                const card = document.createElement('div'); card.className = 'equipe-card';
+                card.onclick = () => {
+                    mostrarParticipantes(equipe.id);
+                    fecharOverlayEquipes(); // fecha a lista e abre os participantes
+                };
+                card.innerHTML = `<div class="equipe-header">${equipe.nome}</div>`;
+                grid.appendChild(card);
+            });
+
+            document.getElementById('equipes-overlay').style.display = 'block';
+            document.body.style.overflow = 'hidden';
+        }
+
+        function fecharOverlayEquipes() {
+            document.getElementById('equipes-overlay').style.display = 'none';
+            document.body.style.overflow = 'auto';
+            document.getElementById('overlay-equipes-card').classList.remove('tema-floresta');
         }
 
         function startQuiz() { currentQ = 0; quizScore = 0; document.getElementById('quiz-start').style.display = 'none'; document.getElementById('quiz-result').style.display = 'none'; document.getElementById('quiz-box').style.display = 'block'; showQuestion(); }
@@ -581,31 +601,7 @@ body.tema-floresta .folhas {display:block;}
         function mudarIdioma(idioma) {
             localStorage.setItem('idiomaSite', idioma);
             aplicarTraducao();
-            if(document.getElementById('lista-equipes-container').innerHTML!== '') {
-                mostrarListaEquipes(tipoTrabalhoAtual);
-            }
         }
-        function mostrarListaEquipes(tipo) {
-            tipoTrabalhoAtual = tipo;
-            const idioma = getIdiomaAtual();
-            const dados = equipesData[tipo][idioma];
-            const container = document.getElementById('lista-equipes-container');
-
-            let titulo = tipo === 'gibi'? 'Gibi - Escolha uma Equipe' : tipo === 'stopmotion'? 'Stop Motion - Escolha uma Equipe' : 'Terrário - Escolha uma Equipe';
-            if (idioma === 'en') titulo = tipo === 'gibi'? 'Comic - Choose a Team' : tipo === 'stopmotion'? 'Stop Motion - Choose a Team' : 'Terrarium - Choose a Team';
-            if (idioma === 'es') titulo = tipo === 'gibi'? 'Cómic - Elige un Equipo' : tipo === 'stopmotion'? 'Stop Motion - Elige un Equipo' : 'Terrario - Elige un Equipo';
-
-            container.innerHTML = `<h3 style="text-align:center; color:var(--secondary); font-size:2rem; margin-bottom:2rem;">${titulo}</h3><div class="equipes-grid" id="equipes-dinamicas"></div>`;
-            const grid = document.getElementById('equipes-dinamicas');
-            dados.forEach(equipe => {
-                const card = document.createElement('div'); card.className = 'equipe-card';
-                card.onclick = () => mostrarParticipantes(equipe.id);
-                card.innerHTML = `<div class="equipe-header">${equipe.nome}</div>`;
-                grid.appendChild(card);
-            });
-            container.scrollIntoView({ behavior: 'smooth', block: 'start' });
-        }
-
         function mostrarParticipantes(equipaId) {
             const idioma = getIdiomaAtual();
             equipaAtual = equipesData[tipoTrabalhoAtual][idioma].find(e => e.id === equipaId);
@@ -634,6 +630,7 @@ body.tema-floresta .folhas {display:block;}
         document.getElementById('curiosidade-overlay').addEventListener('click', (e) => { if (e.target.id === 'curiosidade-overlay') fecharOverlay('curiosidade-overlay'); });
         document.getElementById('gibi-overlay').addEventListener('click', (e) => { if (e.target.id === 'gibi-overlay') fecharOverlay('gibi-overlay'); });
         document.getElementById('video-overlay').addEventListener('click', (e) => { if (e.target.id === 'video-overlay') fecharOverlay('video-overlay'); });
+        document.getElementById('equipes-overlay').addEventListener('click', (e) => { if (e.target.id === 'equipes-overlay') fecharOverlayEquipes(); });
 
 document.addEventListener('DOMContentLoaded',()=>{
 const obs=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.animate([{opacity:0,transform:'translateY(25px)'},{opacity:1,transform:'translateY(0)'}],{duration:700,fill:'forwards'});obs.unobserve(e.target)}}),{threshold:.12});
