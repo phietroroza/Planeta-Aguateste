@@ -8,8 +8,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         :root {
-    --primary: #003366; --primary-dark: #001f3f; --secondary: #00bfff;
-    --trabalhos-fixo: #00B3FF; /* COR FIXA DO GIBI E STOP */
+            --primary: #003366; --primary-dark: #001f3f; --secondary: #00bfff;
             --light: #f0f9ff; --text: #e0e0e0; --text-dark: #333; --white: #ffffff;
             --transition: all 0.3s ease;
         }
@@ -17,177 +16,153 @@
         html { scroll-behavior: smooth; }
         body { background: var(--primary-dark); color: var(--text); line-height: 1.6; font-family: 'Inter', sans-serif; }
 
-       .sidebar { position: fixed; left: 0; top: 0; width: 280px; height: 100vh; background: #002244; padding: 30px 0; overflow-y: auto; z-index: 1000; border-right: 1px solid rgba(0, 191, 255, 0.2); }
-       .sidebar-header { padding: 0 20px 30px; border-bottom: 1px solid rgba(0, 191, 255, 0.3); margin-bottom: 20px; }
-       .sidebar-header h1 { color: var(--white); font-size: 1.6rem; font-weight: 300; display: flex; align-items: center; gap: 12px; font-family: 'Poppins', sans-serif; letter-spacing: 2px; }
-       .sidebar-header i { font-size: 1.8rem; color: var(--secondary); }
-       .sidebar-nav { display: flex; flex-direction: column; gap: 0; }
-       .sidebar-nav a { display: flex; align-items: center; gap: 15px; padding: 18px 20px; color: rgba(255, 255, 255, 0.8); text-decoration: none; transition: var(--transition); border-left: 4px solid transparent; font-weight: 400; font-size: 1rem; letter-spacing: 1px; }
-       .sidebar-nav a:hover,.sidebar-nav a.active { background: rgba(0, 51, 102, 0.8); color: var(--white); border-left: 4px solid var(--secondary); }
-       .sidebar-nav i { font-size: 1.2rem; width: 24px; text-align: center; color: var(--secondary); }
+        .sidebar { position: fixed; left: 0; top: 0; width: 280px; height: 100vh; background: #002244; padding: 30px 0; overflow-y: auto; z-index: 1000; border-right: 1px solid rgba(0, 191, 255, 0.2); }
+        .sidebar-header { padding: 0 20px 30px; border-bottom: 1px solid rgba(0, 191, 255, 0.3); margin-bottom: 20px; }
+        .sidebar-header h1 { color: var(--white); font-size: 1.6rem; font-weight: 300; display: flex; align-items: center; gap: 12px; font-family: 'Poppins', sans-serif; letter-spacing: 2px; }
+        .sidebar-header i { font-size: 1.8rem; color: var(--secondary); }
+        .sidebar-nav { display: flex; flex-direction: column; gap: 0; }
+        .sidebar-nav a { display: flex; align-items: center; gap: 15px; padding: 18px 20px; color: rgba(255, 255, 255, 0.8); text-decoration: none; transition: var(--transition); border-left: 4px solid transparent; font-weight: 400; font-size: 1rem; letter-spacing: 1px; }
+        .sidebar-nav a:hover,.sidebar-nav a.active { background: rgba(0, 51, 102, 0.8); color: var(--white); border-left: 4px solid var(--secondary); }
+        .sidebar-nav i { font-size: 1.2rem; width: 24px; text-align: center; color: var(--secondary); }
 
         main { margin-left: 280px; }
         header { height: 450px; background: linear-gradient(rgba(0,34,68,0.6), rgba(0,34,68,0.6)), url('https://images.unsplash.com/photo-1505144801001-cf9b64f49e21?q=80&w=2070') no-repeat center/cover; color: var(--white); display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; position: relative; border-bottom: 3px solid var(--secondary); }
-       .logo-circulo { width: 120px; height: 120px; border: 3px solid var(--white); border-radius: 50%; margin-bottom: 20px; position: relative; }
-       .logo-circulo::before { content: ""; position: absolute; width: 80px; height: 80px; border: 3px solid var(--white); border-radius: 50%; top: 17px; left: 17px; }
-       .logo-circulo::after { content: ""; position: absolute; width: 40px; height: 40px; border: 3px solid var(--white); border-radius: 50%; top: 37px; left: 37px; }
+        .logo-circulo { width: 120px; height: 120px; border: 3px solid var(--white); border-radius: 50%; margin-bottom: 20px; position: relative; }
+        .logo-circulo::before { content: ""; position: absolute; width: 80px; height: 80px; border: 3px solid var(--white); border-radius: 50%; top: 17px; left: 17px; }
+        .logo-circulo::after { content: ""; position: absolute; width: 40px; height: 40px; border: 3px solid var(--white); border-radius: 50%; top: 37px; left: 37px; }
         header p { font-size: 1.5rem; font-weight: 300; letter-spacing: 8px; font-family: 'Poppins', sans-serif; }
 
         section { max-width: 1200px; margin: 0 auto; padding: 80px 40px; display: none; animation: fadeIn 0.6s ease; }
         section.active { display: block; }
         @keyframes fadeIn { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
-       .section-title { text-align: center; font-size: 2.5rem; color: var(--white); margin-bottom: 3rem; font-weight: 600; font-family: 'Poppins', sans-serif; letter-spacing: 3px; }
+        .section-title { text-align: center; font-size: 2.5rem; color: var(--white); margin-bottom: 3rem; font-weight: 600; font-family: 'Poppins', sans-serif; letter-spacing: 3px; }
 
-       .grid-container { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 2rem; }
-       .info-card { background: #003366; padding: 2.5rem; border-radius: 10px; box-shadow: 0 5px 20px rgba(0,0,0,0.3); transition: var(--transition); border: 1px solid rgba(0, 191, 255, 0.2); cursor: pointer; color: var(--white); text-align: center; }
-       .info-card:hover { transform: translateY(-10px); border-color: var(--secondary); }
-       .info-card h3 { color: var(--secondary); margin-bottom: 1rem; font-size: 1.5rem; font-weight: 600; }
-       .info-card i { font-size: 3rem; margin-bottom: 15px; color: var(--secondary); }
-       .click-hint { font-size: 0.8rem; color: var(--secondary); font-weight: 600; margin-top: 15px; display: block; }
+        .grid-container { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 2rem; }
+        .info-card { background: #003366; padding: 2.5rem; border-radius: 10px; box-shadow: 0 5px 20px rgba(0,0,0,0.3); transition: var(--transition); border: 1px solid rgba(0, 191, 255, 0.2); cursor: pointer; color: var(--white); text-align: center; }
+        .info-card:hover { transform: translateY(-10px); border-color: var(--secondary); }
+        .info-card h3 { color: var(--secondary); margin-bottom: 1rem; font-size: 1.5rem; font-weight: 600; }
+        .info-card i { font-size: 3rem; margin-bottom: 15px; color: var(--secondary); }
+        .click-hint { font-size: 0.8rem; color: var(--secondary); font-weight: 600; margin-top: 15px; display: block; }
 
-       .equipes-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 2rem; }
-       .equipe-card { background: #003366; border-radius: 10px; overflow: hidden; box-shadow: 0 5px 20px rgba(0,0,0,0.3); transition: var(--transition); border: 1px solid rgba(0, 191, 255, 0.2); text-align: center; cursor: pointer; }
-       .equipe-card:hover { transform: translateY(-10px); border-color: var(--secondary); }
-       .equipe-header { height: 100px; background: var(--primary); display: flex; align-items: center; justify-content: center; font-size: 1.8rem; color: var(--white); font-weight: 600; font-family: 'Poppins', sans-serif; letter-spacing: 3px; }
+        /* CORES FIXAS DOS 3 CARDS DE TRABALHOS */
+        #trabalhos .grid-container .info-card:nth-child(1), /* GIBI */
+        #trabalhos .grid-container .info-card:nth-child(2) { /* STOP */
+            background: #00B3FF!important; border: 1px solid #00B3FF!important;
+        }
+        #trabalhos .grid-container .info-card:nth-child(1):hover,
+        #trabalhos .grid-container .info-card:nth-child(2):hover {
+            background: #0099E6!important; box-shadow: 0 0 25px rgba(0,179,255,0.5)!important;
+        }
+        #trabalhos .grid-container .info-card:nth-child(1) h3,
+        #trabalhos .grid-container .info-card:nth-child(2) h3,
+        #trabalhos .grid-container .info-card:nth-child(1) p,
+        #trabalhos .grid-container .info-card:nth-child(2) p,
+        #trabalhos .grid-container .info-card:nth-child(1) .click-hint,
+        #trabalhos .grid-container .info-card:nth-child(2) .click-hint { color: var(--white)!important; }
 
-       .btn { display: inline-block; background: transparent; color: var(--secondary); padding: 14px 32px; border: 2px solid var(--secondary); border-radius: 50px; cursor: pointer; font-size: 0.95rem; font-weight: 600; transition: var(--transition); font-family: 'Poppins', sans-serif; }
-       .btn:hover { background: var(--secondary); color: var(--primary-dark); }
+        #trabalhos .grid-container .info-card:nth-child(3) { /* TERRARIO */
+            background: #228B22!important; border: 1px solid #228B22!important;
+        }
+        #trabalhos .grid-container .info-card:nth-child(3):hover {
+            background: #1A6A1A!important; box-shadow: 0 0 25px rgba(34,139,34,0.5)!important;
+        }
+        #trabalhos .grid-container .info-card:nth-child(3) h3,
+        #trabalhos .grid-container .info-card:nth-child(3) p,
+        #trabalhos .grid-container .info-card:nth-child(3) .click-hint { color: var(--white)!important; }
 
-       .dicas-container { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 2rem; }
-       .dica-card { background: #003366; color: var(--white); padding: 2.5rem; border-radius: 10px; border: 1px solid rgba(0, 191, 255, 0.2); }
-       .dica-icon { font-size: 3rem; margin-bottom: 1rem; color: var(--secondary); }
-       .dica-card h4 { font-size: 1.4rem; margin-bottom: 1rem; font-weight: 600; }
+        .equipes-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 2rem; }
+        .equipe-card { background: #003366; border-radius: 10px; overflow: hidden; box-shadow: 0 5px 20px rgba(0,0,0,0.3); transition: var(--transition); border: 1px solid rgba(0, 191, 255, 0.2); text-align: center; cursor: pointer; }
+        .equipe-card:hover { transform: translateY(-10px); border-color: var(--secondary); }
+        .equipe-header { height: 100px; background: var(--primary); display: flex; align-items: center; justify-content: center; font-size: 1.8rem; color: var(--white); font-weight: 600; font-family: 'Poppins', sans-serif; letter-spacing: 3px; }
+
+        .btn { display: inline-block; background: transparent; color: var(--secondary); padding: 14px 32px; border: 2px solid var(--secondary); border-radius: 50px; cursor: pointer; font-size: 0.95rem; font-weight: 600; transition: var(--transition); font-family: 'Poppins', sans-serif; }
+        .btn:hover { background: var(--secondary); color: var(--primary-dark); }
+
+        .dicas-container { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 2rem; }
+        .dica-card { background: #003366; color: var(--white); padding: 2.5rem; border-radius: 10px; border: 1px solid rgba(0, 191, 255, 0.2); }
+        .dica-icon { font-size: 3rem; margin-bottom: 1rem; color: var(--secondary); }
+        .dica-card h4 { font-size: 1.4rem; margin-bottom: 1rem; font-weight: 600; }
 
         #quiz-container { background: #003366; padding: 50px; border-radius: 10px; max-width: 900px; margin: 0 auto; border: 1px solid rgba(0, 191, 255, 0.2); }
-       .quiz-question { font-size: 1.5rem; font-weight: 600; color: var(--white); margin-bottom: 25px; }
-       .quiz-option { background: rgba(0,51,102,0.8); padding: 18px 20px; border-radius: 8px; cursor: pointer; border: 1px solid transparent; transition: var(--transition); font-weight: 500; font-size: 1rem; color: var(--white); margin-bottom: 15px; }
-       .quiz-option:hover { border-color: var(--secondary); }
-       .quiz-option.correct { background: rgba(6,214,160,0.3); border-color: #06d6a0; }
-       .quiz-option.wrong { background: rgba(239,71,111,0.3); border-color: #ef476f; }
+        .quiz-question { font-size: 1.5rem; font-weight: 600; color: var(--white); margin-bottom: 25px; }
+        .quiz-option { background: rgba(0,51,102,0.8); padding: 18px 20px; border-radius: 8px; cursor: pointer; border: 1px solid transparent; transition: var(--transition); font-weight: 500; font-size: 1rem; color: var(--white); margin-bottom: 15px; }
+        .quiz-option:hover { border-color: var(--secondary); }
+        .quiz-option.correct { background: rgba(6,214,160,0.3); border-color: #06d6a0; }
+        .quiz-option.wrong { background: rgba(239,71,111,0.3); border-color: #ef476f; }
 
-       .content-overlay { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0, 0, 0, 0.9); z-index: 2000; padding: 40px; overflow-y: auto; }
-       .overlay-card { background: #002244; max-width: 700px; margin: 0 auto; padding: 50px; border-radius: 10px; position: relative; border: 1px solid var(--secondary); color: var(--white); }
-       .close-btn { position: absolute; top: 20px; right: 20px; font-size: 2.5rem; cursor: pointer; background: none; border: none; color: var(--white); }
-       .overlay-content h2 { color: var(--secondary); margin-bottom: 20px; font-size: 2rem; }
-       .overlay-content ul { margin-left: 20px; }
-       .overlay-content li { margin-bottom: 10px; font-size: 1.1rem; }
+        .content-overlay { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0, 0, 0, 0.9); z-index: 2000; padding: 40px; overflow-y: auto; }
+        .overlay-card { background: #002244; max-width: 700px; margin: 0 auto; padding: 50px; border-radius: 10px; position: relative; border: 1px solid var(--secondary); color: var(--white); }
+        .close-btn { position: absolute; top: 20px; right: 20px; font-size: 2.5rem; cursor: pointer; background: none; border: none; color: var(--white); }
+        .overlay-content h2 { color: var(--secondary); margin-bottom: 20px; font-size: 2rem; }
+        .overlay-content ul { margin-left: 20px; }
+        .overlay-content li { margin-bottom: 10px; font-size: 1.1rem; }
 
         footer { background: #001a33; color: var(--white); text-align: center; padding: 40px 20px; margin-left: 280px; border-top: 1px solid rgba(0, 191, 255, 0.2); }
 
-       .config-btn { position: fixed; bottom: 25px; right: 25px; width: 55px; height: 55px; border-radius: 50%; background: var(--secondary); color: var(--primary-dark); display: flex; align-items: center; justify-content: center; font-size: 1.5rem; cursor: pointer; z-index: 1500; box-shadow: 0 5px 20px rgba(0,191,255,0.4); transition: var(--transition); }
-       .config-btn:hover { transform: rotate(90deg) scale(1.1); }
-       .config-menu { position: fixed; bottom: 90px; right: 25px; width: 320px; background: #002244; border: 1px solid var(--secondary); border-radius: 15px; padding: 25px; z-index: 1500; box-shadow: 0 10px 40px rgba(0,0,0,0.5); display: none; animation: slideUpConfig 0.3s ease; }
+        .config-btn { position: fixed; bottom: 25px; right: 25px; width: 55px; height: 55px; border-radius: 50%; background: var(--secondary); color: var(--primary-dark); display: flex; align-items: center; justify-content: center; font-size: 1.5rem; cursor: pointer; z-index: 1500; box-shadow: 0 5px 20px rgba(0,191,255,0.4); transition: var(--transition); }
+        .config-btn:hover { transform: rotate(90deg) scale(1.1); }
+        .config-menu { position: fixed; bottom: 90px; right: 25px; width: 320px; background: #002244; border: 1px solid var(--secondary); border-radius: 15px; padding: 25px; z-index: 1500; box-shadow: 0 10px 40px rgba(0,0,0,0.5); display: none; animation: slideUpConfig 0.3s ease; }
         @keyframes slideUpConfig { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
-       .config-menu.active { display: block; }
-       .config-menu h3 { color: var(--secondary); margin-bottom: 20px; font-size: 1.3rem; }
-       .config-item { margin-bottom: 25px; }
-       .config-item label { display: block; color: var(--white); margin-bottom: 10px; font-weight: 600; }
-       .config-item select { width: 100%; padding: 10px; border-radius: 8px; background: #003366; color: var(--white); border: 1px solid var(--secondary); font-size: 1rem; }
-       .color-picker { width: 100%; height: 50px; border: none; border-radius: 8px; cursor: pointer; }
+        .config-menu.active { display: block; }
+        .config-menu h3 { color: var(--secondary); margin-bottom: 20px; font-size: 1.3rem; }
+        .config-item { margin-bottom: 25px; }
+        .config-item label { display: block; color: var(--white); margin-bottom: 10px; font-weight: 600; }
+        .config-item select { width: 100%; padding: 10px; border-radius: 8px; background: #003366; color: var(--white); border: 1px solid var(--secondary); font-size: 1rem; }
+        .color-picker { width: 100%; height: 50px; border: none; border-radius: 8px; cursor: pointer; }
 
         @media (max-width: 768px) {
-       .sidebar { width: 100%; height: auto; position: relative; }
+            .sidebar { width: 100%; height: auto; position: relative; }
             main { margin-left: 0; } footer { margin-left: 0; }
             header { height: 300px; } header p { font-size: 1.1rem; letter-spacing: 4px; }
             section { padding: 50px 20px; }.section-title { font-size: 2rem; }
-       .grid-container,.equipes-grid,.dicas-container { grid-template-columns: 1fr; }
+            .grid-container,.equipes-grid,.dicas-container { grid-template-columns: 1fr; }
         }
     
-body::before{ content:"";position:fixed;inset:0;pointer-events:none; background: radial-gradient(circle at 20% 120%,rgba(255,255,255,.08) 0 2px,transparent 3px) 0 0/120px 120px, radial-gradient(circle at 70% 130%,rgba(255,255,255,.06) 0 3px,transparent 4px) 0 0/180px 180px; animation:bubbles 20s linear infinite; opacity:.8;z-index:-1}
-@keyframes bubbles{from{transform:translateY(0)}to{transform:translateY(-220px)}}
-section,header,.info-card,.dica-card,.equipe-card{ animation:fadeUp .8s ease both}
-@keyframes fadeUp{from{opacity:0;transform:translateY(30px)}to{opacity:1;transform:none}}
-.info-card,.dica-card,.equipe-card{position:relative;overflow:hidden}
-.info-card::after,.dica-card::after,.equipe-card::after{ content:"";position:absolute;top:-150%;left:-50%;width:60%;height:300%; background:linear-gradient(90deg,transparent,rgba(255,255,255,.15),transparent); transform:rotate(25deg);transition:.8s}
-.info-card:hover::after,.dica-card:hover::after,.equipe-card:hover::after{left:120%}
-.bubbles{position:fixed;inset:0;overflow:hidden;pointer-events:none;z-index:0}
-.bubbles span{position:absolute;bottom:-120px;left:calc(var(--i)*4%);width:18px;height:18px;border-radius:50%;background:rgba(255,255,255,.6);box-shadow:0 0 8px rgba(255,255,255,.3);animation:subir calc(28s/(var(--i)/10)) linear infinite}
-.bubbles span:nth-child(3n){width:16px;height:16px}.bubbles span:nth-child(5n){width:22px;height:22px}
-@keyframes subir{0%{transform:translateY(0) translateX(0);opacity:0}10%{opacity:.5}50%{transform:translateY(-50vh) translateX(25px)}100%{transform:translateY(-120vh) translateX(-35px);opacity:0}}
-main,header,section,nav,.container{position:relative;z-index:2}
-.fish{position:fixed;font-size:32px;pointer-events:none;z-index:1;opacity:.8;animation:swim linear infinite}
-.f1{top:20%;left:-10%;animation-duration:22s} .f2{top:55%;left:110%;animation-name:swim2;animation-duration:28s} .f3{top:75%;left:-15%;animation-duration:35s}
-@keyframes swim{from{transform:translateX(0)}to{transform:translateX(120vw)}} @keyframes swim2{from{transform:translateX(0) scaleX(-1)}to{transform:translateX(-120vw) scaleX(-1)}}
-.shark{position:fixed;font-size:60px;pointer-events:none;z-index:1;opacity:.9}
-.s1{top:12%;left:-15%;animation:sharkR 32s linear infinite} .s2{top:68%;left:115%;animation:sharkL 40s linear infinite}
-.glow{filter:drop-shadow(0 0 8px #7df9ff) drop-shadow(0 0 18px #7df9ff)}
-@keyframes sharkR{from{transform:translateX(0)}to{transform:translateX(130vw)}} @keyframes sharkL{from{transform:translateX(0) scaleX(-1)}to{transform:translateX(-130vw) scaleX(-1)}}
-/* FORÇA GIBI E STOP A TER COR FIXA #00B3FF */
-#overlay-equipes-card.tema-oceano {
-    --secondary: #00B3FF !important;
-}
-#overlay-equipes-card.tema-oceano .equipe-header {
-    background: #00B3FF !important;
-}
-#overlay-equipes-card.tema-oceano .equipe-card:hover {
-    border-color: #00B3FF !important;
-}
-#overlay-equipes-card.tema-oceano .close-btn {
-    color: #00B3FF !important;
-}
-/* TEMA EXCLUSIVO DO TERRARIO */
-#overlay-equipes-card.tema-floresta {
-    background: linear-gradient(180deg, #0a1a0a 0%, #143214 100%);
-    border: 2px solid #228B22;
-    box-shadow: 0 0 40px rgba(34,139,34,0.6);
-    max-width: 1100px;
-    padding: 60px 50px;
-    position: relative;
-    overflow: hidden;
-}
-#overlay-equipes-card.tema-floresta::before { /* FOLHAS CAINDO */
-    content: "🍃 🐞 🦋 🐢 🐸";
-    position: absolute;
-    top: -50px;
-    left: 0;
-    width: 100%;
-    font-size: 2rem;
-    animation: cairFolhas 15s linear infinite;
-    opacity: 0.4;
-    z-index: 0;
-}
-@keyframes cairFolhas {
-    0% { transform: translateY(-50px) rotate(0deg); }
-    100% { transform: translateY(900px) rotate(360deg); }
-}
+        body::before{ content:"";position:fixed;inset:0;pointer-events:none; background: radial-gradient(circle at 20% 120%,rgba(255,255,255,.08) 0 2px,transparent 3px) 0 0/120px 120px, radial-gradient(circle at 70% 130%,rgba(255,255,255,.06) 0 3px,transparent 4px) 0 0/180px 180px; animation:bubbles 20s linear infinite; opacity:.8;z-index:-1}
+        @keyframes bubbles{from{transform:translateY(0)}to{transform:translateY(-220px)}}
+        section,header,.info-card,.dica-card,.equipe-card{ animation:fadeUp .8s ease both}
+        @keyframes fadeUp{from{opacity:0;transform:translateY(30px)}to{opacity:1;transform:none}}
+        .info-card,.dica-card,.equipe-card{position:relative;overflow:hidden}
+        .info-card::after,.dica-card::after,.equipe-card::after{ content:"";position:absolute;top:-150%;left:-50%;width:60%;height:300%; background:linear-gradient(90deg,transparent,rgba(255,255,255,.15),transparent); transform:rotate(25deg);transition:.8s}
+        .info-card:hover::after,.dica-card:hover::after,.equipe-card:hover::after{left:120%}
+        .bubbles{position:fixed;inset:0;overflow:hidden;pointer-events:none;z-index:0}
+        .bubbles span{position:absolute;bottom:-120px;left:calc(var(--i)*4%);width:18px;height:18px;border-radius:50%;background:rgba(255,255,255,.6);box-shadow:0 0 8px rgba(255,255,255,.3);animation:subir calc(28s/(var(--i)/10)) linear infinite}
+        .bubbles span:nth-child(3n){width:16px;height:16px}.bubbles span:nth-child(5n){width:22px;height:22px}
+        @keyframes subir{0%{transform:translateY(0) translateX(0);opacity:0}10%{opacity:.5}50%{transform:translateY(-50vh) translateX(25px)}100%{transform:translateY(-120vh) translateX(-35px);opacity:0}}
+        main,header,section,nav,.container{position:relative;z-index:2}
+        .fish{position:fixed;font-size:32px;pointer-events:none;z-index:1;opacity:.8;animation:swim linear infinite}
+        .f1{top:20%;left:-10%;animation-duration:22s} .f2{top:55%;left:110%;animation-name:swim2;animation-duration:28s} .f3{top:75%;left:-15%;animation-duration:35s}
+        @keyframes swim{from{transform:translateX(0)}to{transform:translateX(120vw)}} @keyframes swim2{from{transform:translateX(0) scaleX(-1)}to{transform:translateX(-120vw) scaleX(-1)}}
+        .shark{position:fixed;font-size:60px;pointer-events:none;z-index:1;opacity:.9}
+        .s1{top:12%;left:-15%;animation:sharkR 32s linear infinite} .s2{top:68%;left:115%;animation:sharkL 40s linear infinite}
+        .glow{filter:drop-shadow(0 0 8px #7df9ff) drop-shadow(0 0 18px #7df9ff)}
+        @keyframes sharkR{from{transform:translateX(0)}to{transform:translateX(130vw)}} @keyframes sharkL{from{transform:translateX(0) scaleX(-1)}to{transform:translateX(-130vw) scaleX(-1)}}
 
-/* INSETOS SÓ APARECEM NO TERRARIO */
-#overlay-equipes-card.tema-floresta .inseto { position: absolute; font-size: 2.5rem; pointer-events: none; z-index: 0; opacity: 0.7; }
-#overlay-equipes-card.tema-floresta .i1 { bottom: 10%; left: -10%; animation: andarDireita 25s linear infinite; }
-#overlay-equipes-card.tema-floresta .i2 { bottom: 30%; left: 110%; animation: andarEsquerda 30s linear infinite; animation-delay: 5s; }
-#overlay-equipes-card.tema-floresta .i3 { bottom: 60%; left: -10%; animation: andarDireita 35s linear infinite; animation-delay: 10s; }
-@keyframes andarDireita { from { transform: translateX(0); } to { transform: translateX(120vw); } }
-@keyframes andarEsquerda { from { transform: translateX(0) scaleX(-1); } to { transform: translateX(-120vw) scaleX(-1); } }
+        /* TEMA OCEANO - GIBI E STOP */
+        #overlay-equipes-card.tema-oceano { --secondary: #00B3FF!important; }
+        #overlay-equipes-card.tema-oceano .equipe-header { background: #00B3FF!important; }
+        #overlay-equipes-card.tema-oceano .equipe-card:hover { border-color: #00B3FF!important; }
 
-/* GRID 4 COLUNAS PRA TODOS */
-#overlay-equipes-card .equipes-grid {
-    grid-template-columns: repeat(4, 1fr);
-    gap: 1.5rem;
-    position: relative;
-    z-index: 2;
-}
-#overlay-equipes-card.tema-floresta .equipe-card {
-    background: rgba(30, 58, 30, 0.8);
-    border: 1px solid rgba(50,205,50,0.5);
-    backdrop-filter: blur(3px);
-}
-#overlay-equipes-card.tema-floresta .equipe-card:hover {
-    background: rgba(34, 139, 34, 0.8);
-    border-color: #7CFC00;
-    transform: translateY(-8px) scale(1.03);
-}
-#overlay-equipes-card.tema-floresta .equipe-header {
-    background: #228B22;
-    font-size: 1.4rem;
-    height: 80px;
-}
-
-@media (max-width: 768px) {
-    #overlay-equipes-card .equipes-grid {
-        grid-template-columns: repeat(2, 1fr);
-    }
-}
-</style>
+        /* TEMA EXCLUSIVO DO TERRARIO */
+        #overlay-equipes-card.tema-floresta {
+            background: linear-gradient(180deg, #0a1a0a 0%, #143214 100%); border: 2px solid #228B22;
+            box-shadow: 0 0 40px rgba(34,139,34,0.6); max-width: 1100px; padding: 60px 50px;
+            position: relative; overflow: hidden; --secondary: #228B22!important;
+        }
+        #overlay-equipes-card.tema-floresta::before { content: "🍃 🐞 🦋 🐢 🐸"; position: absolute; top: -50px; left: 0; width: 100%; font-size: 2rem; animation: cairFolhas 15s linear infinite; opacity: 0.4; z-index: 0; }
+        @keyframes cairFolhas { 0% { transform: translateY(-50px) rotate(0deg); } 100% { transform: translateY(900px) rotate(360deg); } }
+        #overlay-equipes-card.tema-floresta .inseto { position: absolute; font-size: 2.5rem; pointer-events: none; z-index: 0; opacity: 0.7; }
+        #overlay-equipes-card.tema-floresta .i1 { bottom: 10%; left: -10%; animation: andarDireita 25s linear infinite; }
+        #overlay-equipes-card.tema-floresta .i2 { bottom: 30%; left: 110%; animation: andarEsquerda 30s linear infinite; animation-delay: 5s; }
+        #overlay-equipes-card.tema-floresta .i3 { bottom: 60%; left: -10%; animation: andarDireita 35s linear infinite; animation-delay: 10s; }
+        @keyframes andarDireita { from { transform: translateX(0); } to { transform: translateX(120vw); } }
+        @keyframes andarEsquerda { from { transform: translateX(0) scaleX(-1); } to { transform: translateX(-120vw) scaleX(-1); } }
+        #overlay-equipes-card .equipes-grid { grid-template-columns: repeat(4, 1fr); gap: 1.5rem; position: relative; z-index: 2; }
+        #overlay-equipes-card.tema-floresta .equipe-card { background: rgba(30, 58, 30, 0.8); border: 1px solid rgba(50,205,50,0.5); backdrop-filter: blur(3px); }
+        #overlay-equipes-card.tema-floresta .equipe-card:hover { background: rgba(34, 139, 34, 0.8); border-color: #7CFC00; transform: translateY(-8px) scale(1.03); }
+        #overlay-equipes-card.tema-floresta .equipe-header { background: #228B22; font-size: 1.4rem; height: 80px; }
+        @media (max-width: 768px) { #overlay-equipes-card .equipes-grid { grid-template-columns: repeat(2, 1fr); } }
+    </style>
 </head>
 <body>
   <aside class="sidebar">
@@ -214,7 +189,7 @@ main,header,section,nav,.container{position:relative;z-index:2}
         </div>
         <div class="config-item">
             <label><i class="fas fa-palette"></i> <span data-key="cor_tema">Cor do Tema</span></label>
-            <input type="color" id="colorPicker" class="color-picker" value="#00bfff" onchange="mudarCor(this.value)">
+            <input type="color" id="colorPicker" class="color-picker" value="#00B3FF" onchange="mudarCor(this.value)">
         </div>
     </div>
 
@@ -223,7 +198,8 @@ main,header,section,nav,.container{position:relative;z-index:2}
             <div class="logo-circulo"></div>
             <p data-key="titulo">O PROJETO E A ÁGUA</p>
         </header>
-                <section id="curiosidades" class="active">
+
+        <section id="curiosidades" class="active">
             <h2 class="section-title" data-key="fatos_titulo">Fatos e Curiosidades</h2>
             <div class="grid-container">
                 <div class="info-card" onclick="abrirCuriosidade('ciclo')"><h3>🌊 <span data-key="ciclo_tit">O Ciclo da Água</span></h3><p data-key="ciclo_resumo">A água percorre um ciclo contínuo na natureza...</p><span class="click-hint" data-key="clique">Clique para saber mais →</span></div>
@@ -231,15 +207,14 @@ main,header,section,nav,.container{position:relative;z-index:2}
                 <div class="info-card" onclick="abrirCuriosidade('contaminacao')"><h3>☠️ <span data-key="conta_tit">Contaminação</span></h3><p data-key="conta_resumo">2 bilhões de pessoas vivem em regiões com escassez severa...</p><span class="click-hint" data-key="clique">Clique para saber mais →</span></div>
             </div>
         </section>
-                <div id="curiosidade-overlay" class="content-overlay"><div class="overlay-card"><button class="close-btn" onclick="fecharOverlay('curiosidade-overlay')">&times;</button><div id="curiosidade-detalhe" class="overlay-content"></div></div></div>
+
+        <div id="curiosidade-overlay" class="content-overlay"><div class="overlay-card"><button class="close-btn" onclick="fecharOverlay('curiosidade-overlay')">&times;</button><div id="curiosidade-detalhe" class="overlay-content"></div></div></div>
         <div id="gibi-overlay" class="content-overlay"><div class="overlay-card"><button class="close-btn" onclick="fecharOverlay('gibi-overlay')">&times;</button><h2 id="gibi-titulo" style="text-align:center; color:var(--secondary); margin-bottom:25px;"></h2><img id="pagina" src="" style="width:100%; max-width:600px; display:block; margin:20px auto; border-radius:8px;" onerror="this.style.display='none'; document.getElementById('img-erro').style.display='block';"><p id="img-erro" style="display:none; text-align:center; color:#ef476f; margin:20px 0;">Arquivo de imagem não encontrado. Coloque o arquivo na mesma pasta do site.</p><p id="contador" style="text-align:center; font-weight:600;"></p><div style="display:flex; justify-content:center; gap:1rem; margin-top:25px;"><button class="btn" onclick="anterior()" data-key="anterior">← Anterior</button><button class="btn" onclick="proxima()" data-key="proxima">Próxima →</button></div></div></div>
         <div id="video-overlay" class="content-overlay"><div class="overlay-card"><button class="close-btn" onclick="fecharOverlay('video-overlay')">&times;</button><h2 id="video-titulo" style="text-align:center; color:var(--secondary); margin-bottom:25px;"></h2><video id="video-player" width="100%" controls style="border-radius:8px;"><source src="" type="video/mp4"></video></div></div>
 
-        <!-- OVERLAY PARA LISTA DE EQUIPES COM INSETOS -->
         <div id="equipes-overlay" class="content-overlay">
             <div class="overlay-card" id="overlay-equipes-card">
                 <button class="close-btn" onclick="fecharOverlayEquipes()">&times;</button>
-                <!-- INSETOS SÓ APARECEM QUANDO ATIVAR TEMA-FLORESTA -->
                 <div class="inseto i1">🦎</div>
                 <div class="inseto i2">🐌</div>
                 <div class="inseto i3">🐛</div>
@@ -278,19 +253,17 @@ main,header,section,nav,.container{position:relative;z-index:2}
 
     <footer><p>&copy; 2026 Projeto Planeta Agua| <span data-key="footer">Gestão Sustentável da Água</span></p></footer>
 
-<div class="bubbles"><span style="--i:11"></span><span style="--i:18"></span><span style="--i:25"></span><span style="--i:14"></span><span style="--i:22"></span><span style="--i:9"></span><span style="--i:27"></span><span style="--i:16"></span><span style="--i:30"></span><span style="--i:12"></span><span style="--i:21"></span><span style="--i:15"></span><span style="--i:24"></span><span style="--i:19"></span><span style="--i:28"></span><span style="--i:13"></span><span style="--i:26"></span><span style="--i:17"></span><span style="--i:23"></span><span style="--i:10"></span></div>
+    <div class="bubbles"><span style="--i:11"></span><span style="--i:18"></span><span style="--i:25"></span><span style="--i:14"></span><span style="--i:22"></span><span style="--i:9"></span><span style="--i:27"></span><span style="--i:16"></span><span style="--i:30"></span><span style="--i:12"></span><span style="--i:21"></span><span style="--i:15"></span><span style="--i:24"></span><span style="--i:19"></span><span style="--i:28"></span><span style="--i:13"></span><span style="--i:26"></span><span style="--i:17"></span><span style="--i:23"></span><span style="--i:10"></span></div>
 
-<!-- PEIXES DO SITE NORMAL -->
-<div class="fish f1">🐬</div>
-<div class="fish f2">🐠</div>
-<div class="fish f3">🐳</div>
-
-<div class="shark s1">🦈</div>
-<div class="shark s2">🦈</div>
-<div class="fish f1 glow">🐠</div>
-<div class="fish f2 glow">🐬</div>
-<div class="fish f3 glow">🐳</div>
-<script>
+    <div class="fish f1">🐬</div>
+    <div class="fish f2">🐠</div>
+    <div class="fish f3">🐳</div>
+    <div class="shark s1">🦈</div>
+    <div class="shark s2">🦈</div>
+    <div class="fish f1 glow">🐠</div>
+    <div class="fish f2 glow">🐬</div>
+    <div class="fish f3 glow">🐳</div>
+    <script>
         const equipesData = {
             gibi: {
                 pt: [
@@ -452,6 +425,7 @@ main,header,section,nav,.container{position:relative;z-index:2}
                 ]
             }
         };
+
       const quizData = {
             pt: [
                 { q: "Qual porcentagem da superfície da Terra é coberta por água?", a: ["50%", "60%", "71%", "80%"], c: 2 },
@@ -492,7 +466,6 @@ main,header,section,nav,.container{position:relative;z-index:2}
         };
 
         let equipaAtual = null; let paginaAtual = 0; let currentQ = 0, quizScore = 0; let tipoTrabalhoAtual = 'gibi';
-
         function getIdiomaAtual() { return localStorage.getItem('idiomaSite') || 'pt'; }
 
         function abrirTrabalho() {
@@ -501,7 +474,6 @@ main,header,section,nav,.container{position:relative;z-index:2}
             else if (tipoTrabalhoAtual === 'stopmotion') abrirVideo(equipaAtual.id);
             else if (tipoTrabalhoAtual === 'terrario') abrirTerrario(equipaAtual.id);
         }
-
         function abrirGibi(equipaId) {
             const idioma = getIdiomaAtual();
             equipaAtual = equipesData.gibi[idioma].find(e => e.id === equipaId);
@@ -534,7 +506,6 @@ main,header,section,nav,.container{position:relative;z-index:2}
                 else atualizarGibi();
             }
         }
-
         function abrirVideo(equipaId) {
             const idioma = getIdiomaAtual();
             equipaAtual = equipesData.stopmotion[idioma].find(e => e.id === equipaId);
@@ -544,7 +515,6 @@ main,header,section,nav,.container{position:relative;z-index:2}
             document.getElementById('video-overlay').style.display = 'block';
             document.body.style.overflow = 'hidden';
         }
-
         function abrirTerrario(equipaId) {
             const idioma = getIdiomaAtual();
             equipaAtual = equipesData.terrario[idioma].find(e => e.id === equipaId);
@@ -563,7 +533,7 @@ main,header,section,nav,.container{position:relative;z-index:2}
             img.src = nomeArquivo;
             document.getElementById("contador").innerText = `${paginaAtual + 1} / ${equipaAtual.totalPaginas}`;
         }
-          const navLinks = document.querySelectorAll('.nav-link'); const sections = document.querySelectorAll('section');
+                  const navLinks = document.querySelectorAll('.nav-link'); const sections = document.querySelectorAll('section');
         navLinks.forEach(link => { link.addEventListener('click', (e) => {
             e.preventDefault(); const sectionId = link.getAttribute('data-section');
             navLinks.forEach(l => l.classList.remove('active')); link.classList.add('active');
@@ -591,27 +561,28 @@ main,header,section,nav,.container{position:relative;z-index:2}
             if(id === 'video-overlay') { const video = document.getElementById('video-player'); video.pause(); video.currentTime = 0; video.src = ""; }
         }
 
-        // FUNÇÕES DO OVERLAY DE EQUIPES
+        // FUNÇÕES DO OVERLAY DE EQUIPES - CORRIGIDA
         function mostrarListaEquipes(tipo) {
             tipoTrabalhoAtual = tipo;
             const idioma = getIdiomaAtual();
             const dados = equipesData[tipo][idioma];
             const overlayCard = document.getElementById('overlay-equipes-card');
-            const conteudo = document.getElementById('equipes-overlay-conteudo');
 
-            // REMOVE TODOS OS TEMAS PRIMEIRO
-            overlayCard.classList.remove('tema-floresta');
+            // REMOVE TODOS OS TEMAS PRIMEIRO - CORRIGIDO
+            overlayCard.classList.remove('tema-floresta', 'tema-oceano');
 
-            // SÓ TERRARIO GANHA TEMA FLORESTA + INSETOS
+            // SÓ TERRARIO GANHA TEMA FLORESTA. O RESTO É OCEANO
             if(tipo === 'terrario') {
                 overlayCard.classList.add('tema-floresta');
+            } else {
+                overlayCard.classList.add('tema-oceano');
             }
 
             let titulo = tipo === 'gibi'? 'Gibi - Escolha uma Equipe' : tipo === 'stopmotion'? 'Stop Motion - Escolha uma Equipe' : 'Terrário - Escolha uma Equipe';
             if (idioma === 'en') titulo = tipo === 'gibi'? 'Comic - Choose a Team' : tipo === 'stopmotion'? 'Stop Motion - Choose a Team' : 'Terrarium - Choose a Team';
             if (idioma === 'es') titulo = tipo === 'gibi'? 'Cómic - Elige un Equipo' : tipo === 'stopmotion'? 'Stop Motion - Elige un Equipo' : 'Terrario - Elige un Equipo';
 
-            conteudo.innerHTML = `<h3 style="text-align:center; color:var(--secondary); font-size:2rem; margin-bottom:2rem;">${titulo}</h3><div class="equipes-grid" id="equipes-dinamicas"></div>`;
+            document.getElementById('equipes-overlay-conteudo').innerHTML = `<h3 style="text-align:center; color:var(--secondary); font-size:2rem; margin-bottom:2rem;">${titulo}</h3><div class="equipes-grid" id="equipes-dinamicas"></div>`;
             const grid = document.getElementById('equipes-dinamicas');
             dados.forEach(equipe => {
                 const card = document.createElement('div'); card.className = 'equipe-card';
@@ -630,7 +601,7 @@ main,header,section,nav,.container{position:relative;z-index:2}
         function fecharOverlayEquipes() {
             document.getElementById('equipes-overlay').style.display = 'none';
             document.body.style.overflow = 'auto';
-            document.getElementById('overlay-equipes-card').classList.remove('tema-floresta');
+            document.getElementById('overlay-equipes-card').classList.remove('tema-floresta', 'tema-oceano');
         }
 
         function startQuiz() { currentQ = 0; quizScore = 0; document.getElementById('quiz-start').style.display = 'none'; document.getElementById('quiz-result').style.display = 'none'; document.getElementById('quiz-box').style.display = 'block'; showQuestion(); }
@@ -645,56 +616,15 @@ main,header,section,nav,.container{position:relative;z-index:2}
 
         function hexToRgb(hex) { let r = parseInt(hex.slice(1, 3), 16); let g = parseInt(hex.slice(3, 5), 16); let b = parseInt(hex.slice(5, 7), 16); return {r, g, b}; }
         function mudarCor(hex) {
-    // SE FOR UM DOS 3 CARDS DE TRABALHOS, NÃO DEIXA MUDAR
-    const overlayAberto = document.getElementById('equipes-overlay').style.display === 'block';
-    if(overlayAberto) return; // trava quando abrir qualquer overlay
+            const overlayAberto = document.getElementById('equipes-overlay').style.display === 'block';
+            if(overlayAberto) return; // trava quando abrir qualquer overlay
 
-    const rgb = hexToRgb(hex); document.documentElement.style.setProperty('--secondary', hex);
-    document.documentElement.style.setProperty('--primary', `rgb(${Math.max(0,rgb.r - 30)}, ${Math.max(0,rgb.g - 30)}, ${Math.max(0,rgb.b - 30)})`);
-    document.documentElement.style.setProperty('--primary-dark', `rgb(${Math.max(0,rgb.r - 60)}, ${Math.max(0,rgb.g - 60)}, ${Math.max(0,rgb.b - 60)})`);
-    localStorage.setItem('corSite', hex);
-}
-    /* CORES FIXAS DOS CARDS DE TRABALHOS */
-.grid-container .info-card:nth-child(1), /* GIBI */
-.grid-container .info-card:nth-child(2) { /* STOP */
-    background: #00B3FF !important;
-    border: 1px solid #00B3FF !important;
-}
-.grid-container .info-card:nth-child(1):hover,
-.grid-container .info-card:nth-child(2):hover {
-    background: #0099E6 !important; /* Azul mais escuro no hover */
-    box-shadow: 0 0 25px rgba(0,179,255,0.5) !important;
-}
+            const rgb = hexToRgb(hex); document.documentElement.style.setProperty('--secondary', hex);
+            document.documentElement.style.setProperty('--primary', `rgb(${Math.max(0,rgb.r - 30)}, ${Math.max(0,rgb.g - 30)}, ${Math.max(0,rgb.b - 30)})`);
+            document.documentElement.style.setProperty('--primary-dark', `rgb(${Math.max(0,rgb.r - 60)}, ${Math.max(0,rgb.g - 60)}, ${Math.max(0,rgb.b - 60)})`);
+            localStorage.setItem('corSite', hex);
+        }
 
-.grid-container .info-card:nth-child(3) { /* TERRARIO */
-    background: #228B22 !important;
-    border: 1px solid #228B22 !important;
-}
-.grid-container .info-card:nth-child(3):hover {
-    background: #1A6A1A !important; /* Verde mais escuro no hover */
-    box-shadow: 0 0 25px rgba(34,139,34,0.5) !important;
-}
-
-/* FORÇA COR FIXA NOS OVERLAYS */
-#overlay-equipes-card.tema-oceano { /* GIBI E STOP */
-    --secondary: #00B3FF !important;
-}
-#overlay-equipes-card.tema-oceano .equipe-header {
-    background: #00B3FF !important;
-}
-#overlay-equipes-card.tema-oceano .equipe-card:hover {
-    border-color: #00B3FF !important;
-}
-
-#overlay-equipes-card.tema-floresta { /* TERRARIO */
-    --secondary: #228B22 !important;
-}
-#overlay-equipes-card.tema-floresta .equipe-header {
-    background: #228B22 !important;
-}
-#overlay-equipes-card.tema-floresta .equipe-card:hover {
-    border-color: #7CFC00 !important;
-}
         const traducoes = {
             pt: { inicio: "Início", curiosidades: "Curiosidades", trabalhos: "Trabalhos", dicas: "Dicas", quiz: "Quiz", titulo: "O PROJETO E A ÁGUA", idioma: "Idioma", cor_tema: "Cor do Tema", fatos_titulo: "Fatos e Curiosidades", trabalhos_titulo: "Nossos Trabalhos", dicas_titulo: "Dicas Práticas", quiz_titulo: "Quiz da Água", gibi_tit: "Gibi", stop_tit: "Stop Motion", terrario_tit: "Terrário", gibi_desc: "Veja as 15 equipes e seus gibis sobre a água", stop_desc: "Assista aos vídeos das 15 equipes", terrario_desc: "Veja as 15 equipes e seus terrários", clique: "Clique para ver →", anterior: "← Anterior", proxima: "Próxima →", ciclo_tit: "O Ciclo da Água", consumo_tit: "Consumo Industrial", conta_tit: "Contaminação", ciclo_resumo: "A água percorre um ciclo contínuo na natureza...", consumo_resumo: "A indústria consome aproximadamente 19% da água doce...", conta_resumo: "2 bilhões de pessoas vivem em regiões com escassez severa...", ciclo_txt: "A água circula continuamente através de evaporação, condensação e precipitação.", consumo_txt: "A agricultura consome 70% de toda a água doce do mundo.", conta_txt: "80% dos rios globais estão poluídos. 2 bilhões de pessoas vivem com escassez severa.", dica1_tit: "Banhos Rápidos", dica1_txt: "Reduzir o tempo de banho economiza até 100 litros por dia.", dica2_tit: "Conserte Vazamentos", dica2_txt: "Um vazamento pequeno desperdiça até 46 mil litros por ano.", dica3_tit: "Reutilize Água", dica3_txt: "Aproveite a água da chuva para regar plantas.", quiz_intro: "Teste seus conhecimentos com 10 perguntas!", btn_comecar: "Começar Quiz", pergunta: "Pergunta", de: "de", parabens: "Parabéns!", btn_tentar: "Tentar Novamente", footer: "Gestão Sustentável da Água" },
             en: { inicio: "Home", curiosidades: "Curiosities", trabalhos: "Projects", dicas: "Tips", quiz: "Quiz", titulo: "THE PROJECT AND WATER", idioma: "Language", cor_tema: "Theme Color", fatos_titulo: "Facts and Curiosities", trabalhos_titulo: "Our Projects", dicas_titulo: "Practical Tips", quiz_titulo: "Water Quiz", gibi_tit: "Comic", stop_tit: "Stop Motion", terrario_tit: "Terrarium", gibi_desc: "See the 15 teams and their water comics", stop_desc: "Watch the 15 teams' videos", terrario_desc: "See the 15 teams and their terrariums", clique: "Click to see →", anterior: "← Previous", proxima: "Next →", ciclo_tit: "The Water Cycle", consumo_tit: "Industrial Consumption", conta_tit: "Contamination", ciclo_resumo: "Water goes through a continuous cycle in nature...", consumo_resumo: "Industry consumes approximately 19% of fresh water...", conta_resumo: "2 billion people live in regions with severe water scarcity...", ciclo_txt: "Water circulates continuously through evaporation, condensation and precipitation.", consumo_txt: "Agriculture consumes 70% of all fresh water in the world.", conta_txt: "80% of the world's rivers are polluted. 2 billion people live with severe water scarcity.", dica1_tit: "Quick Showers", dica1_txt: "Reducing shower time saves up to 100 liters per day.", dica2_tit: "Fix Leaks", dica2_txt: "A small leak wastes up to 46 thousand liters per year.", dica3_tit: "Reuse Water", dica3_txt: "Use rainwater to water plants.", quiz_intro: "Test your knowledge with 10 questions!", btn_comecar: "Start Quiz", pergunta: "Question", de: "of", parabens: "Congratulations!", btn_tentar: "Try Again", footer: "Sustainable Water Management" },
@@ -728,22 +658,25 @@ main,header,section,nav,.container{position:relative;z-index:2}
             document.getElementById('curiosidade-overlay').style.display = 'block';
             document.body.style.overflow = 'hidden';
         }
+
+        // CARREGAMENTO INICIAL - CORRIGIDO
         document.addEventListener('DOMContentLoaded', () => {
-            const corSalva = localStorage.getItem('corSite') || '#00bfff';
+            const corSalva = localStorage.getItem('corSite') || '#00B3FF';
             document.getElementById('colorPicker').value = corSalva; mudarCor(corSalva);
             const idiomaSalvo = localStorage.getItem('idiomaSite') || 'pt';
             document.getElementById('idioma-select').value = idiomaSalvo; aplicarTraducao();
         });
-
         document.getElementById('curiosidade-overlay').addEventListener('click', (e) => { if (e.target.id === 'curiosidade-overlay') fecharOverlay('curiosidade-overlay'); });
         document.getElementById('gibi-overlay').addEventListener('click', (e) => { if (e.target.id === 'gibi-overlay') fecharOverlay('gibi-overlay'); });
         document.getElementById('video-overlay').addEventListener('click', (e) => { if (e.target.id === 'video-overlay') fecharOverlay('video-overlay'); });
         document.getElementById('equipes-overlay').addEventListener('click', (e) => { if (e.target.id === 'equipes-overlay') fecharOverlayEquipes(); });
 
-document.addEventListener('DOMContentLoaded',()=>{
-const obs=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.animate([{opacity:0,transform:'translateY(25px)'},{opacity:1,transform:'translateY(0)'}],{duration:700,fill:'forwards'});obs.unobserve(e.target)}}),{threshold:.12});
-document.querySelectorAll('section,.info-card,.dica-card,.equipe-card').forEach(el=>obs.observe(el));
-});
+        // ANIMAÇÃO SCROLL - CORRIGIDO
+        document.addEventListener('DOMContentLoaded',()=>{
+        const obs=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.animate([{opacity:0,transform:'translateY(25px)'},{opacity:1,transform:'translateY(0)'}],{duration:700,fill:'forwards'});obs.unobserve(e.target)}}),{threshold:.12});
+        document.querySelectorAll('section,.info-card,.dica-card,.equipe-card').forEach(el=>obs.observe(el));
+        });
+
 </script>
 </body>
 </html>
