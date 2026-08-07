@@ -744,7 +744,6 @@ document.addEventListener('DOMContentLoaded',()=>{
 const obs=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.animate([{opacity:0,transform:'translateY(25px)'},{opacity:1,transform:'translateY(0)'}],{duration:700,fill:'forwards'});obs.unobserve(e.target)}}),{threshold:.12});
 document.querySelectorAll('section,.info-card,.dica-card,.equipe-card').forEach(el=>obs.observe(el));
 });
-
 </script>
 </body>
 </html>
