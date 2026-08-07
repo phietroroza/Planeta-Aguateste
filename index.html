@@ -176,14 +176,29 @@
         #overlay-equipes-card.tema-oceano h3 { color: #00B3FF!important; }
 
         /* TEMA EXCLUSIVO DO TERRARIO */
-        #overlay-equipes-card.tema-floresta {
+#overlay-equipes-card.tema-floresta {
             background: linear-gradient(180deg, #0a1a0a 0%, #143214 100%); 
             border: 2px solid #228B22;
             box-shadow: 0 0 40px rgba(34,139,34,0.6); 
             --secondary: #228B22!important;
+            overflow: visible; /* ADICIONA ISSO AQUI */
+            position: relative; /* PRA GARANTIR */
         }
-        #overlay-equipes-card.tema-floresta::before { content: "🍃 🐞 🦋 🐢 🐸"; position: absolute; top: -50px; left: 0; width: 100%; font-size: 2rem; animation: cairFolhas 15s linear infinite; opacity: 0.4; z-index: 0; }
-        @keyframes cairFolhas { 0% { transform: translateY(-50px) rotate(0deg); } 100% { transform: translateY(900px) rotate(360deg); } }
+       #overlay-equipes-card.tema-floresta::before { 
+            content: "🍃 🐞 🦋 🐢 🐸"; 
+            position: absolute; 
+            top: 10px; /* ERA -50px, AGORA 10px */
+            left: 0; 
+            width: 100%; 
+            font-size: 2rem; 
+            animation: cairFolhas 15s linear infinite; 
+            opacity: 0.4; 
+            z-index: 0; 
+        }
+        @keyframes cairFolhas { 
+            0% { transform: translateY(-20px) rotate(0deg); } /* COMEÇA UM POUCO ACIMA */
+            100% { transform: translateY(850px) rotate(360deg); } /* TERMINA DENTRO DO CARD */
+        }
         #overlay-equipes-card.tema-floresta .inseto { position: absolute; font-size: 2.5rem; pointer-events: none; z-index: 0; opacity: 0.7; }
         #overlay-equipes-card.tema-floresta .i1 { bottom: 10%; left: -10%; animation: andarDireita 25s linear infinite; }
         #overlay-equipes-card.tema-floresta .i2 { bottom: 30%; left: 110%; animation: andarEsquerda 30s linear infinite; animation-delay: 5s; }
