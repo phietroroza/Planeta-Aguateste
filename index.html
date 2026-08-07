@@ -65,16 +65,7 @@
        .quiz-option.wrong { background: rgba(239,71,111,0.3); border-color: #ef476f; }
 
        .content-overlay { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0, 0, 0, 0.9); z-index: 2000; padding: 40px; overflow-y: auto; }
-       .overlay-card { 
-    background: #002244; 
-    max-width: 700px; 
-    margin: 0 auto; 
-    padding: 50px; 
-    border-radius: 10px; 
-    position: relative; /* IMPORTANTE PRA INSETOS ANDAREM */
-    border: 1px solid var(--secondary); 
-    color: var(--white); 
-}
+       .overlay-card { background: #002244; max-width: 700px; margin: 0 auto; padding: 50px; border-radius: 10px; position: relative; border: 1px solid var(--secondary); color: var(--white); }
        .close-btn { position: absolute; top: 20px; right: 20px; font-size: 2.5rem; cursor: pointer; background: none; border: none; color: var(--white); }
        .overlay-content h2 { color: var(--secondary); margin-bottom: 20px; font-size: 2rem; }
        .overlay-content ul { margin-left: 20px; }
@@ -121,60 +112,67 @@ main,header,section,nav,.container{position:relative;z-index:2}
 .glow{filter:drop-shadow(0 0 8px #7df9ff) drop-shadow(0 0 18px #7df9ff)}
 @keyframes sharkR{from{transform:translateX(0)}to{transform:translateX(130vw)}} @keyframes sharkL{from{transform:translateX(0) scaleX(-1)}to{transform:translateX(-130vw) scaleX(-1)}}
 
-/* OVERLAY PADRÃO AZUL COM PEIXES E BOLHAS - GIBI E STOP */
-#overlay-equipes-card.tema-oceano {
-    background: #002244;
-    border: 1px solid var(--secondary);
-    max-width: 1100px;
-    padding: 60px 50px;
-}
-/* PEIXES DENTRO DO OVERLAY OCEANO */
-#overlay-equipes-card.tema-oceano .peixe-overlay { position: absolute; font-size: 2.5rem; pointer-events: none; z-index: 0; opacity: 0.4; }
-#overlay-equipes-card.tema-oceano .po1 { top: 15%; left: -10%; animation: nadarDireita 20s linear infinite; }
-#overlay-equipes-card.tema-oceano .po2 { top: 50%; left: 110%; animation: nadarEsquerda 25s linear infinite; animation-delay: 3s; }
-@keyframes nadarDireita { from { transform: translateX(0); } to { transform: translateX(120vw); }
-@keyframes nadarEsquerda { from { transform: translateX(0) scaleX(-1); } to { transform: translateX(-120vw) scaleX(-1); }
-/* BOLHAS DENTRO DO OVERLAY */
-#overlay-equipes-card.tema-oceano::after {
-    content: ""; position: absolute; inset: 0;
-    background: radial-gradient(circle at 20% 120%,rgba(255,255,255,.08) 0 2px,transparent 3px) 0 0/120px 120px;
-    animation: bubbles 20s linear infinite; opacity: .6; pointer-events: none; z-index: 0;
-}
-
-/* OVERLAY MAIOR TEMA FLORESTA - SÓ TERRARIO */
+/* TEMA EXCLUSIVO DO TERRARIO */
 #overlay-equipes-card.tema-floresta {
     background: linear-gradient(180deg, #0a1a0a 0%, #143214 100%);
     border: 2px solid #228B22;
     box-shadow: 0 0 40px rgba(34,139,34,0.6);
     max-width: 1100px;
     padding: 60px 50px;
+    position: relative;
+    overflow: hidden;
 }
 #overlay-equipes-card.tema-floresta::before { /* FOLHAS CAINDO */
-    content: "🍃 🐞 🦋 🐢 🐸"; position: absolute; top: -50px; left: 0; width: 100%;
-    font-size: 2rem; animation: cairFolhas 15s linear infinite; opacity: 0.4; z-index: 0;
+    content: "🍃 🐞 🦋 🐢 🐸";
+    position: absolute;
+    top: -50px;
+    left: 0;
+    width: 100%;
+    font-size: 2rem;
+    animation: cairFolhas 15s linear infinite;
+    opacity: 0.4;
+    z-index: 0;
 }
-@keyframes cairFolhas { 0% { transform: translateY(-50px) rotate(0deg); } 100% { transform: translateY(900px) rotate(360deg); } }
-/* INSETOS SÓ NO FLORESTA */
+@keyframes cairFolhas {
+    0% { transform: translateY(-50px) rotate(0deg); }
+    100% { transform: translateY(900px) rotate(360deg); }
+}
+
+/* INSETOS SÓ APARECEM NO TERRARIO */
 #overlay-equipes-card.tema-floresta .inseto { position: absolute; font-size: 2.5rem; pointer-events: none; z-index: 0; opacity: 0.7; }
 #overlay-equipes-card.tema-floresta .i1 { bottom: 10%; left: -10%; animation: andarDireita 25s linear infinite; }
 #overlay-equipes-card.tema-floresta .i2 { bottom: 30%; left: 110%; animation: andarEsquerda 30s linear infinite; animation-delay: 5s; }
 #overlay-equipes-card.tema-floresta .i3 { bottom: 60%; left: -10%; animation: andarDireita 35s linear infinite; animation-delay: 10s; }
+@keyframes andarDireita { from { transform: translateX(0); } to { transform: translateX(120vw); } }
+@keyframes andarEsquerda { from { transform: translateX(0) scaleX(-1); } to { transform: translateX(-120vw) scaleX(-1); } }
 
 /* GRID 4 COLUNAS PRA TODOS */
 #overlay-equipes-card .equipes-grid {
-    grid-template-columns: repeat(4, 1fr); gap: 1.5rem; position: relative; z-index: 2;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1.5rem;
+    position: relative;
+    z-index: 2;
 }
 #overlay-equipes-card.tema-floresta .equipe-card {
-    background: rgba(30, 58, 30, 0.8); border: 1px solid rgba(50,205,50,0.5); backdrop-filter: blur(3px);
+    background: rgba(30, 58, 30, 0.8);
+    border: 1px solid rgba(50,205,50,0.5);
+    backdrop-filter: blur(3px);
 }
 #overlay-equipes-card.tema-floresta .equipe-card:hover {
-    background: rgba(34, 139, 34, 0.8); border-color: #7CFC00;
+    background: rgba(34, 139, 34, 0.8);
+    border-color: #7CFC00;
+    transform: translateY(-8px) scale(1.03);
 }
 #overlay-equipes-card.tema-floresta .equipe-header {
-    background: #228B22; font-size: 1.4rem; height: 80px;
+    background: #228B22;
+    font-size: 1.4rem;
+    height: 80px;
 }
+
 @media (max-width: 768px) {
-    #overlay-equipes-card .equipes-grid { grid-template-columns: repeat(2, 1fr); }
+    #overlay-equipes-card .equipes-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
 }
 </style>
 </head>
@@ -225,19 +223,16 @@ main,header,section,nav,.container{position:relative;z-index:2}
         <div id="video-overlay" class="content-overlay"><div class="overlay-card"><button class="close-btn" onclick="fecharOverlay('video-overlay')">&times;</button><h2 id="video-titulo" style="text-align:center; color:var(--secondary); margin-bottom:25px;"></h2><video id="video-player" width="100%" controls style="border-radius:8px;"><source src="" type="video/mp4"></video></div></div>
 
         <!-- OVERLAY PARA LISTA DE EQUIPES COM INSETOS -->
-    <div id="equipes-overlay" class="content-overlay">
-    <div class="overlay-card" id="overlay-equipes-card">
-        <button class="close-btn" onclick="fecharOverlayEquipes()">&times;</button>
-        <!-- PEIXES PRO GIBI E STOP -->
-        <div class="peixe-overlay po1">🐠</div>
-        <div class="peixe-overlay po2">🐟</div>
-        <!-- INSETOS PRO TERRARIO -->
-        <div class="inseto i1">🦎</div>
-        <div class="inseto i2">🐌</div>
-        <div class="inseto i3">🐛</div>
-        <div id="equipes-overlay-conteudo"></div>
-    </div>
-</div>
+        <div id="equipes-overlay" class="content-overlay">
+            <div class="overlay-card" id="overlay-equipes-card">
+                <button class="close-btn" onclick="fecharOverlayEquipes()">&times;</button>
+                <!-- INSETOS SÓ APARECEM QUANDO ATIVAR TEMA-FLORESTA -->
+                <div class="inseto i1">🦎</div>
+                <div class="inseto i2">🐌</div>
+                <div class="inseto i3">🐛</div>
+                <div id="equipes-overlay-conteudo"></div>
+            </div>
+        </div>
 
         <section id="trabalhos">
             <h2 class="section-title" data-key="trabalhos_titulo">Nossos Trabalhos</h2>
@@ -591,14 +586,14 @@ main,header,section,nav,.container{position:relative;z-index:2}
             const overlayCard = document.getElementById('overlay-equipes-card');
             const conteudo = document.getElementById('equipes-overlay-conteudo');
 
-            // SE FOR TERRARIO ATIVA TEMA FLORESTA + INSETOS
-     overlayCard.classList.remove('tema-floresta', 'tema-oceano');
-if(tipo === 'terrario') {
-    overlayCard.classList.add('tema-floresta');
-    console.log("Ativou tema floresta") // pra testar
-} else {
-    overlayCard.classList.add('tema-oceano');
-}
+            // REMOVE TODOS OS TEMAS PRIMEIRO
+            overlayCard.classList.remove('tema-floresta');
+
+            // SÓ TERRARIO GANHA TEMA FLORESTA + INSETOS
+            if(tipo === 'terrario') {
+                overlayCard.classList.add('tema-floresta');
+            }
+
             let titulo = tipo === 'gibi'? 'Gibi - Escolha uma Equipe' : tipo === 'stopmotion'? 'Stop Motion - Escolha uma Equipe' : 'Terrário - Escolha uma Equipe';
             if (idioma === 'en') titulo = tipo === 'gibi'? 'Comic - Choose a Team' : tipo === 'stopmotion'? 'Stop Motion - Choose a Team' : 'Terrarium - Choose a Team';
             if (idioma === 'es') titulo = tipo === 'gibi'? 'Cómic - Elige un Equipo' : tipo === 'stopmotion'? 'Stop Motion - Elige un Equipo' : 'Terrario - Elige un Equipo';
@@ -619,11 +614,11 @@ if(tipo === 'terrario') {
             document.body.style.overflow = 'hidden';
         }
 
-   function fecharOverlayEquipes() {
-    document.getElementById('equipes-overlay').style.display = 'none';
-    document.body.style.overflow = 'auto';
-    document.getElementById('overlay-equipes-card').classList.remove('tema-floresta', 'tema-oceano');
-}
+        function fecharOverlayEquipes() {
+            document.getElementById('equipes-overlay').style.display = 'none';
+            document.body.style.overflow = 'auto';
+            document.getElementById('overlay-equipes-card').classList.remove('tema-floresta');
+        }
 
         function startQuiz() { currentQ = 0; quizScore = 0; document.getElementById('quiz-start').style.display = 'none'; document.getElementById('quiz-result').style.display = 'none'; document.getElementById('quiz-box').style.display = 'block'; showQuestion(); }
         function showQuestion() { const idioma = getIdiomaAtual(); const q = quizData[idioma][currentQ]; document.getElementById('q-current').innerText = currentQ + 1; document.getElementById('q-text').innerText = q.q; const optionsDiv = document.getElementById('q-options'); optionsDiv.innerHTML = '';
@@ -646,7 +641,7 @@ if(tipo === 'terrario') {
         const traducoes = {
             pt: { inicio: "Início", curiosidades: "Curiosidades", trabalhos: "Trabalhos", dicas: "Dicas", quiz: "Quiz", titulo: "O PROJETO E A ÁGUA", idioma: "Idioma", cor_tema: "Cor do Tema", fatos_titulo: "Fatos e Curiosidades", trabalhos_titulo: "Nossos Trabalhos", dicas_titulo: "Dicas Práticas", quiz_titulo: "Quiz da Água", gibi_tit: "Gibi", stop_tit: "Stop Motion", terrario_tit: "Terrário", gibi_desc: "Veja as 15 equipes e seus gibis sobre a água", stop_desc: "Assista aos vídeos das 15 equipes", terrario_desc: "Veja as 15 equipes e seus terrários", clique: "Clique para ver →", anterior: "← Anterior", proxima: "Próxima →", ciclo_tit: "O Ciclo da Água", consumo_tit: "Consumo Industrial", conta_tit: "Contaminação", ciclo_resumo: "A água percorre um ciclo contínuo na natureza...", consumo_resumo: "A indústria consome aproximadamente 19% da água doce...", conta_resumo: "2 bilhões de pessoas vivem em regiões com escassez severa...", ciclo_txt: "A água circula continuamente através de evaporação, condensação e precipitação.", consumo_txt: "A agricultura consome 70% de toda a água doce do mundo.", conta_txt: "80% dos rios globais estão poluídos. 2 bilhões de pessoas vivem com escassez severa.", dica1_tit: "Banhos Rápidos", dica1_txt: "Reduzir o tempo de banho economiza até 100 litros por dia.", dica2_tit: "Conserte Vazamentos", dica2_txt: "Um vazamento pequeno desperdiça até 46 mil litros por ano.", dica3_tit: "Reutilize Água", dica3_txt: "Aproveite a água da chuva para regar plantas.", quiz_intro: "Teste seus conhecimentos com 10 perguntas!", btn_comecar: "Começar Quiz", pergunta: "Pergunta", de: "de", parabens: "Parabéns!", btn_tentar: "Tentar Novamente", footer: "Gestão Sustentável da Água" },
             en: { inicio: "Home", curiosidades: "Curiosities", trabalhos: "Projects", dicas: "Tips", quiz: "Quiz", titulo: "THE PROJECT AND WATER", idioma: "Language", cor_tema: "Theme Color", fatos_titulo: "Facts and Curiosities", trabalhos_titulo: "Our Projects", dicas_titulo: "Practical Tips", quiz_titulo: "Water Quiz", gibi_tit: "Comic", stop_tit: "Stop Motion", terrario_tit: "Terrarium", gibi_desc: "See the 15 teams and their water comics", stop_desc: "Watch the 15 teams' videos", terrario_desc: "See the 15 teams and their terrariums", clique: "Click to see →", anterior: "← Previous", proxima: "Next →", ciclo_tit: "The Water Cycle", consumo_tit: "Industrial Consumption", conta_tit: "Contamination", ciclo_resumo: "Water goes through a continuous cycle in nature...", consumo_resumo: "Industry consumes approximately 19% of fresh water...", conta_resumo: "2 billion people live in regions with severe water scarcity...", ciclo_txt: "Water circulates continuously through evaporation, condensation and precipitation.", consumo_txt: "Agriculture consumes 70% of all fresh water in the world.", conta_txt: "80% of the world's rivers are polluted. 2 billion people live with severe water scarcity.", dica1_tit: "Quick Showers", dica1_txt: "Reducing shower time saves up to 100 liters per day.", dica2_tit: "Fix Leaks", dica2_txt: "A small leak wastes up to 46 thousand liters per year.", dica3_tit: "Reuse Water", dica3_txt: "Use rainwater to water plants.", quiz_intro: "Test your knowledge with 10 questions!", btn_comecar: "Start Quiz", pergunta: "Question", de: "of", parabens: "Congratulations!", btn_tentar: "Try Again", footer: "Sustainable Water Management" },
-            es: { inicio: "Inicio", curiosidades: "Curiosidades", trabalhos: "Trabajos", dicas: "Consejos", quiz: "Cuestionario", titulo: "EL PROYECTO Y EL AGUA", idioma: "Idioma", cor_tema: "Color del Tema", fatos_titulo: "Datos y Curiosidades", trabalhos_titulo: "Nuestros Trabajos", dicas_titulo: "Consejos Prácticos", quiz_titulo: "Cuestionario del Agua", gibi_tit: "Cómic", stop_tit: "Stop Motion", terrario_tit: "Terrario", gibi_desc: "Mira los 15 equipos y sus cómics sobre el agua", stop_desc: "Mira los videos de los 15 equipos", terrario_desc: "Mira los 15 equipos y sus terrarios", clique: "Haz clic para ver →", anterior: "← Anterior", proxima: "Siguiente →", ciclo_tit: "El Ciclo del Agua", consumo_tit: "Consumo Industrial", conta_tit: "Contaminación", ciclo_resumo: "El agua recorre un ciclo continuo en la naturaleza...", consumo_resumo: "La industria consume aproximadamente el 19% del agua dulce...", conta_resumo: "2 mil millones de personas viven en regiones con escasez severa...", ciclo_txt: "El agua circula continuamente a través de evaporación, condensación y precipitación.", consumo_txt: "La agricultura consume el 70% de toda el agua dulce del mundo.", conta_txt: "El 80% de los ríos del mundo están contaminados. 2 mil millones de personas viven con escasez severa.", dica1_tit: "Duchas Rápidas", dica1_txt: "Reducir el tiempo de ducha ahorra hasta 100 litros por día.", dica2_tit: "Repara Fugas", dica2_txt: "Una pequeña fuga desperdiça hasta 46 mil litros por año.", dica3_tit: "Reutiliza Agua", dica3_txt: "Aprovecha el agua de lluvia para regar plantas.", quiz_intro: "¡Pon a prueba tus conocimientos con 10 preguntas!", btn_comecar: "Comenzar Cuestionario", pergunta: "Pregunta", de: "de", parabens: "¡Felicidades!", btn_tentar: "Intentar de Nuevo", footer: "Gestión Sostenible del Agua" }
+            es: { inicio: "Inicio", curiosidades: "Curiosidades", trabajos: "Trabajos", dicas: "Consejos", quiz: "Cuestionario", titulo: "EL PROYECTO Y EL AGUA", idioma: "Idioma", cor_tema: "Color del Tema", fatos_titulo: "Datos y Curiosidades", trabalhos_titulo: "Nuestros Trabajos", dicas_titulo: "Consejos Prácticos", quiz_titulo: "Cuestionario del Agua", gibi_tit: "Cómic", stop_tit: "Stop Motion", terrario_tit: "Terrario", gibi_desc: "Mira los 15 equipos y sus cómics sobre el agua", stop_desc: "Mira los videos de los 15 equipos", terrario_desc: "Mira los 15 equipos y sus terrarios", clique: "Haz clic para ver →", anterior: "← Anterior", proxima: "Siguiente →", ciclo_tit: "El Ciclo del Agua", consumo_tit: "Consumo Industrial", conta_tit: "Contaminación", ciclo_resumo: "El agua recorre un ciclo continuo en la naturaleza...", consumo_resumo: "La industria consume aproximadamente el 19% del agua dulce...", conta_resumo: "2 mil millones de personas viven en regiones con escasez severa...", ciclo_txt: "El agua circula continuamente a través de evaporación, condensación y precipitación.", consumo_txt: "La agricultura consume el 70% de toda el agua dulce del mundo.", conta_txt: "El 80% de los ríos del mundo están contaminados. 2 mil millones de personas viven con escasez severa.", dica1_tit: "Duchas Rápidas", dica1_txt: "Reducir el tiempo de ducha ahorra hasta 100 litros por día.", dica2_tit: "Repara Fugas", dica2_txt: "Una pequeña fuga desperdiça hasta 46 mil litros por año.", dica3_tit: "Reutiliza Agua", dica3_txt: "Aprovecha el agua de lluvia para regar plantas.", quiz_intro: "¡Pon a prueba tus conocimientos con 10 preguntas!", btn_comecar: "Comenzar Cuestionario", pergunta: "Pregunta", de: "de", parabens: "¡Felicidades!", btn_tentar: "Intentar de Nuevo", footer: "Gestión Sostenible del Agua" }
         };
 
         function aplicarTraducao() {
