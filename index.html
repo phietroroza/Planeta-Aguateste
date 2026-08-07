@@ -112,22 +112,67 @@ main,header,section,nav,.container{position:relative;z-index:2}
 .glow{filter:drop-shadow(0 0 8px #7df9ff) drop-shadow(0 0 18px #7df9ff)}
 @keyframes sharkR{from{transform:translateX(0)}to{transform:translateX(130vw)}} @keyframes sharkL{from{transform:translateX(0) scaleX(-1)}to{transform:translateX(-130vw) scaleX(-1)}}
 
-/* NOVO: TEMA FLORESTA NO OVERLAY */
+/* OVERLAY MAIOR TEMA FLORESTA */
 #overlay-equipes-card.tema-floresta {
-    background: linear-gradient(180deg, #0a2a0a 0%, #1a3a1a 100%);
-    border: 1px solid #228B22;
-    box-shadow: 0 0 30px rgba(34,139,34,0.5);
+    background: linear-gradient(180deg, #0a1a0a 0%, #143214 100%);
+    border: 2px solid #228B22;
+    box-shadow: 0 0 40px rgba(34,139,34,0.6);
+    max-width: 1100px; /* ABA MAIOR */
+    padding: 60px 50px;
+    position: relative;
+    overflow: hidden;
+}
+#overlay-equipes-card.tema-floresta::before { /* FOLHAS CAINDO */
+    content: "🍃 🐞 🦋 🐢 🐸";
+    position: absolute;
+    top: -50px;
+    left: 0;
+    width: 100%;
+    font-size: 2rem;
+    animation: cairFolhas 15s linear infinite;
+    opacity: 0.4;
+}
+@keyframes cairFolhas {
+    0% { transform: translateY(-50px) rotate(0deg); }
+    100% { transform: translateY(900px) rotate(360deg); }
+}
+
+/* INSETOS PASSANDO SÓ NO TERRARIO */
+.inseto { position: absolute; font-size: 2.5rem; pointer-events: none; z-index: 0; opacity: 0.7; }
+.i1 { bottom: 10%; left: -10%; animation: andarDireita 25s linear infinite; }
+.i2 { bottom: 30%; left: 110%; animation: andarEsquerda 30s linear infinite; animation-delay: 5s; }
+.i3 { bottom: 60%; left: -10%; animation: andarDireita 35s linear infinite; animation-delay: 10s; }
+@keyframes andarDireita { from { transform: translateX(0); } to { transform: translateX(120vw); } }
+@keyframes andarEsquerda { from { transform: translateX(0) scaleX(-1); } to { transform: translateX(-120vw) scaleX(-1); } }
+
+/* GRID 4 COLUNAS */
+#overlay-equipes-card.tema-floresta .equipes-grid {
+    grid-template-columns: repeat(4, 1fr); /* 4 POR LINHA */
+    gap: 1.5rem;
+    position: relative;
+    z-index: 2;
 }
 #overlay-equipes-card.tema-floresta .equipe-card {
-    background: #1e3a1e;
-    border: 1px solid rgba(34,139,34,0.4);
+    background: rgba(30, 58, 30, 0.8);
+    border: 1px solid rgba(50,205,50,0.5);
+    backdrop-filter: blur(3px);
 }
 #overlay-equipes-card.tema-floresta .equipe-card:hover {
-    border-color: #32CD32;
-    transform: translateY(-10px);
+    background: rgba(34, 139, 34, 0.8);
+    border-color: #7CFC00;
+    transform: translateY(-8px) scale(1.03);
 }
 #overlay-equipes-card.tema-floresta .equipe-header {
     background: #228B22;
+    font-size: 1.4rem;
+    height: 80px;
+}
+
+/* MOBILE: 2 COLUNAS */
+@media (max-width: 768px) {
+    #overlay-equipes-card.tema-floresta .equipes-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
 }
 </style>
 </head>
@@ -177,10 +222,14 @@ main,header,section,nav,.container{position:relative;z-index:2}
         <div id="gibi-overlay" class="content-overlay"><div class="overlay-card"><button class="close-btn" onclick="fecharOverlay('gibi-overlay')">&times;</button><h2 id="gibi-titulo" style="text-align:center; color:var(--secondary); margin-bottom:25px;"></h2><img id="pagina" src="" style="width:100%; max-width:600px; display:block; margin:20px auto; border-radius:8px;" onerror="this.style.display='none'; document.getElementById('img-erro').style.display='block';"><p id="img-erro" style="display:none; text-align:center; color:#ef476f; margin:20px 0;">Arquivo de imagem não encontrado. Coloque o arquivo na mesma pasta do site.</p><p id="contador" style="text-align:center; font-weight:600;"></p><div style="display:flex; justify-content:center; gap:1rem; margin-top:25px;"><button class="btn" onclick="anterior()" data-key="anterior">← Anterior</button><button class="btn" onclick="proxima()" data-key="proxima">Próxima →</button></div></div></div>
         <div id="video-overlay" class="content-overlay"><div class="overlay-card"><button class="close-btn" onclick="fecharOverlay('video-overlay')">&times;</button><h2 id="video-titulo" style="text-align:center; color:var(--secondary); margin-bottom:25px;"></h2><video id="video-player" width="100%" controls style="border-radius:8px;"><source src="" type="video/mp4"></video></div></div>
 
-        <!-- NOVO: OVERLAY PARA LISTA DE EQUIPES -->
+        <!-- OVERLAY PARA LISTA DE EQUIPES COM INSETOS -->
         <div id="equipes-overlay" class="content-overlay">
             <div class="overlay-card" id="overlay-equipes-card">
                 <button class="close-btn" onclick="fecharOverlayEquipes()">&times;</button>
+                <!-- INSETOS PASSANDO SÓ QUANDO FOR TERRARIO -->
+                <div class="inseto i1">🦎</div>
+                <div class="inseto i2">🐌</div>
+                <div class="inseto i3">🐛</div>
                 <div id="equipes-overlay-conteudo"></div>
             </div>
         </div>
@@ -218,6 +267,7 @@ main,header,section,nav,.container{position:relative;z-index:2}
 
 <div class="bubbles"><span style="--i:11"></span><span style="--i:18"></span><span style="--i:25"></span><span style="--i:14"></span><span style="--i:22"></span><span style="--i:9"></span><span style="--i:27"></span><span style="--i:16"></span><span style="--i:30"></span><span style="--i:12"></span><span style="--i:21"></span><span style="--i:15"></span><span style="--i:24"></span><span style="--i:19"></span><span style="--i:28"></span><span style="--i:13"></span><span style="--i:26"></span><span style="--i:17"></span><span style="--i:23"></span><span style="--i:10"></span></div>
 
+<!-- PEIXES DO SITE NORMAL -->
 <div class="fish f1">🐬</div>
 <div class="fish f2">🐠</div>
 <div class="fish f3">🐳</div>
@@ -528,7 +578,7 @@ main,header,section,nav,.container{position:relative;z-index:2}
             if(id === 'video-overlay') { const video = document.getElementById('video-player'); video.pause(); video.currentTime = 0; video.src = ""; }
         }
 
-        // NOVAS FUNÇÕES DO OVERLAY DE EQUIPES
+        // FUNÇÕES DO OVERLAY DE EQUIPES
         function mostrarListaEquipes(tipo) {
             tipoTrabalhoAtual = tipo;
             const idioma = getIdiomaAtual();
@@ -536,7 +586,7 @@ main,header,section,nav,.container{position:relative;z-index:2}
             const overlayCard = document.getElementById('overlay-equipes-card');
             const conteudo = document.getElementById('equipes-overlay-conteudo');
 
-            // SE FOR TERRARIO ATIVA TEMA FLORESTA
+            // SE FOR TERRARIO ATIVA TEMA FLORESTA + INSETOS
             if(tipo === 'terrario') {
                 overlayCard.classList.add('tema-floresta');
             } else {
@@ -553,7 +603,7 @@ main,header,section,nav,.container{position:relative;z-index:2}
                 const card = document.createElement('div'); card.className = 'equipe-card';
                 card.onclick = () => {
                     mostrarParticipantes(equipe.id);
-                    fecharOverlayEquipes(); // fecha a lista e abre os participantes
+                    fecharOverlayEquipes();
                 };
                 card.innerHTML = `<div class="equipe-header">${equipe.nome}</div>`;
                 grid.appendChild(card);
