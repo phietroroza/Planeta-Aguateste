@@ -122,7 +122,7 @@ main,header,section,nav,.container{position:relative;z-index:2}
     position: relative;
     overflow: hidden;
 }
-#overlay-equipes-card.tema-floresta::before { /* FOLHAS CAINDO */
+#overlay-equipes-card.tema-floresta::before { /* FOLHAS CAINDO SÓ NO TERRARIO */
     content: "🍃 🐞 🦋 🐢 🐸";
     position: absolute;
     top: -50px;
@@ -137,16 +137,16 @@ main,header,section,nav,.container{position:relative;z-index:2}
     100% { transform: translateY(900px) rotate(360deg); }
 }
 
-/* INSETOS PASSANDO SÓ NO TERRARIO */
-.inseto { position: absolute; font-size: 2.5rem; pointer-events: none; z-index: 0; opacity: 0.7; }
-.i1 { bottom: 10%; left: -10%; animation: andarDireita 25s linear infinite; }
-.i2 { bottom: 30%; left: 110%; animation: andarEsquerda 30s linear infinite; animation-delay: 5s; }
-.i3 { bottom: 60%; left: -10%; animation: andarDireita 35s linear infinite; animation-delay: 10s; }
+/* INSETOS PASSANDO SÓ QUANDO TEMA FLORESTA ESTIVER ATIVO */
+#overlay-equipes-card.tema-floresta .inseto { position: absolute; font-size: 2.5rem; pointer-events: none; z-index: 0; opacity: 0.7; }
+#overlay-equipes-card.tema-floresta .i1 { bottom: 10%; left: -10%; animation: andarDireita 25s linear infinite; }
+#overlay-equipes-card.tema-floresta .i2 { bottom: 30%; left: 110%; animation: andarEsquerda 30s linear infinite; animation-delay: 5s; }
+#overlay-equipes-card.tema-floresta .i3 { bottom: 60%; left: -10%; animation: andarDireita 35s linear infinite; animation-delay: 10s; }
 @keyframes andarDireita { from { transform: translateX(0); } to { transform: translateX(120vw); } }
 @keyframes andarEsquerda { from { transform: translateX(0) scaleX(-1); } to { transform: translateX(-120vw) scaleX(-1); } }
 
-/* GRID 4 COLUNAS */
-#overlay-equipes-card.tema-floresta .equipes-grid {
+/* GRID 4 COLUNAS PRA TODOS: GIBI, STOP E TERRARIO */
+#overlay-equipes-card .equipes-grid {
     grid-template-columns: repeat(4, 1fr); /* 4 POR LINHA */
     gap: 1.5rem;
     position: relative;
@@ -170,7 +170,7 @@ main,header,section,nav,.container{position:relative;z-index:2}
 
 /* MOBILE: 2 COLUNAS */
 @media (max-width: 768px) {
-    #overlay-equipes-card.tema-floresta .equipes-grid {
+    #overlay-equipes-card .equipes-grid {
         grid-template-columns: repeat(2, 1fr);
     }
 }
