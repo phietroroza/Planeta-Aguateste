@@ -112,17 +112,44 @@ main,header,section,nav,.container{position:relative;z-index:2}
 .glow{filter:drop-shadow(0 0 8px #7df9ff) drop-shadow(0 0 18px #7df9ff)}
 @keyframes sharkR{from{transform:translateX(0)}to{transform:translateX(130vw)}} @keyframes sharkL{from{transform:translateX(0) scaleX(-1)}to{transform:translateX(-130vw) scaleX(-1)}}
 
-/* OVERLAY MAIOR TEMA FLORESTA */
-#overlay-equipes-card.tema-floresta {
-    background: linear-gradient(180deg, #0a1a0a 0%, #143214 100%);
-    border: 2px solid #228B22;
-    box-shadow: 0 0 40px rgba(34,139,34,0.6);
-    max-width: 1100px; /* ABA MAIOR */
+/* OVERLAY PADRÃO AZUL COM PEIXES E BOLHAS */
+#overlay-equipes-card.tema-oceano {
+    background: #002244;
+    border: 1px solid var(--secondary);
+    max-width: 1100px;
     padding: 60px 50px;
     position: relative;
     overflow: hidden;
 }
-#overlay-equipes-card.tema-floresta::before { /* FOLHAS CAINDO SÓ NO TERRARIO */
+/* PEIXES DENTRO DO OVERLAY OCEANO */
+#overlay-equipes-card.tema-oceano .peixe-overlay { position: absolute; font-size: 2.5rem; pointer-events: none; z-index: 0; opacity: 0.4; }
+#overlay-equipes-card.tema-oceano .po1 { top: 15%; left: -10%; animation: nadarDireita 20s linear infinite; }
+#overlay-equipes-card.tema-oceano .po2 { top: 50%; left: 110%; animation: nadarEsquerda 25s linear infinite; animation-delay: 3s; }
+@keyframes nadarDireita { from { transform: translateX(0); } to { transform: translateX(120vw); }
+@keyframes nadarEsquerda { from { transform: translateX(0) scaleX(-1); } to { transform: translateX(-120vw) scaleX(-1); } }
+/* BOLHAS DENTRO DO OVERLAY */
+#overlay-equipes-card.tema-oceano::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(circle at 20% 120%,rgba(255,255,255,.08) 0 2px,transparent 3px) 0 0/120px 120px;
+    animation: bubbles 20s linear infinite;
+    opacity: .6;
+    pointer-events: none;
+    z-index: 0;
+}
+
+/* OVERLAY MAIOR TEMA FLORESTA - SÓ TERRARIO */
+#overlay-equipes-card.tema-floresta {
+    background: linear-gradient(180deg, #0a1a0a 0%, #143214 100%);
+    border: 2px solid #228B22;
+    box-shadow: 0 0 40px rgba(34,139,34,0.6);
+    max-width: 1100px;
+    padding: 60px 50px;
+    position: relative;
+    overflow: hidden;
+}
+#overlay-equipes-card.tema-floresta::before { /* FOLHAS CAINDO */
     content: "🍃 🐞 🦋 🐢 🐸";
     position: absolute;
     top: -50px;
@@ -136,18 +163,18 @@ main,header,section,nav,.container{position:relative;z-index:2}
     0% { transform: translateY(-50px) rotate(0deg); }
     100% { transform: translateY(900px) rotate(360deg); }
 }
-
-/* INSETOS PASSANDO SÓ QUANDO TEMA FLORESTA ESTIVER ATIVO */
+/* INSETOS SÓ NO FLORESTA */
 #overlay-equipes-card.tema-floresta .inseto { position: absolute; font-size: 2.5rem; pointer-events: none; z-index: 0; opacity: 0.7; }
 #overlay-equipes-card.tema-floresta .i1 { bottom: 10%; left: -10%; animation: andarDireita 25s linear infinite; }
 #overlay-equipes-card.tema-floresta .i2 { bottom: 30%; left: 110%; animation: andarEsquerda 30s linear infinite; animation-delay: 5s; }
 #overlay-equipes-card.tema-floresta .i3 { bottom: 60%; left: -10%; animation: andarDireita 35s linear infinite; animation-delay: 10s; }
 @keyframes andarDireita { from { transform: translateX(0); } to { transform: translateX(120vw); } }
-@keyframes andarEsquerda { from { transform: translateX(0) scaleX(-1); } to { transform: translateX(-120vw) scaleX(-1); } }
+@keyframes andarEsquerda { from { transform: translateX(0) scaleX(-1); } to { transform: translateX(-120vw) scaleX(-1); }
 
-/* GRID 4 COLUNAS PRA TODOS: GIBI, STOP E TERRARIO */
+
+/* GRID 4 COLUNAS PRA TODOS */
 #overlay-equipes-card .equipes-grid {
-    grid-template-columns: repeat(4, 1fr); /* 4 POR LINHA */
+    grid-template-columns: repeat(4, 1fr);
     gap: 1.5rem;
     position: relative;
     z-index: 2;
@@ -160,7 +187,6 @@ main,header,section,nav,.container{position:relative;z-index:2}
 #overlay-equipes-card.tema-floresta .equipe-card:hover {
     background: rgba(34, 139, 34, 0.8);
     border-color: #7CFC00;
-    transform: translateY(-8px) scale(1.03);
 }
 #overlay-equipes-card.tema-floresta .equipe-header {
     background: #228B22;
@@ -223,16 +249,19 @@ main,header,section,nav,.container{position:relative;z-index:2}
         <div id="video-overlay" class="content-overlay"><div class="overlay-card"><button class="close-btn" onclick="fecharOverlay('video-overlay')">&times;</button><h2 id="video-titulo" style="text-align:center; color:var(--secondary); margin-bottom:25px;"></h2><video id="video-player" width="100%" controls style="border-radius:8px;"><source src="" type="video/mp4"></video></div></div>
 
         <!-- OVERLAY PARA LISTA DE EQUIPES COM INSETOS -->
-        <div id="equipes-overlay" class="content-overlay">
-            <div class="overlay-card" id="overlay-equipes-card">
-                <button class="close-btn" onclick="fecharOverlayEquipes()">&times;</button>
-                <!-- INSETOS PASSANDO SÓ QUANDO FOR TERRARIO -->
-                <div class="inseto i1">🦎</div>
-                <div class="inseto i2">🐌</div>
-                <div class="inseto i3">🐛</div>
-                <div id="equipes-overlay-conteudo"></div>
-            </div>
-        </div>
+    <div id="equipes-overlay" class="content-overlay">
+    <div class="overlay-card" id="overlay-equipes-card">
+        <button class="close-btn" onclick="fecharOverlayEquipes()">&times;</button>
+        <!-- PEIXES PRO GIBI E STOP -->
+        <div class="peixe-overlay po1">🐠</div>
+        <div class="peixe-overlay po2">🐟</div>
+        <!-- INSETOS PRO TERRARIO -->
+        <div class="inseto i1">🦎</div>
+        <div class="inseto i2">🐌</div>
+        <div class="inseto i3">🐛</div>
+        <div id="equipes-overlay-conteudo"></div>
+    </div>
+</div>
 
         <section id="trabalhos">
             <h2 class="section-title" data-key="trabalhos_titulo">Nossos Trabalhos</h2>
@@ -587,12 +616,12 @@ main,header,section,nav,.container{position:relative;z-index:2}
             const conteudo = document.getElementById('equipes-overlay-conteudo');
 
             // SE FOR TERRARIO ATIVA TEMA FLORESTA + INSETOS
-            if(tipo === 'terrario') {
-                overlayCard.classList.add('tema-floresta');
-            } else {
-                overlayCard.classList.remove('tema-floresta');
-            }
-
+        overlayCard.classList.remove('tema-floresta', 'tema-oceano');
+if(tipo === 'terrario') {
+    overlayCard.classList.add('tema-floresta');
+} else {
+    overlayCard.classList.add('tema-oceano'); // GIBI E STOP FICAM COM TEMA OCEANO
+}
             let titulo = tipo === 'gibi'? 'Gibi - Escolha uma Equipe' : tipo === 'stopmotion'? 'Stop Motion - Escolha uma Equipe' : 'Terrário - Escolha uma Equipe';
             if (idioma === 'en') titulo = tipo === 'gibi'? 'Comic - Choose a Team' : tipo === 'stopmotion'? 'Stop Motion - Choose a Team' : 'Terrarium - Choose a Team';
             if (idioma === 'es') titulo = tipo === 'gibi'? 'Cómic - Elige un Equipo' : tipo === 'stopmotion'? 'Stop Motion - Elige un Equipo' : 'Terrario - Elige un Equipo';
@@ -613,11 +642,11 @@ main,header,section,nav,.container{position:relative;z-index:2}
             document.body.style.overflow = 'hidden';
         }
 
-        function fecharOverlayEquipes() {
-            document.getElementById('equipes-overlay').style.display = 'none';
-            document.body.style.overflow = 'auto';
-            document.getElementById('overlay-equipes-card').classList.remove('tema-floresta');
-        }
+   function fecharOverlayEquipes() {
+    document.getElementById('equipes-overlay').style.display = 'none';
+    document.body.style.overflow = 'auto';
+    document.getElementById('overlay-equipes-card').classList.remove('tema-floresta', 'tema-oceano');
+}
 
         function startQuiz() { currentQ = 0; quizScore = 0; document.getElementById('quiz-start').style.display = 'none'; document.getElementById('quiz-result').style.display = 'none'; document.getElementById('quiz-box').style.display = 'block'; showQuestion(); }
         function showQuestion() { const idioma = getIdiomaAtual(); const q = quizData[idioma][currentQ]; document.getElementById('q-current').innerText = currentQ + 1; document.getElementById('q-text').innerText = q.q; const optionsDiv = document.getElementById('q-options'); optionsDiv.innerHTML = '';
