@@ -157,10 +157,12 @@
         #overlay-equipes-card.tema-floresta .i3 { bottom: 60%; left: -10%; animation: andarDireita 35s linear infinite; animation-delay: 10s; }
         @keyframes andarDireita { from { transform: translateX(0); } to { transform: translateX(120vw); } }
         @keyframes andarEsquerda { from { transform: translateX(0) scaleX(-1); } to { transform: translateX(-120vw) scaleX(-1); } }
-       #overlay-equipes-card .equipes-grid {
+     #overlay-equipes-card .equipes-grid {
     display: grid;
-    grid-template-columns: repeat(4, 1fr); /* FORÇA 4 COLUNAS EM TODOS */
-    gap: 1.5rem;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); /* MAIS LIVRE */
+    gap: 2rem; /* AUMENTEI O ESPAÇO */
+    max-width: 1000px; /* PRA NÃO FICAR ESTICADO DEMAIS */
+    margin: 0 auto; /* CENTRALIZA */
     position: relative;
     z-index: 2;
 }
