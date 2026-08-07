@@ -654,6 +654,47 @@ main,header,section,nav,.container{position:relative;z-index:2}
     document.documentElement.style.setProperty('--primary-dark', `rgb(${Math.max(0,rgb.r - 60)}, ${Math.max(0,rgb.g - 60)}, ${Math.max(0,rgb.b - 60)})`);
     localStorage.setItem('corSite', hex);
 }
+    /* CORES FIXAS DOS CARDS DE TRABALHOS */
+.grid-container .info-card:nth-child(1), /* GIBI */
+.grid-container .info-card:nth-child(2) { /* STOP */
+    background: #00B3FF !important;
+    border: 1px solid #00B3FF !important;
+}
+.grid-container .info-card:nth-child(1):hover,
+.grid-container .info-card:nth-child(2):hover {
+    background: #0099E6 !important; /* Azul mais escuro no hover */
+    box-shadow: 0 0 25px rgba(0,179,255,0.5) !important;
+}
+
+.grid-container .info-card:nth-child(3) { /* TERRARIO */
+    background: #228B22 !important;
+    border: 1px solid #228B22 !important;
+}
+.grid-container .info-card:nth-child(3):hover {
+    background: #1A6A1A !important; /* Verde mais escuro no hover */
+    box-shadow: 0 0 25px rgba(34,139,34,0.5) !important;
+}
+
+/* FORÇA COR FIXA NOS OVERLAYS */
+#overlay-equipes-card.tema-oceano { /* GIBI E STOP */
+    --secondary: #00B3FF !important;
+}
+#overlay-equipes-card.tema-oceano .equipe-header {
+    background: #00B3FF !important;
+}
+#overlay-equipes-card.tema-oceano .equipe-card:hover {
+    border-color: #00B3FF !important;
+}
+
+#overlay-equipes-card.tema-floresta { /* TERRARIO */
+    --secondary: #228B22 !important;
+}
+#overlay-equipes-card.tema-floresta .equipe-header {
+    background: #228B22 !important;
+}
+#overlay-equipes-card.tema-floresta .equipe-card:hover {
+    border-color: #7CFC00 !important;
+}
         const traducoes = {
             pt: { inicio: "Início", curiosidades: "Curiosidades", trabalhos: "Trabalhos", dicas: "Dicas", quiz: "Quiz", titulo: "O PROJETO E A ÁGUA", idioma: "Idioma", cor_tema: "Cor do Tema", fatos_titulo: "Fatos e Curiosidades", trabalhos_titulo: "Nossos Trabalhos", dicas_titulo: "Dicas Práticas", quiz_titulo: "Quiz da Água", gibi_tit: "Gibi", stop_tit: "Stop Motion", terrario_tit: "Terrário", gibi_desc: "Veja as 15 equipes e seus gibis sobre a água", stop_desc: "Assista aos vídeos das 15 equipes", terrario_desc: "Veja as 15 equipes e seus terrários", clique: "Clique para ver →", anterior: "← Anterior", proxima: "Próxima →", ciclo_tit: "O Ciclo da Água", consumo_tit: "Consumo Industrial", conta_tit: "Contaminação", ciclo_resumo: "A água percorre um ciclo contínuo na natureza...", consumo_resumo: "A indústria consome aproximadamente 19% da água doce...", conta_resumo: "2 bilhões de pessoas vivem em regiões com escassez severa...", ciclo_txt: "A água circula continuamente através de evaporação, condensação e precipitação.", consumo_txt: "A agricultura consome 70% de toda a água doce do mundo.", conta_txt: "80% dos rios globais estão poluídos. 2 bilhões de pessoas vivem com escassez severa.", dica1_tit: "Banhos Rápidos", dica1_txt: "Reduzir o tempo de banho economiza até 100 litros por dia.", dica2_tit: "Conserte Vazamentos", dica2_txt: "Um vazamento pequeno desperdiça até 46 mil litros por ano.", dica3_tit: "Reutilize Água", dica3_txt: "Aproveite a água da chuva para regar plantas.", quiz_intro: "Teste seus conhecimentos com 10 perguntas!", btn_comecar: "Começar Quiz", pergunta: "Pergunta", de: "de", parabens: "Parabéns!", btn_tentar: "Tentar Novamente", footer: "Gestão Sustentável da Água" },
             en: { inicio: "Home", curiosidades: "Curiosities", trabalhos: "Projects", dicas: "Tips", quiz: "Quiz", titulo: "THE PROJECT AND WATER", idioma: "Language", cor_tema: "Theme Color", fatos_titulo: "Facts and Curiosities", trabalhos_titulo: "Our Projects", dicas_titulo: "Practical Tips", quiz_titulo: "Water Quiz", gibi_tit: "Comic", stop_tit: "Stop Motion", terrario_tit: "Terrarium", gibi_desc: "See the 15 teams and their water comics", stop_desc: "Watch the 15 teams' videos", terrario_desc: "See the 15 teams and their terrariums", clique: "Click to see →", anterior: "← Previous", proxima: "Next →", ciclo_tit: "The Water Cycle", consumo_tit: "Industrial Consumption", conta_tit: "Contamination", ciclo_resumo: "Water goes through a continuous cycle in nature...", consumo_resumo: "Industry consumes approximately 19% of fresh water...", conta_resumo: "2 billion people live in regions with severe water scarcity...", ciclo_txt: "Water circulates continuously through evaporation, condensation and precipitation.", consumo_txt: "Agriculture consumes 70% of all fresh water in the world.", conta_txt: "80% of the world's rivers are polluted. 2 billion people live with severe water scarcity.", dica1_tit: "Quick Showers", dica1_txt: "Reducing shower time saves up to 100 liters per day.", dica2_tit: "Fix Leaks", dica2_txt: "A small leak wastes up to 46 thousand liters per year.", dica3_tit: "Reuse Water", dica3_txt: "Use rainwater to water plants.", quiz_intro: "Test your knowledge with 10 questions!", btn_comecar: "Start Quiz", pergunta: "Question", de: "of", parabens: "Congratulations!", btn_tentar: "Try Again", footer: "Sustainable Water Management" },
@@ -703,47 +744,7 @@ document.addEventListener('DOMContentLoaded',()=>{
 const obs=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.animate([{opacity:0,transform:'translateY(25px)'},{opacity:1,transform:'translateY(0)'}],{duration:700,fill:'forwards'});obs.unobserve(e.target)}}),{threshold:.12});
 document.querySelectorAll('section,.info-card,.dica-card,.equipe-card').forEach(el=>obs.observe(el));
 });
-/* CORES FIXAS DOS CARDS DE TRABALHOS */
-.grid-container .info-card:nth-child(1), /* GIBI */
-.grid-container .info-card:nth-child(2) { /* STOP */
-    background: #00B3FF !important;
-    border: 1px solid #00B3FF !important;
-}
-.grid-container .info-card:nth-child(1):hover,
-.grid-container .info-card:nth-child(2):hover {
-    background: #0099E6 !important; /* Azul mais escuro no hover */
-    box-shadow: 0 0 25px rgba(0,179,255,0.5) !important;
-}
 
-.grid-container .info-card:nth-child(3) { /* TERRARIO */
-    background: #228B22 !important;
-    border: 1px solid #228B22 !important;
-}
-.grid-container .info-card:nth-child(3):hover {
-    background: #1A6A1A !important; /* Verde mais escuro no hover */
-    box-shadow: 0 0 25px rgba(34,139,34,0.5) !important;
-}
-
-/* FORÇA COR FIXA NOS OVERLAYS */
-#overlay-equipes-card.tema-oceano { /* GIBI E STOP */
-    --secondary: #00B3FF !important;
-}
-#overlay-equipes-card.tema-oceano .equipe-header {
-    background: #00B3FF !important;
-}
-#overlay-equipes-card.tema-oceano .equipe-card:hover {
-    border-color: #00B3FF !important;
-}
-
-#overlay-equipes-card.tema-floresta { /* TERRARIO */
-    --secondary: #228B22 !important;
-}
-#overlay-equipes-card.tema-floresta .equipe-header {
-    background: #228B22 !important;
-}
-#overlay-equipes-card.tema-floresta .equipe-card:hover {
-    border-color: #7CFC00 !important;
-}
 </script>
 </body>
 </html>
