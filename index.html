@@ -87,6 +87,19 @@
         .dica-icon { font-size: 3rem; margin-bottom: 1rem; color: var(--secondary); }
         .dica-card h4 { font-size: 1.4rem; margin-bottom: 1rem; font-weight: 600; }
 
+        /* NOVA ABA: ÁGUA VIRTUAL */
+        #agua-virtual-container { background: #003366; padding: 50px; border-radius: 10px; max-width: 1000px; margin: 0 auto; border: 1px solid rgba(0, 191, 255, 0.2); }
+        .agua-intro { text-align: center; margin-bottom: 30px; font-size: 1.1rem; line-height: 1.6; }
+        .item-agua { display: flex; justify-content: space-between; align-items: center; background: rgba(0,51,102,0.8); padding: 18px 20px; border-radius: 8px; margin-bottom: 15px; border: 1px solid rgba(0,191,255,0.2); }
+        .item-info h4 { font-size: 1.1rem; margin-bottom: 5px; }
+        .item-info p { font-size: 0.9rem; color: var(--secondary); }
+        .item-controle { display: flex; align-items: center; gap: 15px; }
+        .btn-qtd { width: 35px; height: 35px; border-radius: 50%; background: var(--secondary); color: var(--primary-dark); border: none; font-size: 1.3rem; font-weight: 700; cursor: pointer; }
+        .qtd-display { font-size: 1.2rem; font-weight: 700; min-width: 30px; text-align: center; }
+        .resultado-agua { background: rgba(0,179,255,0.2); padding: 30px; border-radius: 10px; text-align: center; margin-top: 30px; border: 2px solid var(--secondary); display: none; }
+        .resultado-agua h3 { font-size: 2rem; color: var(--secondary); margin-bottom: 15px; }
+        .resultado-agua .total { font-size: 3rem; font-weight: 800; color: var(--white); }
+
         #quiz-container { background: #003366; padding: 50px; border-radius: 10px; max-width: 900px; margin: 0 auto; border: 1px solid rgba(0, 191, 255, 0.2); }
         .quiz-question { font-size: 1.5rem; font-weight: 600; color: var(--white); margin-bottom: 25px; }
         .quiz-option { background: rgba(0,51,102,0.8); padding: 18px 20px; border-radius: 8px; cursor: pointer; border: 1px solid transparent; transition: var(--transition); font-weight: 500; font-size: 1rem; color: var(--white); margin-bottom: 15px; }
@@ -95,7 +108,7 @@
         .quiz-option.wrong { background: rgba(239,71,111,0.3); border-color: #ef476f; }
 
         .content-overlay { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0, 0, 0, 0.9); z-index: 2000; padding: 40px; overflow-y: auto; }
-        .overlay-card { background: #002244; max-width: 700px; margin: 0 auto; padding: 50px; border-radius: 10px; position: relative; border: 1px solid var(--secondary); color: var(--white); min-height: 600px; /* altura minima pra animação */}
+        .overlay-card { background: #002244; max-width: 700px; margin: 0 auto; padding: 50px; border-radius: 10px; position: relative; border: 1px solid var(--secondary); color: var(--white); min-height: 600px; }
         .close-btn { position: absolute; top: 20px; right: 20px; font-size: 2.5rem; cursor: pointer; background: none; border: none; color: var(--white); z-index: 3; }
         .overlay-content h2 { color: var(--secondary); margin-bottom: 20px; font-size: 2rem; }
         .overlay-content ul { margin-left: 20px; }
@@ -120,6 +133,7 @@
             header { height: 300px; } header p { font-size: 1.1rem; letter-spacing: 4px; }
             section { padding: 50px 20px; }.section-title { font-size: 2rem; }
             .grid-container,.equipes-grid,.dicas-container { grid-template-columns: 1fr; }
+            .item-agua { flex-direction: column; gap: 10px; }
         }
     
         body::before{ content:"";position:fixed;inset:0;pointer-events:none; background: radial-gradient(circle at 20% 120%,rgba(255,255,255,.08) 0 2px,transparent 3px) 0 0/120px 120px, radial-gradient(circle at 70% 130%,rgba(255,255,255,.06) 0 3px,transparent 4px) 0 0/180px 180px; animation:bubbles 20s linear infinite; opacity:.8;z-index:-1}
@@ -181,13 +195,13 @@
             border: 2px solid #228B22;
             box-shadow: 0 0 40px rgba(34,139,34,0.6); 
             --secondary: #228B22!important;
-            overflow: hidden; /* AGORA CORTA O QUE SAIR */
+            overflow: hidden;
             position: relative;
         }
        #overlay-equipes-card.tema-floresta::before { 
             content: "🍃 🐞 🦋 🐢 🐸"; 
             position: absolute; 
-            top: -30px; /* COMEÇA DENTRO */
+            top: -30px;
             left: 0; 
             width: 100%; 
             font-size: 2rem; 
@@ -198,7 +212,7 @@
         }
         @keyframes cairFolhas { 
             0% { transform: translateY(0) rotate(0deg); }
-            100% { transform: translateY(650px) rotate(360deg); } /* CAI ATE O FIM DO CARD */
+            100% { transform: translateY(650px) rotate(360deg); }
         }
         #overlay-equipes-card.tema-floresta .inseto { 
             position: absolute; 
@@ -234,10 +248,10 @@
             <a href="#" class="nav-link" data-section="curiosidades"><i class="fas fa-lightbulb"></i> <span data-key="curiosidades">Curiosidades</span></a>
             <a href="#" class="nav-link" data-section="trabalhos"><i class="fas fa-folder-open"></i> <span data-key="trabalhos">Trabalhos</span></a>
             <a href="#" class="nav-link" data-section="dicas"><i class="fas fa-star"></i> <span data-key="dicas">Dicas</span></a>
+            <a href="#" class="nav-link" data-section="agua-virtual"><i class="fas fa-calculator"></i> <span data-key="agua_virtual">Água Virtual</span></a>
             <a href="#" class="nav-link" data-section="quiz"><i class="fas fa-question-circle"></i> <span data-key="quiz">Quiz</span></a>
         </nav>
     </aside>
-
     <div class="config-btn" onclick="toggleConfig()"><i class="fas fa-ellipsis-vertical"></i></div>
     <div id="config-menu" class="config-menu">
         <h3><i class="fas fa-gear"></i> Configurações</h3>
@@ -300,6 +314,23 @@
             </div>
         </section>
 
+        <!-- NOVA SEÇÃO: ÁGUA VIRTUAL -->
+        <section id="agua-virtual">
+            <h2 class="section-title" data-key="agua_virtual_tit">Água Virtual</h2>
+            <div id="agua-virtual-container">
+                <p class="agua-intro" data-key="agua_intro">Selecione os itens que você tem em casa e veja quanta água foi usada para produzi-los. Isso se chama "Pegada Hídrica".</p>
+                <div id="lista-itens-agua"></div>
+                <div style="text-align:center; margin-top:30px;">
+                    <button class="btn" onclick="calcularAguaVirtual()" data-key="btn_calcular">Calcular Minha Pegada</button>
+                </div>
+                <div id="resultado-agua" class="resultado-agua">
+                    <h3 data-key="resultado_tit">Sua Pegada Hídrica</h3>
+                    <div class="total" id="total-litros">0 L</div>
+                    <p id="equivalencia"></p>
+                </div>
+            </div>
+        </section>
+
         <section id="quiz">
             <h2 class="section-title" data-key="quiz_titulo">Quiz da Água</h2>
             <div id="quiz-container">
@@ -311,7 +342,6 @@
     </main>
 
     <footer><p>&copy; 2026 Projeto Planeta Agua| <span data-key="footer">Gestão Sustentável da Água</span></p></footer>
-
     <div class="bubbles"><span style="--i:11"></span><span style="--i:18"></span><span style="--i:25"></span><span style="--i:14"></span><span style="--i:22"></span><span style="--i:9"></span><span style="--i:27"></span><span style="--i:16"></span><span style="--i:30"></span><span style="--i:12"></span><span style="--i:21"></span><span style="--i:15"></span><span style="--i:24"></span><span style="--i:19"></span><span style="--i:28"></span><span style="--i:13"></span><span style="--i:26"></span><span style="--i:17"></span><span style="--i:23"></span><span style="--i:10"></span></div>
 
     <div class="fish f1">🐬</div>
@@ -323,6 +353,30 @@
     <div class="fish f2 glow">🐬</div>
     <div class="fish f3 glow">🐳</div>
     <script>
+        // DADOS DOS 20 ITENS DA ÁGUA VIRTUAL - LITROS POR UNIDADE
+        const itensAguaVirtual = [
+            { id: 1, nome: "Camiseta de Algodão", agua: 2700, icone: "👕" },
+            { id: 2, nome: "1kg de Carne Bovina", agua: 15000, icone: "🥩" },
+            { id: 3, nome: "1kg de Arroz", agua: 2500, icone: "🍚" },
+            { id: 4, nome: "1kg de Pão", agua: 1600, icone: "🍞" },
+            { id: 5, nome: "1 Par de Tênis", agua: 8000, icone: "👟" },
+            { id: 6, nome: "1 Celular", agua: 12000, icone: "📱" },
+            { id: 7, nome: "1kg de Queijo", agua: 5000, icone: "🧀" },
+            { id: 8, nome: "1 Folha de Papel A4", agua: 10, icone: "📄" },
+            { id: 9, nome: "1 Xícara de Café", agua: 140, icone: "☕" },
+            { id: 10, nome: "1 Calça Jeans", agua: 10000, icone: "👖" },
+            { id: 11, nome: "1kg de Frango", agua: 4300, icone: "🍗" },
+            { id: 12, nome: "1 Ovo", agua: 200, icone: "🥚" },
+            { id: 13, nome: "1 Maçã", agua: 70, icone: "🍎" },
+            { id: 14, nome: "1 Copo de Leite 250ml", agua: 250, icone: "🥛" },
+            { id: 15, nome: "1kg de Batata", agua: 290, icone: "🥔" },
+            { id: 16, nome: "1 Toalha de Banho", agua: 2500, icone: "🛁" },
+            { id: 17, nome: "1 Caderno 100 folhas", agua: 1000, icone: "📓" },
+            { id: 18, nome: "1kg de Açúcar", agua: 1500, icone: "🍬" },
+            { id: 19, nome: "1 Litro de Gasolina", agua: 1500, icone: "⛽" },
+            { id: 20, nome: "1 Sofá 2 lugares", agua: 20000, icone: "🛋️" }
+        ];
+
         const equipesData = {
             gibi: {
                 pt: [
@@ -524,7 +578,49 @@
         };
 
         let equipaAtual = null; let paginaAtual = 0; let currentQ = 0, quizScore = 0; let tipoTrabalhoAtual = 'gibi';
+        let quantidadesItens = {}; // Guarda a qtd de cada item da água virtual
         function getIdiomaAtual() { return localStorage.getItem('idiomaSite') || 'pt'; }
+
+        // FUNÇÕES DA ÁGUA VIRTUAL
+        function carregarItensAgua() {
+            const container = document.getElementById('lista-itens-agua');
+            container.innerHTML = '';
+            itensAguaVirtual.forEach(item => {
+                quantidadesItens[item.id] = 0;
+                const div = document.createElement('div');
+                div.className = 'item-agua';
+                div.innerHTML = `
+                    <div class="item-info">
+                        <h4>${item.icone} ${item.nome}</h4>
+                        <p>${item.agua.toLocaleString()} L por unidade</p>
+                    </div>
+                    <div class="item-controle">
+                        <button class="btn-qtd" onclick="mudarQtd(${item.id}, -1)">-</button>
+                        <span class="qtd-display" id="qtd-${item.id}">0</span>
+                        <button class="btn-qtd" onclick="mudarQtd(${item.id}, 1)">+</button>
+                    </div>
+                `;
+                container.appendChild(div);
+            });
+        }
+
+        function mudarQtd(id, valor) {
+            quantidadesItens[id] += valor;
+            if (quantidadesItens[id] < 0) quantidadesItens[id] = 0;
+            document.getElementById(`qtd-${id}`).innerText = quantidadesItens[id];
+        }
+
+        function calcularAguaVirtual() {
+            let total = 0;
+            itensAguaVirtual.forEach(item => {
+                total += item.agua * quantidadesItens[item.id];
+            });
+            document.getElementById('total-litros').innerText = total.toLocaleString() + ' L';
+
+            const piscinas = (total / 2500000).toFixed(2); // 1 piscina = 2.5 milhões L
+            document.getElementById('equivalencia').innerText = `Isso equivale a ${piscinas} piscinas olímpicas!`;
+            document.getElementById('resultado-agua').style.display = 'block';
+        }
 
         function abrirTrabalho() {
             fecharOverlay('curiosidade-overlay');
@@ -591,13 +687,16 @@
             img.src = nomeArquivo;
             document.getElementById("contador").innerText = `${paginaAtual + 1} / ${equipaAtual.totalPaginas}`;
         }
-                  const navLinks = document.querySelectorAll('.nav-link'); const sections = document.querySelectorAll('section');
+        const navLinks = document.querySelectorAll('.nav-link'); const sections = document.querySelectorAll('section');
         navLinks.forEach(link => { link.addEventListener('click', (e) => {
             e.preventDefault(); const sectionId = link.getAttribute('data-section');
             navLinks.forEach(l => l.classList.remove('active')); link.classList.add('active');
             sections.forEach(s => s.classList.remove('active'));
             if (sectionId === 'home') { document.getElementById('home').scrollIntoView({ behavior: 'smooth' }); }
             else { document.getElementById(sectionId).classList.add('active'); document.getElementById(sectionId).scrollIntoView({ behavior: 'smooth' }); }
+
+            // Carrega os itens quando entrar na aba água virtual
+            if(sectionId === 'agua-virtual') carregarItensAgua();
         }); });
 
         const detalhesCuriosidades = {
@@ -619,17 +718,14 @@
             if(id === 'video-overlay') { const video = document.getElementById('video-player'); video.pause(); video.currentTime = 0; video.src = ""; }
         }
 
-        // FUNÇÕES DO OVERLAY DE EQUIPES - CORRIGIDA
+        // FUNÇÕES DO OVERLAY DE EQUIPES
         function mostrarListaEquipes(tipo) {
             tipoTrabalhoAtual = tipo;
             const idioma = getIdiomaAtual();
             const dados = equipesData[tipo][idioma];
             const overlayCard = document.getElementById('overlay-equipes-card');
 
-            // REMOVE TODOS OS TEMAS PRIMEIRO
             overlayCard.classList.remove('tema-floresta', 'tema-oceano');
-
-            // SÓ TERRARIO GANHA TEMA FLORESTA. O RESTO É OCEANO
             if(tipo === 'terrario') {
                 overlayCard.classList.add('tema-floresta');
             } else {
@@ -674,7 +770,7 @@
         function hexToRgb(hex) { let r = parseInt(hex.slice(1, 3), 16); let g = parseInt(hex.slice(3, 5), 16); let b = parseInt(hex.slice(5, 7), 16); return {r, g, b}; }
         function mudarCor(hex) {
             const overlayAberto = document.getElementById('equipes-overlay').style.display === 'block';
-            if(overlayAberto) return; // trava quando abrir qualquer overlay
+            if(overlayAberto) return;
 
             const rgb = hexToRgb(hex); document.documentElement.style.setProperty('--secondary', hex);
             document.documentElement.style.setProperty('--primary', `rgb(${Math.max(0,rgb.r - 30)}, ${Math.max(0,rgb.g - 30)}, ${Math.max(0,rgb.b - 30)})`);
@@ -683,11 +779,10 @@
         }
 
         const traducoes = {
-            pt: { inicio: "Início", curiosidades: "Curiosidades", trabalhos: "Trabalhos", dicas: "Dicas", quiz: "Quiz", titulo: "O PROJETO E A ÁGUA", idioma: "Idioma", cor_tema: "Cor do Tema", fatos_titulo: "Fatos e Curiosidades", trabalhos_titulo: "Nossos Trabalhos", dicas_titulo: "Dicas Práticas", quiz_titulo: "Quiz da Água", gibi_tit: "Gibi", stop_tit: "Stop Motion", terrario_tit: "Terrário", gibi_desc: "Veja as 15 equipes e seus gibis sobre a água", stop_desc: "Assista aos vídeos das 15 equipes", terrario_desc: "Veja as 15 equipes e seus terrários", clique: "Clique para ver →", anterior: "← Anterior", proxima: "Próxima →", ciclo_tit: "O Ciclo da Água", consumo_tit: "Consumo Industrial", conta_tit: "Contaminação", ciclo_resumo: "A água percorre um ciclo contínuo na natureza...", consumo_resumo: "A indústria consome aproximadamente 19% da água doce...", conta_resumo: "2 bilhões de pessoas vivem em regiões com escassez severa...", ciclo_txt: "A água circula continuamente através de evaporação, condensação e precipitação.", consumo_txt: "A agricultura consome 70% de toda a água doce do mundo.", conta_txt: "80% dos rios globais estão poluídos. 2 bilhões de pessoas vivem com escassez severa.", dica1_tit: "Banhos Rápidos", dica1_txt: "Reduzir o tempo de banho economiza até 100 litros por dia.", dica2_tit: "Conserte Vazamentos", dica2_txt: "Um vazamento pequeno desperdiça até 46 mil litros por ano.", dica3_tit: "Reutilize Água", dica3_txt: "Aproveite a água da chuva para regar plantas.", quiz_intro: "Teste seus conhecimentos com 10 perguntas!", btn_comecar: "Começar Quiz", pergunta: "Pergunta", de: "de", parabens: "Parabéns!", btn_tentar: "Tentar Novamente", footer: "Gestão Sustentável da Água" },
-            en: { inicio: "Home", curiosidades: "Curiosities", trabalhos: "Projects", dicas: "Tips", quiz: "Quiz", titulo: "THE PROJECT AND WATER", idioma: "Language", cor_tema: "Theme Color", fatos_titulo: "Facts and Curiosities", trabalhos_titulo: "Our Projects", dicas_titulo: "Practical Tips", quiz_titulo: "Water Quiz", gibi_tit: "Comic", stop_tit: "Stop Motion", terrario_tit: "Terrarium", gibi_desc: "See the 15 teams and their water comics", stop_desc: "Watch the 15 teams' videos", terrario_desc: "See the 15 teams and their terrariums", clique: "Click to see →", anterior: "← Previous", proxima: "Next →", ciclo_tit: "The Water Cycle", consumo_tit: "Industrial Consumption", conta_tit: "Contamination", ciclo_resumo: "Water goes through a continuous cycle in nature...", consumo_resumo: "Industry consumes approximately 19% of fresh water...", conta_resumo: "2 billion people live in regions with severe water scarcity...", ciclo_txt: "Water circulates continuously through evaporation, condensation and precipitation.", consumo_txt: "Agriculture consumes 70% of all fresh water in the world.", conta_txt: "80% of the world's rivers are polluted. 2 billion people live with severe water scarcity.", dica1_tit: "Quick Showers", dica1_txt: "Reducing shower time saves up to 100 liters per day.", dica2_tit: "Fix Leaks", dica2_txt: "A small leak wastes up to 46 thousand liters per year.", dica3_tit: "Reuse Water", dica3_txt: "Use rainwater to water plants.", quiz_intro: "Test your knowledge with 10 questions!", btn_comecar: "Start Quiz", pergunta: "Question", de: "of", parabens: "Congratulations!", btn_tentar: "Try Again", footer: "Sustainable Water Management" },
-            es: { inicio: "Inicio", curiosidades: "Curiosidades", trabajos: "Trabajos", dicas: "Consejos", quiz: "Cuestionario", titulo: "EL PROYECTO Y EL AGUA", idioma: "Idioma", cor_tema: "Color del Tema", fatos_titulo: "Datos y Curiosidades", trabalhos_titulo: "Nuestros Trabajos", dicas_titulo: "Consejos Prácticos", quiz_titulo: "Cuestionario del Agua", gibi_tit: "Cómic", stop_tit: "Stop Motion", terrario_tit: "Terrario", gibi_desc: "Mira los 15 equipos y sus cómics sobre el agua", stop_desc: "Mira los videos de los 15 equipos", terrario_desc: "Mira los 15 equipos y sus terrarios", clique: "Haz clic para ver →", anterior: "← Anterior", proxima: "Siguiente →", ciclo_tit: "El Ciclo del Agua", consumo_tit: "Consumo Industrial", conta_tit: "Contaminación", ciclo_resumo: "El agua recorre un ciclo continuo en la naturaleza...", consumo_resumo: "La industria consume aproximadamente el 19% del agua dulce...", conta_resumo: "2 mil millones de personas viven en regiones con escasez severa...", ciclo_txt: "El agua circula continuamente a través de evaporación, condensación y precipitación.", consumo_txt: "La agricultura consume el 70% de toda el agua dulce del mundo.", conta_txt: "El 80% de los ríos del mundo están contaminados. 2 mil millones de personas viven con escasez severa.", dica1_tit: "Duchas Rápidas", dica1_txt: "Reducir el tiempo de ducha ahorra hasta 100 litros por día.", dica2_tit: "Repara Fugas", dica2_txt: "Una pequeña fuga desperdiça hasta 46 mil litros por año.", dica3_tit: "Reutiliza Agua", dica3_txt: "Aprovecha el agua de lluvia para regar plantas.", quiz_intro: "¡Pon a prueba tus conocimientos con 10 preguntas!", btn_comecar: "Comenzar Cuestionario", pergunta: "Pregunta", de: "de", parabens: "¡Felicidades!", btn_tentar: "Intentar de Nuevo", footer: "Gestión Sostenible del Agua" }
+            pt: { inicio: "Início", curiosidades: "Curiosidades", trabalhos: "Trabalhos", dicas: "Dicas", quiz: "Quiz", agua_virtual: "Água Virtual", titulo: "O PROJETO E A ÁGUA", idioma: "Idioma", cor_tema: "Cor do Tema", fatos_titulo: "Fatos e Curiosidades", trabalhos_titulo: "Nossos Trabalhos", dicas_titulo: "Dicas Práticas", agua_virtual_tit: "Água Virtual", agua_intro: "Selecione os itens que você tem em casa e veja quanta água foi usada para produzi-los. Isso se chama 'Pegada Hídrica'.", btn_calcular: "Calcular Minha Pegada", resultado_tit: "Sua Pegada Hídrica", quiz_titulo: "Quiz da Água", gibi_tit: "Gibi", stop_tit: "Stop Motion", terrario_tit: "Terrário", gibi_desc: "Veja as 15 equipes e seus gibis sobre a água", stop_desc: "Assista aos vídeos das 15 equipes", terrario_desc: "Veja as 15 equipes e seus terrários", clique: "Clique para ver →", anterior: "← Anterior", proxima: "Próxima →", ciclo_tit: "O Ciclo da Água", consumo_tit: "Consumo Industrial", conta_tit: "Contaminação", ciclo_resumo: "A água percorre um ciclo contínuo na natureza...", consumo_resumo: "A indústria consome aproximadamente 19% da água doce...", conta_resumo: "2 bilhões de pessoas vivem em regiões com escassez severa...", ciclo_txt: "A água circula continuamente através de evaporação, condensação e precipitação.", consumo_txt: "A agricultura consome 70% de toda a água doce do mundo.", conta_txt: "80% dos rios globais estão poluídos. 2 bilhões de pessoas vivem com escassez severa.", dica1_tit: "Banhos Rápidos", dica1_txt: "Reduzir o tempo de banho economiza até 100 litros por dia.", dica2_tit: "Conserte Vazamentos", dica2_txt: "Um vazamento pequeno desperdiça até 46 mil litros por ano.", dica3_tit: "Reutilize Água", dica3_txt: "Aproveite a água da chuva para regar plantas.", quiz_intro: "Teste seus conhecimentos com 10 perguntas!", btn_comecar: "Começar Quiz", pergunta: "Pergunta", de: "de", parabens: "Parabéns!", btn_tentar: "Tentar Novamente", footer: "Gestão Sustentável da Água" },
+            en: { inicio: "Home", curiosidades: "Curiosities", trabalhos: "Projects", dicas: "Tips", quiz: "Quiz", agua_virtual: "Virtual Water", titulo: "THE PROJECT AND WATER", idioma: "Language", cor_tema: "Theme Color", fatos_titulo: "Facts and Curiosities", trabalhos_titulo: "Our Projects", dicas_titulo: "Practical Tips", agua_virtual_tit: "Virtual Water", agua_intro: "Select the items you have at home and see how much water was used to produce them. This is called 'Water Footprint'.", btn_calcular: "Calculate My Footprint", resultado_tit: "Your Water Footprint", quiz_titulo: "Water Quiz", gibi_tit: "Comic", stop_tit: "Stop Motion", terrario_tit: "Terrarium", gibi_desc: "See the 15 teams and their water comics", stop_desc: "Watch the 15 teams' videos", terrario_desc: "See the 15 teams and their terrariums", clique: "Click to see →", anterior: "← Previous", proxima: "Next →", ciclo_tit: "The Water Cycle", consumo_tit: "Industrial Consumption", conta_tit: "Contamination", ciclo_resumo: "Water goes through a continuous cycle in nature...", consumo_resumo: "Industry consumes approximately 19% of fresh water...", conta_resumo: "2 billion people live in regions with severe water scarcity...", ciclo_txt: "Water circulates continuously through evaporation, condensation and precipitation.", consumo_txt: "Agriculture consumes 70% of all fresh water in the world.", conta_txt: "80% of the world's rivers are polluted. 2 billion people live with severe water scarcity.", dica1_tit: "Quick Showers", dica1_txt: "Reducing shower time saves up to 100 liters per day.", dica2_tit: "Fix Leaks", dica2_txt: "A small leak wastes up to 46 thousand liters per year.", dica3_tit: "Reuse Water", dica3_txt: "Use rainwater to water plants.", quiz_intro: "Test your knowledge with 10 questions!", btn_comecar: "Start Quiz", pergunta: "Question", de: "of", parabens: "Congratulations!", btn_tentar: "Try Again", footer: "Sustainable Water Management" },
+            es: { inicio: "Inicio", curiosidades: "Curiosidades", trabajos: "Trabajos", dicas: "Consejos", quiz: "Cuestionario", agua_virtual: "Agua Virtual", titulo: "EL PROYECTO Y EL AGUA", idioma: "Idioma", cor_tema: "Color del Tema", fatos_titulo: "Datos y Curiosidades", trabalhos_titulo: "Nuestros Trabajos", dicas_titulo: "Consejos Prácticos", agua_virtual_tit: "Agua Virtual", agua_intro: "Selecciona los artículos que tienes en casa y ve cuánta agua se usó para producirlos. Esto se llama 'Huella Hídrica'.", btn_calcular: "Calcular Mi Huella", resultado_tit: "Tu Huella Hídrica", quiz_titulo: "Cuestionario del Agua", gibi_tit: "Cómic", stop_tit: "Stop Motion", terrario_tit: "Terrario", gibi_desc: "Mira los 15 equipos y sus cómics sobre el agua", stop_desc: "Mira los videos de los 15 equipos", terrario_desc: "Mira los 15 equipos y sus terrarios", clique: "Haz clic para ver →", anterior: "← Anterior", proxima: "Siguiente →", ciclo_tit: "El Ciclo del Agua", consumo_tit: "Consumo Industrial", conta_tit: "Contaminación", ciclo_resumo: "El agua recorre un ciclo continuo en la naturaleza...", consumo_resumo: "La industria consume aproximadamente el 19% del agua dulce...", conta_resumo: "2 mil millones de personas viven en regiones con escasez severa...", ciclo_txt: "El agua circula continuamente a través de evaporación, condensación y precipitación.", consumo_txt: "La agricultura consume el 70% de toda el agua dulce del mundo.", conta_txt: "El 80% de los ríos del mundo están contaminados. 2 mil millones de personas viven con escasez severa.", dica1_tit: "Duchas Rápidas", dica1_txt: "Reducir el tiempo de ducha ahorra hasta 100 litros por día.", dica2_tit: "Repara Fugas", dica2_txt: "Una pequeña fuga desperdiça hasta 46 mil litros por año.", dica3_tit: "Reutiliza Agua", dica3_txt: "Aprovecha el agua de lluvia para regar plantas.", quiz_intro: "¡Pon a prueba tus conocimientos con 10 preguntas!", btn_comecar: "Comenzar Cuestionario", pergunta: "Pregunta", de: "de", parabens: "¡Felicidades!", btn_tentar: "Intentar de Nuevo", footer: "Gestión Sostenible del Agua" }
         };
-
         function aplicarTraducao() {
             const idioma = getIdiomaAtual(); const t = traducoes[idioma];
             document.querySelectorAll('[data-key]').forEach(el => { const key = el.getAttribute('data-key'); if(t[key]) el.innerHTML = t[key]; });
@@ -696,6 +791,8 @@
         function mudarIdioma(idioma) {
             localStorage.setItem('idiomaSite', idioma);
             aplicarTraducao();
+            // Recarrega os itens se estiver na aba
+            if(document.getElementById('agua-virtual').classList.contains('active')) carregarItensAgua();
         }
 
         function mostrarParticipantes(equipaId) {
@@ -717,7 +814,7 @@
             document.body.style.overflow = 'hidden';
         }
 
-        // CARREGAMENTO INICIAL UNICO
+        // CARREGAMENTO INICIAL
         document.addEventListener('DOMContentLoaded', () => {
             const corSalva = localStorage.getItem('corSite') || '#00B3FF';
             document.getElementById('colorPicker').value = corSalva; mudarCor(corSalva);
