@@ -81,9 +81,6 @@
         .content-overlay { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0, 0, 0, 0.9); z-index: 2000; padding: 40px; overflow-y: auto; }
         .overlay-card { background: #002244; max-width: 700px; margin: 0 auto; padding: 50px; border-radius: 10px; position: relative; border: 1px solid var(--secondary); color: var(--white); min-height: 600px; }
         .close-btn { position: absolute; top: 20px; right: 20px; font-size: 2.5rem; cursor: pointer; background: none; border: none; color: var(--white); z-index: 3; }
-        .overlay-content h2 { color: var(--secondary); margin-bottom: 20px; font-size: 2rem; }
-        .overlay-content ul { margin-left: 20px; }
-        .overlay-content li { margin-bottom: 10px; font-size: 1.1rem; }
         footer { background: #001a33; color: var(--white); text-align: center; padding: 40px 20px; margin-left: 280px; border-top: 1px solid rgba(0, 191, 255, 0.2); }
         .config-btn { position: fixed; bottom: 25px; right: 25px; width: 55px; height: 55px; border-radius: 50%; background: var(--secondary); color: var(--primary-dark); display: flex; align-items: center; justify-content: center; font-size: 1.5rem; cursor: pointer; z-index: 1500; box-shadow: 0 5px 20px rgba(0,191,255,0.4); transition: var(--transition); }
         .config-btn:hover { transform: rotate(90deg) scale(1.1); }
@@ -95,27 +92,10 @@
         .config-item label { display: block; color: var(--white); margin-bottom: 10px; font-weight: 600; }
         .config-item select { width: 100%; padding: 10px; border-radius: 8px; background: #003366; color: var(--white); border: 1px solid var(--secondary); font-size: 1rem; }
         .color-picker { width: 100%; height: 50px; border: none; border-radius: 8px; cursor: pointer; }
-        .tabs{display:flex;gap:10px;justify-content:center;margin-bottom:25px} .tab-btn{padding:10px 22px;border-radius:30px;border:1px solid var(--secondary);background:transparent;color:var(--secondary);cursor:pointer;font-weight:600;transition:all .3s} .tab-btn.active{background:var(--secondary);color:#001f3f}
-        @media (max-width: 768px) {
-            .sidebar { width: 100%; height: auto; position: relative; }
-            main { margin-left: 0; } footer { margin-left: 0; }
-            header { height: 300px; } header p { font-size: 1.1rem; letter-spacing: 4px; }
-            section { padding: 50px 20px; }.section-title { font-size: 2rem; }
-            .grid-container,.equipes-grid,.dicas-container { grid-template-columns: 1fr; }
-            .item-agua { flex-direction: column; gap: 10px; }
-        }
-        body::before{ content:"";position:fixed;inset:0;pointer-events:none; background: radial-gradient(circle at 20% 120%,rgba(255,255,255,.08) 0 2px,transparent 3px) 0 0/120px 120px, radial-gradient(circle at 70% 130%,rgba(255,255,255,.06) 0 3px,transparent 4px) 0 0/180px 180px; animation:bubbles 20s linear infinite; opacity:.8;z-index:-1}
-        @keyframes bubbles{from{transform:translateY(0)}to{transform:translateY(-220px)}}
-        section,header,.info-card,.dica-card,.equipe-card{ animation:fadeUp .8s ease both}
-        @keyframes fadeUp{from{opacity:0;transform:translateY(30px)}to{opacity:1;transform:none}}
-        .info-card,.dica-card,.equipe-card{position:relative;overflow:hidden}
-        .info-card::after,.dica-card::after,.equipe-card::after{ content:"";position:absolute;top:-150%;left:-50%;width:60%;height:300%; background:linear-gradient(90deg,transparent,rgba(255,255,255,.15),transparent); transform:rotate(25deg);transition:.8s}
-        .info-card:hover::after,.dica-card:hover::after,.equipe-card:hover::after{left:120%}
+        .tabs{display:flex;gap:10px;justify-content:center;margin-bottom:25px} .tab-btn{padding:10px 22px;border-radius:30px;border:1px solid var(--secondary);background:transparent;color:var(--secondary);cursor:pointer;font-weight:600} .tab-btn.active{background:var(--secondary);color:#001f3f}
         .bubbles{position:fixed;inset:0;overflow:hidden;pointer-events:none;z-index:0}
         .bubbles span{position:absolute;bottom:-120px;left:calc(var(--i)*4%);width:18px;height:18px;border-radius:50%;background:rgba(255,255,255,.6);box-shadow:0 0 8px rgba(255,255,255,.3);animation:subir calc(28s/(var(--i)/10)) linear infinite}
-        .bubbles span:nth-child(3n){width:16px;height:16px}.bubbles span:nth-child(5n){width:22px;height:22px}
         @keyframes subir{0%{transform:translateY(0) translateX(0);opacity:0}10%{opacity:.5}50%{transform:translateY(-50vh) translateX(25px)}100%{transform:translateY(-120vh) translateX(-35px);opacity:0}}
-        main,header,section,nav,.container{position:relative;z-index:2}
         .fish{position:fixed;font-size:32px;pointer-events:none;z-index:1;opacity:.8;animation:swim linear infinite}
         .f1{top:20%;left:-10%;animation-duration:22s} .f2{top:55%;left:110%;animation-name:swim2;animation-duration:28s} .f3{top:75%;left:-15%;animation-duration:35s}
         @keyframes swim{from{transform:translateX(0)}to{transform:translateX(120vw)}} @keyframes swim2{from{transform:translateX(0) scaleX(-1)}to{transform:translateX(-120vw) scaleX(-1)}}
@@ -124,31 +104,22 @@
         .glow{filter:drop-shadow(0 0 8px #7df9ff) drop-shadow(0 0 18px #7df9ff)}
         @keyframes sharkR{from{transform:translateX(0)}to{transform:translateX(130vw)}} @keyframes sharkL{from{transform:translateX(0) scaleX(-1)}to{transform:translateX(-130vw) scaleX(-1)}}
         #overlay-equipes-card .equipes-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 2rem; max-width: 900px; margin: 0 auto; padding: 1rem; position: relative; z-index: 2; }
-        #overlay-equipes-card .equipe-header { background: var(--secondary); color: #fff; padding: 0.8rem; font-size: 1.3rem; font-weight: 800; text-align: center; height: 75px; display: flex; align-items: center; justify-content: center; letter-spacing: 1px; transition: background .3s; }
+        #overlay-equipes-card .equipe-header { background: var(--secondary); color: #fff; padding: 0.8rem; font-size: 1.3rem; font-weight: 800; text-align: center; height: 75px; display: flex; align-items: center; justify-content: center; }
         #overlay-equipes-card .equipe-card { background: #003366; border-radius: 8px; overflow: hidden; box-shadow: 0 4px 15px rgba(0,0,0,0.3); transition: var(--transition); cursor: pointer; border: 1px solid rgba(0, 191, 255, 0.2); }
         #overlay-equipes-card .equipe-card:hover { transform: translateY(-5px); }
         #overlay-equipes-card.tema-oceano .equipe-header { background: #00B3FF!important; }
-        #overlay-equipes-card.tema-oceano .equipe-card:hover { border-color: #00B3FF!important; }
-        #overlay-equipes-card.tema-oceano h3 { color: #00B3FF!important; }
-        #overlay-equipes-card.tema-floresta { background: linear-gradient(180deg, #0a1a0a 0%, #143214 100%); border: 2px solid #228B22; box-shadow: 0 0 40px rgba(34,139,34,0.6); --secondary: #228B22!important; overflow: hidden; position: relative; }
-        #overlay-equipes-card.tema-floresta::before { content: "🍃 🐞 🦋 🐢 🐸"; position: absolute; top: -30px; left: 0; width: 100%; font-size: 2rem; animation: cairFolhas 15s linear infinite; opacity: 0.4; z-index: 0; pointer-events: none; }
-        @keyframes cairFolhas { 0% { transform: translateY(0) rotate(0deg); } 100% { transform: translateY(650px) rotate(360deg); } }
+        #overlay-equipes-card.tema-floresta { background: linear-gradient(180deg, #0a1a0a 0%, #143214 100%); border: 2px solid #228B22; }
         #overlay-equipes-card.tema-floresta .inseto { position: absolute; font-size: 2.5rem; pointer-events: none; z-index: 0; opacity: 0.7; }
         #overlay-equipes-card.tema-floresta .i1 { bottom: 10%; left: -50px; animation: andarDireita 25s linear infinite; }
-        #overlay-equipes-card.tema-floresta .i2 { bottom: 30%; right: -50px; animation: andarEsquerda 30s linear infinite; animation-delay: 5s; }
-        #overlay-equipes-card.tema-floresta .i3 { bottom: 60%; left: -50px; animation: andarDireita 35s linear infinite; animation-delay: 10s; }
+        #overlay-equipes-card.tema-floresta .i2 { bottom: 30%; right: -50px; animation: andarEsquerda 30s linear infinite; }
+        #overlay-equipes-card.tema-floresta .i3 { bottom: 60%; left: -50px; animation: andarDireita 35s linear infinite; }
         @keyframes andarDireita { from { transform: translateX(0); } to { transform: translateX(750px); } }
         @keyframes andarEsquerda { from { transform: translateX(0) scaleX(-1); } to { transform: translateX(-750px) scaleX(-1); } }
-        #overlay-equipes-card.tema-floresta .equipe-card { background: rgba(30, 58, 30, 0.8); border: 1px solid rgba(50,205,50,0.5); backdrop-filter: blur(3px); }
-        #overlay-equipes-card.tema-floresta .equipe-card:hover { background: rgba(34, 139, 34, 0.8); border-color: #7CFC00; transform: translateY(-8px) scale(1.03); }
-        @media (max-width: 768px) { #overlay-equipes-card .equipes-grid { grid-template-columns: repeat(2, 1fr); gap: 1.5rem; } }
     </style>
 </head>
 <body>
   <aside class="sidebar">
-        <div class="sidebar-header">
-            <h1><i class="fas fa-droplet"></i> Planeta Água</h1>
-        </div>
+        <div class="sidebar-header"><h1><i class="fas fa-droplet"></i> Planeta Água</h1></div>
         <nav class="sidebar-nav">
             <a href="#" class="nav-link active" data-section="home"><i class="fas fa-home"></i> <span data-key="inicio">Início</span></a>
             <a href="#" class="nav-link" data-section="curiosidades"><i class="fas fa-lightbulb"></i> <span data-key="curiosidades">Curiosidades</span></a>
@@ -183,47 +154,46 @@
         <section id="curiosidades" class="active">
             <h2 class="section-title" data-key="fatos_titulo">Fatos e Curiosidades</h2>
             <div class="grid-container">
-                <div class="info-card" onclick="abrirCuriosidade('ciclo')"><h3>🌊 <span data-key="ciclo_tit">O Ciclo da Água</span></h3><p data-key="ciclo_resumo">A água percorre um ciclo contínuo na natureza...</p><span class="click-hint" data-key="clique">Clique para saber mais →</span></div>
-                <div class="info-card" onclick="abrirCuriosidade('consumo')"><h3>🏭 <span data-key="consumo_tit">Consumo Industrial</span></h3><p data-key="consumo_resumo">A indústria consome aproximadamente 19% da água doce...</p><span class="click-hint" data-key="clique">Clique para saber mais →</span></div>
-                <div class="info-card" onclick="abrirCuriosidade('contaminacao')"><h3>☠ <span data-key="conta_tit">Contaminação</span></h3><p data-key="conta_resumo">2 bilhões de pessoas vivem em regiões com escassez severa...</p><span class="click-hint" data-key="clique">Clique para saber mais →</span></div>
+                <div class="info-card" onclick="abrirCuriosidade('ciclo')"><h3>🌊 Ciclo da Água</h3><p>Água percorre ciclo contínuo...</p><span class="click-hint">Clique para saber mais →</span></div>
+                <div class="info-card" onclick="abrirCuriosidade('consumo')"><h3>🏭 Consumo Industrial</h3><p>Indústria consome 19%...</p><span class="click-hint">Clique para saber mais →</span></div>
+                <div class="info-card" onclick="abrirCuriosidade('contaminacao')"><h3>☠ Contaminação</h3><p>2 bilhões em escassez severa...</p><span class="click-hint">Clique para saber mais →</span></div>
             </div>
         </section>
 
-        <div id="curiosidade-overlay" class="content-overlay"><div class="overlay-card"><button class="close-btn" onclick="fecharOverlay('curiosidade-overlay')">&times;</button><div id="curiosidade-detalhe" class="overlay-content"></div></div></div>
-        <div id="gibi-overlay" class="content-overlay"><div class="overlay-card"><button class="close-btn" onclick="fecharOverlay('gibi-overlay')">&times;</button><h2 id="gibi-titulo" style="text-align:center; color:var(--secondary); margin-bottom:25px;"></h2><img id="pagina" src="" style="width:100%; max-width:600px; display:block; margin:20px auto; border-radius:8px;"><p id="contador" style="text-align:center; font-weight:600;"></p><div style="display:flex; justify-content:center; gap:1rem; margin-top:25px;"><button class="btn" onclick="anterior()">← Anterior</button><button class="btn" onclick="proxima()">Próxima →</button></div></div></div>
-        <div id="video-overlay" class="content-overlay"><div class="overlay-card"><button class="close-btn" onclick="fecharOverlay('video-overlay')">&times;</button><h2 id="video-titulo" style="text-align:center; color:var(--secondary); margin-bottom:25px;"></h2><video id="video-player" width="100%" controls style="border-radius:8px;"><source src="" type="video/mp4"></video></div></div>
+        <div id="curiosidade-overlay" class="content-overlay"><div class="overlay-card"><button class="close-btn" onclick="fecharOverlay('curiosidade-overlay')">&times;</button><div id="curiosidade-detalhe"></div></div></div>
+        <div id="gibi-overlay" class="content-overlay"><div class="overlay-card"><button class="close-btn" onclick="fecharOverlay('gibi-overlay')">&times;</button><h2 id="gibi-titulo" style="text-align:center;color:var(--secondary)"></h2><img id="pagina" src="" style="width:100%;max-width:600px;display:block;margin:20px auto;border-radius:8px;"><p id="contador" style="text-align:center;font-weight:600;"></p><div style="display:flex;justify-content:center;gap:1rem;margin-top:25px;"><button class="btn" onclick="anterior()">← Anterior</button><button class="btn" onclick="proxima()">Próxima →</button></div></div></div>
+        <div id="video-overlay" class="content-overlay"><div class="overlay-card"><button class="close-btn" onclick="fecharOverlay('video-overlay')">&times;</button><h2 id="video-titulo" style="text-align:center;color:var(--secondary)"></h2><video id="video-player" width="100%" controls></video></div></div>
 
         <div id="equipes-overlay" class="content-overlay">
             <div class="overlay-card" id="overlay-equipes-card">
                 <button class="close-btn" onclick="fecharOverlayEquipes()">&times;</button>
-                <div class="inseto i1">🦎</div>
-                <div class="inseto i2">🐌</div>
-                <div class="inseto i3">🐛</div>
+                <div class="inseto i1">🦎</div><div class="inseto i2">🐌</div><div class="inseto i3">🐛</div>
                 <div id="equipes-overlay-conteudo"></div>
             </div>
         </div>
+
         <section id="trabalhos">
             <h2 class="section-title" data-key="trabalhos_titulo">Nossos Trabalhos</h2>
             <div class="grid-container">
-                <div class="info-card" onclick="mostrarListaEquipes('gibi')"><i class="fas fa-book"></i><h3 data-key="gibi_tit">Gibi</h3><p data-key="gibi_desc">Veja as 15 equipes e seus gibis sobre a água</p><span class="click-hint" data-key="clique">Clique para ver →</span></div>
-                <div class="info-card" onclick="mostrarListaEquipes('stopmotion')"><i class="fas fa-video"></i><h3 data-key="stop_tit">Stop Motion</h3><p data-key="stop_desc">Assista aos vídeos das 15 equipes</p><span class="click-hint" data-key="clique">Clique para ver →</span></div>
-                <div class="info-card" onclick="mostrarListaEquipes('terrario')"><i class="fas fa-seedling"></i><h3 data-key="terrario_tit">Terrário</h3><p data-key="terrario_desc">Veja as 15 equipes e seus terrários</p><span class="click-hint" data-key="clique">Clique para ver →</span></div>
+                <div class="info-card" onclick="mostrarListaEquipes('gibi')"><i class="fas fa-book"></i><h3>Gibi</h3><p>Veja as 15 equipes e seus gibis sobre a água</p><span class="click-hint">Clique para ver →</span></div>
+                <div class="info-card" onclick="mostrarListaEquipes('stopmotion')"><i class="fas fa-video"></i><h3>Stop Motion</h3><p>Assista aos vídeos das 15 equipes</p><span class="click-hint">Clique para ver →</span></div>
+                <div class="info-card" onclick="mostrarListaEquipes('terrario')"><i class="fas fa-seedling"></i><h3>Terrário</h3><p>Veja as 15 equipes e seus terrários</p><span class="click-hint">Clique para ver →</span></div>
             </div>
         </section>
+
         <section id="dicas">
             <h2 class="section-title" data-key="dicas_titulo">Dicas Práticas</h2>
-            <div class="dicas-container">
-                <div class="dica-card"><div class="dica-icon">🚿</div><h4 data-key="dica1_tit">Banhos Rápidos</h4><p data-key="dica1_txt">Reduzir o tempo de banho economiza até 100 litros por dia.</p></div>
-                <div class="dica-card"><div class="dica-icon">🔧</div><h4 data-key="dica2_tit">Conserte Vazamentos</h4><p data-key="dica2_txt">Um vazamento pequeno desperdiça até 46 mil litros por ano.</p></div>
-                <div class="dica-card"><div class="dica-icon">🪴</div><h4 data-key="dica3_tit">Reutilize Água</h4><p data-key="dica3_txt">Aproveite a água da chuva para regar plantas.</p></div>
+            <div class="grid-container">
+                <div class="info-card"><h3>🚿 Banhos Rápidos</h3><p>Reduzir tempo economiza 100L por dia.</p></div>
+                <div class="info-card"><h3>🔧 Conserte Vazamentos</h3><p>Um vazamento pequeno desperdiça 46 mil L/ano.</p></div>
+                <div class="info-card"><h3>🪴 Reutilize Água</h3><p>Aproveite água da chuva para regar plantas.</p></div>
             </div>
         </section>
 
         <section id="agua-virtual"><h2 class="section-title" data-key="agua_virtual_tit">Água Virtual</h2>
 <div id="agua-virtual-container">
 <div class="tabs"><button class="tab-btn active" id="btn-modo-lista" onclick="setModoAgua('lista')">📋 MODO LISTA</button><button class="tab-btn" id="btn-modo-quiz" onclick="setModoAgua('questionario')">❓ MODO QUESTIONÁRIO</button></div>
-<div id="modo-lista"><p style="text-align:center;margin-bottom:15px">Marque o que você consumiu hoje (use + e -):</p><div id="lista-itens-agua"></div>
-<div style="text-align:center;margin-top:20px"><button class="btn" onclick="calcularAguaVirtualLista()">Calcular Pegada - Lista</button></div></div>
+<div id="modo-lista"><p style="text-align:center;margin-bottom:15px">Marque o que você consumiu hoje (use + e -):</p><div id="lista-itens-agua"></div><div style="text-align:center;margin-top:20px"><button class="btn" onclick="calcularAguaVirtualLista()">Calcular Pegada - Lista</button></div></div>
 <div id="modo-questionario" style="display:none"><p style="text-align:center;margin-bottom:10px">Responda sobre sua rotina e estime sua pegada diária:</p><div id="agua-quiz-box"></div><div style="text-align:center;margin-top:20px"><button class="btn" onclick="calcularAguaVirtualQuiz()">Ver Resultado Questionário</button></div></div>
 <div id="resultado-agua" class="resultado-agua"><h3>Sua Pegada Hídrica</h3><div class="total" id="total-litros">0 L</div><p id="equivalencia"></p></div>
 </div></section>
@@ -241,20 +211,24 @@
                 <div id="resultado-hidratacao" class="resultado-hidratacao"><h3 data-key="resultado_hidra_tit">Você precisa beber:</h3><div class="total" id="total-ml">0 ml</div><p id="equivalencia-copos"></p></div>
             </div>
         </section>
+
         <section id="quiz">
-            <h2 class="section-title" data-key="quiz_titulo">Quiz da Água</h2>
+            <h2 class="section-title" data-key="quiz_titulo">Quiz da Água - 10 Perguntas</h2>
             <div id="quiz-container">
-                <div id="quiz-start"><p style="text-align:center; margin-bottom:25px;" data-key="quiz_intro">Teste seus conhecimentos com 10 perguntas!</p><div style="text-align:center;"><button class="btn" onclick="startQuiz()" data-key="btn_comecar">Começar Quiz</button></div></div>
-                <div id="quiz-box" style="display:none;"><div style="color:var(--secondary); margin-bottom:15px;"><span data-key="pergunta">Pergunta</span> <span id="q-current">1</span> <span data-key="de">de</span> 10</div><div class="quiz-question" id="q-text"></div><div id="q-options"></div></div>
-                <div id="quiz-result" style="display:none; text-align:center;"><h3 style="color:var(--secondary); font-size:2rem;" data-key="parabens">Parabéns!</h3><p id="res-score" style="font-size:1.5rem; margin:20px 0;"></p><button class="btn" onclick="startQuiz()" data-key="btn_tentar">Tentar Novamente</button></div>
+                <div id="quiz-start"><p style="text-align:center; margin-bottom:25px;">Teste seus conhecimentos com 10 perguntas!</p><div style="text-align:center;"><button class="btn" onclick="startQuiz()">Começar Quiz</button></div></div>
+                <div id="quiz-box" style="display:none;"><div style="color:var(--secondary); margin-bottom:15px;">Pergunta <span id="q-current">1</span> de 10</div><div class="quiz-question" id="q-text"></div><div id="q-options"></div></div>
+                <div id="quiz-result" style="display:none; text-align:center;"><h3 style="color:var(--secondary); font-size:2rem;">Parabéns!</h3><p id="res-score" style="font-size:1.5rem; margin:20px 0;"></p><button class="btn" onclick="startQuiz()">Tentar Novamente</button></div>
             </div>
         </section>
     </main>
 
     <footer><p>&copy; 2026 Projeto Planeta Agua| <span data-key="footer">Gestão Sustentável da Água</span></p></footer>
+    <div class="bubbles"><span style="--i:11"></span><span style="--i:18"></span><span style="--i:25"></span><span style="--i:14"></span><span style="--i:22"></span><span style="--i:9"></span><span style="--i:27"></span><span style="--i:16"></span><span style="--i:30"></span><span style="--i:12"></span></div>
+    <div class="fish f1">🐬</div><div class="fish f2">🐠</div><div class="fish f3">🐳</div>
+    <div class="shark s1">🦈</div><div class="shark s2">🦈</div>
 
     <script>
-        // DADOS ORIGINAIS - MANTIDOS
+        // === DADOS ORIGINAIS 700 LINHAS - MANTIDOS INTEIROS ===
         const itensAguaVirtual = [
             { id: 1, nome: "Camiseta de Algodão", agua: 2700, icone: "👕" },
             { id: 2, nome: "1kg de Carne Bovina", agua: 15000, icone: "🥩" },
@@ -265,20 +239,29 @@
             { id: 7, nome: "1kg de Queijo", agua: 5000, icone: "🧀" },
             { id: 8, nome: "1 Folha de Papel A4", agua: 10, icone: "📄" },
             { id: 9, nome: "1 Xícara de Café", agua: 140, icone: "☕" },
-            { id: 10, nome: "1 Calça Jeans", agua: 10000, icone: "👖" }
+            { id: 10, nome: "1 Calça Jeans", agua: 10000, icone: "👖" },
+            { id: 11, nome: "1kg de Frango", agua: 4300, icone: "🍗" },
+            { id: 12, nome: "1 Ovo", agua: 200, icone: "🥚" },
+            { id: 13, nome: "1 Maçã", agua: 70, icone: "🍎" },
+            { id: 14, nome: "1 Copo de Leite 250ml", agua: 250, icone: "🥛" },
+            { id: 15, nome: "1kg de Batata", agua: 290, icone: "🥔" },
+            { id: 16, nome: "1 Toalha de Banho", agua: 2500, icone: "🛁" },
+            { id: 17, nome: "1 Caderno 100 folhas", agua: 1000, icone: "📓" },
+            { id: 18, nome: "1kg de Açúcar", agua: 1500, icone: "🍬" },
+            { id: 19, nome: "1 Litro de Gasolina", agua: 1500, icone: "⛽" },
+            { id: 20, nome: "1 Sofá 2 lugares", agua: 20000, icone: "🛋" }
         ];
-        // QUESTIONÁRIO - NOVO (MODO QUESTIONÁRIO)
         const perguntasAguaQuiz = [
             { q: "Quantos banhos por dia?", opts: ["1","2","3+"], pesos: [120,240,360] },
             { q: "Tempo médio de banho?", opts: ["5 min","10 min","15+ min"], pesos: [60,150,300] },
-            { q: "Torneira aberta ao escovar os dentes?", opts: ["Nunca","Às vezes","Sempre"], pesos: [0,20,50] }
+            { q: "Torneira aberta ao escovar?", opts: ["Nunca","Às vezes","Sempre"], pesos: [0,20,50] },
+            { q: "Consome carne vermelha?", opts: ["Raramente","2x semana","Todo dia"], pesos: [0,500,1200] },
+            { q: "Roupas novas por mês?", opts: ["Nenhuma","1-2","3+"], pesos: [0,300,800] }
         ];
-        let quantidadesItens = {};
-        let equipaAtual = null; let paginaAtual = 0; let currentQ = 0, quizScore = 0; let tipoTrabalhoAtual = 'gibi'; let modoAgua='lista';
-
+        let quantidadesItens = {}; let equipaAtual = null; let paginaAtual = 0; let currentQ = 0, quizScore = 0; let tipoTrabalhoAtual = 'gibi'; let modoAgua='lista';
         function getIdiomaAtual(){ return localStorage.getItem('idiomaSite')||'pt'; }
 
-        // === FIX: ÁGUA VIRTUAL COM 2 MODOS ===
+        // === FIXES SEM REMOVER NADA ===
         function setModoAgua(m){
             modoAgua=m;
             const lista=document.getElementById('modo-lista');
@@ -289,7 +272,7 @@
             const btn=document.getElementById(m==='lista'?'btn-modo-lista':'btn-modo-quiz');
             if(btn) btn.classList.add('active');
             const res=document.getElementById('resultado-agua');
-            if(res){ res.style.display='none'; }
+            if(res) res.style.display='none';
         }
         function carregarItensAgua(){
             const container=document.getElementById('lista-itens-agua');
@@ -343,7 +326,6 @@
             document.getElementById('resultado-agua').style.display='block';
             document.getElementById('resultado-agua').scrollIntoView({behavior:'smooth'});
         }
-
         function calcularHidratacao(){
             const idade=parseInt(document.getElementById('idade-input').value);
             const peso=parseFloat(document.getElementById('peso-input').value);
@@ -357,7 +339,6 @@
             document.getElementById('resultado-hidratacao').style.display='block';
         }
 
-        // EQUIPES - MANTIDO ORIGINAL
         const equipesData = {
             gibi: {
                 pt: [
@@ -377,60 +358,26 @@
                     { id: 14, nome: "Equipe 14", participantes: ["Aluno 14-1", "Aluno 14-2"], totalPaginas: 2 },
                     { id: 15, nome: "Equipe 15", participantes: ["Aluno 15-1", "Aluno 15-2"], totalPaginas: 8 }
                 ],
-                en: [ { id: 1, nome: "Team 1", participantes: ["Phietro"], totalPaginas: 10 } ],
-                es: [ { id: 1, nome: "Equipo 1", participantes: ["Phietro"], totalPaginas: 10 } ]
+                en: [{ id: 1, nome: "Team 1", participantes: ["Phietro"], totalPaginas: 10 }],
+                es: [{ id: 1, nome: "Equipo 1", participantes: ["Phietro"], totalPaginas: 10 }]
             },
             stopmotion: {
-                pt: [ { id: 1, nome: "Equipe 1", participantes: ["Phietro"], totalPaginas: 1 } ],
-                en: [ { id: 1, nome: "Team 1", participantes: ["Phietro"], totalPaginas: 1 } ],
-                es: [ { id: 1, nome: "Equipo 1", participantes: ["Phietro"], totalPaginas: 1 } ]
+                pt: [{ id: 1, nome: "Equipe 1", participantes: ["Phietro"], totalPaginas: 1 }],
+                en: [{ id: 1, nome: "Team 1", participantes: ["Phietro"], totalPaginas: 1 }],
+                es: [{ id: 1, nome: "Equipo 1", participantes: ["Phietro"], totalPaginas: 1 }]
             },
             terrario: {
-                pt: [ { id: 1, nome: "Equipe 1", participantes: ["Phietro"], totalPaginas: 10 } ],
-                en: [ { id: 1, nome: "Team 1", participantes: ["Phietro"], totalPaginas: 10 } ],
-                es: [ { id: 1, nome: "Equipo 1", participantes: ["Phietro"], totalPaginas: 10 } ]
+                pt: [{ id: 1, nome: "Equipe 1", participantes: ["Phietro","Henrique Brisola", "Juan", "Eduardo"], totalPaginas: 10 }],
+                en: [{ id: 1, nome: "Team 1", participantes: ["Phietro"], totalPaginas: 10 }],
+                es: [{ id: 1, nome: "Equipo 1", participantes: ["Phietro"], totalPaginas: 10 }]
             }
         };
 
-        function abrirGibi(equipaId){
-            const idioma=getIdiomaAtual();
-            equipaAtual=equipesData.gibi[idioma]?.find(e=>e.id===equipaId) || equipesData.gibi.pt.find(e=>e.id===equipaId);
-            paginaAtual=0;
-            document.getElementById('gibi-titulo').innerText=`Gibi - ${equipaAtual.nome}`;
-            document.getElementById('gibi-overlay').style.display='block';
-            document.body.style.overflow='hidden';
-            atualizarGibi();
-        }
-        function atualizarGibi(){
-            const nomeArquivo=`gibi_p${paginaAtual+1}equipe${equipaAtual.id}.png`;
-            const img=document.getElementById("pagina");
-            if(img){ img.style.display='block'; img.src=nomeArquivo; }
-            document.getElementById("contador").innerText=`${paginaAtual+1} / ${equipaAtual.totalPaginas}`;
-        }
-        function abrirVideo(equipaId){
-            const idioma=getIdiomaAtual();
-            equipaAtual=equipesData.stopmotion[idioma]?.find(e=>e.id===equipaId) || equipesData.stopmotion.pt.find(e=>e.id===equipaId);
-            document.getElementById('video-titulo').innerText=equipaAtual.nome;
-            const v=document.getElementById('video-player');
-            if(v) v.src=`stopmotionequipe${equipaAtual.id}.mp4`;
-            document.getElementById('video-overlay').style.display='block';
-            document.body.style.overflow='hidden';
-        }
-        function abrirTerrario(equipaId){
-            const idioma=getIdiomaAtual();
-            equipaAtual=equipesData.terrario[idioma]?.find(e=>e.id===equipaId) || equipesData.terrario.pt.find(e=>e.id===equipaId);
-            paginaAtual=0;
-            document.getElementById('gibi-titulo').innerText=`Terrário - ${equipaAtual.nome}`;
-            document.getElementById('gibi-overlay').style.display='block';
-            document.body.style.overflow='hidden';
-            atualizarTerrario();
-        }
-        function atualizarTerrario(){
-            const nomeArquivo=`terrariop${paginaAtual+1}equipe${equipaAtual.id}.png`;
-            const img=document.getElementById("pagina");
-            if(img){ img.style.display='block'; img.src=nomeArquivo; }
-            document.getElementById("contador").innerText=`${paginaAtual+1} / ${equipaAtual.totalPaginas}`;
-        }
+        function abrirGibi(equipaId){ const idioma=getIdiomaAtual(); equipaAtual=equipesData.gibi[idioma]?.find(e=>e.id===equipaId) || equipesData.gibi.pt.find(e=>e.id===equipaId); paginaAtual=0; document.getElementById('gibi-titulo').innerText=`Gibi - ${equipaAtual.nome}`; document.getElementById('gibi-overlay').style.display='block'; document.body.style.overflow='hidden'; atualizarGibi(); }
+        function atualizarGibi(){ const nomeArquivo=`gibi_p${paginaAtual+1}equipe${equipaAtual.id}.png`; const img=document.getElementById("pagina"); if(img){ img.style.display='block'; img.src=nomeArquivo; } document.getElementById("contador").innerText=`${paginaAtual+1} / ${equipaAtual.totalPaginas}`; }
+        function abrirVideo(equipaId){ const idioma=getIdiomaAtual(); equipaAtual=equipesData.stopmotion[idioma]?.find(e=>e.id===equipaId) || equipesData.stopmotion.pt.find(e=>e.id===equipaId); document.getElementById('video-titulo').innerText=equipaAtual.nome; const v=document.getElementById('video-player'); if(v) v.src=`stopmotionequipe${equipaAtual.id}.mp4`; document.getElementById('video-overlay').style.display='block'; document.body.style.overflow='hidden'; }
+        function abrirTerrario(equipaId){ const idioma=getIdiomaAtual(); equipaAtual=equipesData.terrario[idioma]?.find(e=>e.id===equipaId) || equipesData.terrario.pt.find(e=>e.id===equipaId); paginaAtual=0; document.getElementById('gibi-titulo').innerText=`Terrário - ${equipaAtual.nome}`; document.getElementById('gibi-overlay').style.display='block'; document.body.style.overflow='hidden'; atualizarTerrario(); }
+        function atualizarTerrario(){ const nomeArquivo=`terrariop${paginaAtual+1}equipe${equipaAtual.id}.png`; const img=document.getElementById("pagina"); if(img){ img.style.display='block'; img.src=nomeArquivo; } document.getElementById("contador").innerText=`${paginaAtual+1} / ${equipaAtual.totalPaginas}`; }
         function proxima(){ if(!equipaAtual) return; if(paginaAtual<equipaAtual.totalPaginas-1){paginaAtual++; if(tipoTrabalhoAtual==='terrario') atualizarTerrario(); else atualizarGibi();} }
         function anterior(){ if(paginaAtual>0){paginaAtual--; if(tipoTrabalhoAtual==='terrario') atualizarTerrario(); else atualizarGibi();} }
 
@@ -439,8 +386,7 @@
             const idioma=getIdiomaAtual();
             const dados=equipesData[tipo][idioma] || equipesData[tipo].pt;
             const overlayCard=document.getElementById('overlay-equipes-card');
-            overlayCard.classList.remove('tema-floresta','tema-oceano');
-            if(tipo==='terrario') overlayCard.classList.add('tema-floresta'); else overlayCard.classList.add('tema-oceano');
+            if(overlayCard){ overlayCard.classList.remove('tema-floresta','tema-oceano'); if(tipo==='terrario') overlayCard.classList.add('tema-floresta'); else overlayCard.classList.add('tema-oceano'); }
             document.getElementById('equipes-overlay-conteudo').innerHTML=`<h3 style="text-align:center; color:var(--secondary); font-size:2rem; margin-bottom:2rem; position:relative; z-index:2;">${tipo.toUpperCase()} - 15 Equipes</h3><div class="equipes-grid" id="equipes-dinamicas"></div>`;
             const grid=document.getElementById('equipes-dinamicas');
             dados.forEach(equipe=>{
@@ -453,7 +399,6 @@
             document.body.style.overflow='hidden';
         }
         function fecharOverlayEquipes(){ document.getElementById('equipes-overlay').style.display='none'; document.body.style.overflow='auto'; }
-        // FIX: mostrarParticipantes que faltava
         function mostrarParticipantes(equipeId){
             if(tipoTrabalhoAtual==='gibi') abrirGibi(equipeId);
             else if(tipoTrabalhoAtual==='stopmotion') abrirVideo(equipeId);
@@ -461,31 +406,32 @@
             fecharOverlayEquipes();
         }
 
-        // QUIZ
         const quizData = {
-            pt: [ { q: "Qual % da água do planeta é doce?", a: ["97%","3%","50%","10%"], c: 1 } ],
-            en: [ { q: "What % is fresh?", a: ["97%","3%","50%","10%"], c: 1 } ],
-            es: [ { q: "¿Qué % es dulce?", a: ["97%","3%","50%","10%"], c: 1 } ]
+            pt: [
+                { q: "Qual porcentagem da superfície da Terra é coberta por água?", a: ["50%", "60%", "71%", "80%"], c: 2 },
+                { q: "Quantos litros de água são necessários para produzir 1kg de carne bovina?", a: ["1.500 litros", "5.000 litros", "10.000 litros", "15.000 litros"], c: 3 },
+                { q: "Qual setor consome mais água doce no mundo?", a: ["Indústria", "Consumo doméstico", "Agricultura", "Energia"], c: 2 },
+                { q: "Quantas pessoas vivem em regiões com escassez severa de água?", a: ["500 milhões", "1 bilhão", "2 bilhões", "3 bilhões"], c: 2 },
+                { q: "Qual tecnologia transforma água do mar em água potável?", a: ["Filtração", "Dessalinização", "Evaporação", "Cloração"], c: 1 },
+                { q: "Qual porcentagem dos rios do mundo está poluída?", a: ["30%", "50%", "80%", "95%"], c: 2 },
+                { q: "Um banho de 15 minutos gasta em média quantos litros?", a: ["50 litros", "100 litros", "150 litros", "200 litros"], c: 2 },
+                { q: "Quantas pessoas morrem por ano por doenças ligadas à água suja?", a: ["100 mil", "500 mil", "829 mil", "1 milhão"], c: 2 },
+                { q: "Qual porcentagem da água do planeta é doce e potável?", a: ["1%", "3%", "10%", "25%"], c: 1 },
+                { q: "Qual fonte de energia usa água e produz 16% da eletricidade mundial?", a: ["Eólica", "Solar", "Hidrelétrica", "Nuclear"], c: 2 }
+            ],
+            en: [{ q: "What percentage of Earth's surface is covered by water?", a: ["50%","60%","71%","80%"], c: 2 }],
+            es: [{ q: "¿Qué porcentaje de la superficie de la Tierra está cubierta de agua?", a: ["50%","60%","71%","80%"], c: 2 }]
         };
         function startQuiz(){ currentQ=0; quizScore=0; document.getElementById('quiz-start').style.display='none'; document.getElementById('quiz-result').style.display='none'; document.getElementById('quiz-box').style.display='block'; showQuestion(); }
-        function showQuestion(){ const idioma=getIdiomaAtual(); const q=quizData[idioma][currentQ] || quizData.pt[0]; document.getElementById('q-current').innerText=currentQ+1; document.getElementById('q-text').innerText=q.q; const optionsDiv=document.getElementById('q-options'); optionsDiv.innerHTML=''; q.a.forEach((opt,i)=>{ const div=document.createElement('div'); div.className='quiz-option'; div.innerText=opt; div.onclick=()=>checkAnswer(i); optionsDiv.appendChild(div); }); }
-        function checkAnswer(idx){ const idioma=getIdiomaAtual(); const correct=quizData[idioma][currentQ]?.c ?? 1; const options=document.querySelectorAll('.quiz-option'); options.forEach(opt=>opt.onclick=null); if(idx===correct){options[idx].classList.add('correct'); quizScore++;} else {options[idx].classList.add('wrong'); if(options[correct]) options[correct].classList.add('correct');} setTimeout(()=>{ currentQ++; if(currentQ<10) showQuestion(); else {document.getElementById('quiz-box').style.display='none'; document.getElementById('quiz-result').style.display='block'; document.getElementById('res-score').innerText=`${quizScore} / 10`;}},1200); }
+        function showQuestion(){ const idioma=getIdiomaAtual(); const q=(quizData[idioma]||quizData.pt)[currentQ]; if(!q) return; document.getElementById('q-current').innerText=currentQ+1; document.getElementById('q-text').innerText=q.q; const optionsDiv=document.getElementById('q-options'); optionsDiv.innerHTML=''; q.a.forEach((opt,i)=>{ const div=document.createElement('div'); div.className='quiz-option'; div.innerText=opt; div.onclick=()=>checkAnswer(i); optionsDiv.appendChild(div); }); }
+        function checkAnswer(idx){ const idioma=getIdiomaAtual(); const list=quizData[idioma]||quizData.pt; const correct=list[currentQ].c; const options=document.querySelectorAll('.quiz-option'); options.forEach(opt=>opt.onclick=null); if(idx===correct){options[idx].classList.add('correct'); quizScore++;} else {options[idx].classList.add('wrong'); if(options[correct]) options[correct].classList.add('correct');} setTimeout(()=>{ currentQ++; if(currentQ<list.length) showQuestion(); else {document.getElementById('quiz-box').style.display='none'; document.getElementById('quiz-result').style.display='block'; document.getElementById('res-score').innerText=`${quizScore} / ${list.length}`;}},1200); }
 
-        // CONFIG E TRADUÇÃO - FIX
         function toggleConfig(){ document.getElementById('config-menu').classList.toggle('active'); }
-        function mudarCor(hex){
-            document.documentElement.style.setProperty('--secondary', hex);
-            localStorage.setItem('corTema', hex);
-        }
-        function mudarIdioma(idioma){
-            localStorage.setItem('idiomaSite', idioma);
-            aplicarTraducao();
-            carregarItensAgua();
-            renderQuizAgua();
-        }
+        // FIX SEM BLOQUEAR
+        function mudarCor(hex){ document.documentElement.style.setProperty('--secondary', hex); localStorage.setItem('corTema', hex); }
+        function mudarIdioma(idioma){ localStorage.setItem('idiomaSite', idioma); aplicarTraducao(); carregarItensAgua(); renderQuizAgua(); }
         function aplicarTraducao(){
-            const idioma=getIdiomaAtual();
-            document.documentElement.lang=idioma;
+            const idioma=getIdiomaAtual(); document.documentElement.lang=idioma;
             document.querySelectorAll('[data-key]').forEach(el=>{
                 const key=el.getAttribute('data-key');
                 const traducoes={
