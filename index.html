@@ -173,7 +173,14 @@
     .cert-name { font-size: 2rem; font-weight: 800; color: #00bfff; text-decoration: underline; margin: 20px 0; }
     .cert-footer { margin-top: 40px; font-size: 0.9rem; border-top: 1px solid #ccc; padding-top: 20px; }
     @media print { body * { visibility: hidden; } .cert-overlay, .cert-overlay * { visibility: visible; } .cert-overlay { position: absolute; left: 0; top: 0; background: white; } .cert-box { border: 5px solid #003366; } .close-btn-cert, .print-btn { display: none; } }
+
+    .scanner-container { display: none; flex-direction: column; align-items: center; background: rgba(0,0,0,0.9); padding: 20px; border-radius: 15px; margin-top: 20px; border: 2px solid var(--secondary); }
+    #video-canvas { width: 100%; max-width: 400px; border-radius: 10px; border: 3px solid #fff; margin-bottom: 15px; }
+    .scanner-result { background: var(--secondary); color: var(--primary-dark); padding: 15px; border-radius: 10px; font-weight: 800; text-align: center; width: 100%; max-width: 400px; display: none; }
+    .scan-btn-main { background: #ffcc00; color: #333; font-weight: 800; border: none; padding: 15px 30px; border-radius: 50px; cursor: pointer; margin-bottom: 20px; transition: 0.3s; }
+    .scan-btn-main:hover { transform: scale(1.05); background: #fff; }
 </style>
+<script src="https://unpkg.com/ml5@latest/dist/ml5.min.js"></script>
 </head>
 <body>
   <aside class="sidebar">
@@ -228,7 +235,19 @@
 
         <section id="curiosidades" class="active">
             <h2 class="section-title" data-key="fatos_titulo">Fatos e Curiosidades</h2>
-            <div class="grid-container">
+            
+            <div style="text-align:center; margin-bottom: 40px;">
+                <button class="scan-btn-main" onclick="iniciarScanner()">🚀 ABRIR SCANNER IA (BETA)</button>
+                <div id="ia-scanner" class="scanner-container">
+                    <p style="margin-bottom:10px; color:var(--secondary);">Aponte a câmera para um objeto (ex: Maçã, Banana, Camiseta, Celular)</p>
+                    <video id="webcam" autoplay playsinline width="400" height="300" style="display:none;"></video>
+                    <canvas id="video-canvas"></canvas>
+                    <div id="status-ia" style="margin-bottom:10px; font-style:italic;">Carregando Inteligência Artificial...</div>
+                    <div id="resultado-ia" class="scanner-result"></div>
+                    <button class="btn" onclick="fecharScanner()" style="margin-top:15px; border-color:#fff; color:#fff;">Fechar Scanner</button>
+                </div>
+            </div>
+<div class="grid-container">
                 <div class="info-card" onclick="abrirCuriosidade('ciclo')"><h3>🌊 <span data-key="ciclo_tit">O Ciclo da Água</span></h3><p data-key="ciclo_resumo">A água percorre um ciclo contínuo na natureza...</p><span class="click-hint" data-key="clique">Clique para saber mais →</span></div>
                 <div class="info-card" onclick="abrirCuriosidade('consumo')"><h3>🏭 <span data-key="consumo_tit">Consumo Industrial</span></h3><p data-key="consumo_resumo">A indústria consome aproximadamente 19% da água doce...</p><span class="click-hint" data-key="clique">Clique para saber mais →</span></div>
                 <div class="info-card" onclick="abrirCuriosidade('contaminacao')"><h3>☠️ <span data-key="conta_tit">Contaminação</span></h3><p data-key="conta_resumo">2 bilhões de pessoas vivem em regiões com escassez severa...</p><span class="click-hint" data-key="clique">Clique para saber mais →</span></div>
@@ -250,7 +269,19 @@
         </div>
         <section id="trabalhos">
             <h2 class="section-title" data-key="trabalhos_titulo">Nossos Trabalhos</h2>
-            <div class="grid-container">
+            
+            <div style="text-align:center; margin-bottom: 40px;">
+                <button class="scan-btn-main" onclick="iniciarScanner()">🚀 ABRIR SCANNER IA (BETA)</button>
+                <div id="ia-scanner" class="scanner-container">
+                    <p style="margin-bottom:10px; color:var(--secondary);">Aponte a câmera para um objeto (ex: Maçã, Banana, Camiseta, Celular)</p>
+                    <video id="webcam" autoplay playsinline width="400" height="300" style="display:none;"></video>
+                    <canvas id="video-canvas"></canvas>
+                    <div id="status-ia" style="margin-bottom:10px; font-style:italic;">Carregando Inteligência Artificial...</div>
+                    <div id="resultado-ia" class="scanner-result"></div>
+                    <button class="btn" onclick="fecharScanner()" style="margin-top:15px; border-color:#fff; color:#fff;">Fechar Scanner</button>
+                </div>
+            </div>
+<div class="grid-container">
                 <div class="info-card" onclick="mostrarListaEquipes('gibi')"><i class="fas fa-book"></i><h3 data-key="gibi_tit">Gibi</h3><p data-key="gibi_desc">Veja as 15 equipes e seus gibis sobre a água</p><span class="click-hint" data-key="clique">Clique para ver →</span></div>
                 <div class="info-card" onclick="mostrarListaEquipes('stopmotion')"><i class="fas fa-video"></i><h3 data-key="stop_tit">Stop Motion</h3><p data-key="stop_desc">Assista aos vídeos das 15 equipes</p><span class="click-hint" data-key="clique">Clique para ver →</span></div>
                 <div class="info-card" onclick="mostrarListaEquipes('terrario')"><i class="fas fa-seedling"></i><h3 data-key="terrario_tit">Terrário</h3><p data-key="terrario_desc">Veja as 15 equipes e seus terrários</p><span class="click-hint" data-key="clique">Clique para ver →</span></div>
@@ -333,7 +364,19 @@
 
         <section id="comparativo">
             <h2 class="section-title">Comparativo Visual</h2>
-            <div class="grid-container">
+            
+            <div style="text-align:center; margin-bottom: 40px;">
+                <button class="scan-btn-main" onclick="iniciarScanner()">🚀 ABRIR SCANNER IA (BETA)</button>
+                <div id="ia-scanner" class="scanner-container">
+                    <p style="margin-bottom:10px; color:var(--secondary);">Aponte a câmera para um objeto (ex: Maçã, Banana, Camiseta, Celular)</p>
+                    <video id="webcam" autoplay playsinline width="400" height="300" style="display:none;"></video>
+                    <canvas id="video-canvas"></canvas>
+                    <div id="status-ia" style="margin-bottom:10px; font-style:italic;">Carregando Inteligência Artificial...</div>
+                    <div id="resultado-ia" class="scanner-result"></div>
+                    <button class="btn" onclick="fecharScanner()" style="margin-top:15px; border-color:#fff; color:#fff;">Fechar Scanner</button>
+                </div>
+            </div>
+<div class="grid-container">
                 <div class="info-card">
                     <h3>🍔 Hambúrguer</h3>
                     <p>2.400 Litros</p>
@@ -993,6 +1036,109 @@
         function startQuiz() { currentQ = 0; quizScore = 0; const startEl = document.getElementById('quiz-start'); const resultEl = document.getElementById('quiz-result'); const boxEl = document.getElementById('quiz-box'); if(startEl) startEl.style.display = 'none'; if(resultEl) resultEl.style.display = 'none'; if(boxEl) boxEl.style.display = 'block'; showQuestion(); }
         function showQuestion() { const idioma = getIdiomaAtual(); const q = quizData[idioma][currentQ]; const curEl = document.getElementById('q-current'); const textEl = document.getElementById('q-text'); const optionsDiv = document.getElementById('q-options'); if(!q) return; if(curEl) curEl.innerText = currentQ + 1; if(textEl) textEl.innerText = q.q; if(optionsDiv) { optionsDiv.innerHTML = ''; q.a.forEach((opt, i) => { const div = document.createElement('div'); div.className = 'quiz-option'; div.innerText = opt; div.onclick = () => checkAnswer(i); optionsDiv.appendChild(div); }); } }
         
+        
+        // --- LÓGICA DO SCANNER IA (ML5.JS) ---
+        let classifier;
+        let video;
+        let canvas;
+        let ctx;
+        let scannerAtivo = false;
+
+        const pegadaObjetos = {
+            'apple': { nome: 'Maçã', litros: 70 },
+            'banana': { nome: 'Banana', litros: 160 },
+            't-shirt': { nome: 'Camiseta', litros: 2700 },
+            'jersey': { nome: 'Camiseta/Roupa', litros: 2700 },
+            'jean': { nome: 'Calça Jeans', litros: 10000 },
+            'coffee': { nome: 'Café', litros: 140 },
+            'cup': { nome: 'Xícara/Copo', litros: 140 },
+            'orange': { nome: 'Laranja', litros: 50 },
+            'bread': { nome: 'Pão', litros: 40 },
+            'cellphone': { nome: 'Celular', litros: 12000 },
+            'laptop': { nome: 'Notebook', litros: 20000 },
+            'paper': { nome: 'Papel', litros: 10 },
+            'bottle': { nome: 'Garrafa de Água', litros: 5 }
+        };
+
+        function iniciarScanner() {
+            document.getElementById('ia-scanner').style.display = 'flex';
+            if (!classifier) {
+                classifier = ml5.imageClassifier('MobileNet', modelReady);
+            } else {
+                startVideo();
+            }
+        }
+
+        function modelReady() {
+            document.getElementById('status-ia').innerText = 'IA Pronta! Analisando...';
+            startVideo();
+        }
+
+        function startVideo() {
+            video = document.getElementById('webcam');
+            canvas = document.getElementById('video-canvas');
+            ctx = canvas.getContext('2d');
+            
+            navigator.mediaDevices.getUserMedia({ video: { facingMode: 'environment' } })
+                .then(stream => {
+                    video.srcObject = stream;
+                    scannerAtivo = true;
+                    requestAnimationFrame(drawVideo);
+                    classifyVideo();
+                })
+                .catch(err => {
+                    alert("Erro ao acessar a câmera: " + err);
+                });
+        }
+
+        function drawVideo() {
+            if (!scannerAtivo) return;
+            canvas.width = video.videoWidth;
+            canvas.height = video.videoHeight;
+            ctx.drawImage(video, 0, 0, canvas.width, canvas.height);
+            requestAnimationFrame(drawVideo);
+        }
+
+        function classifyVideo() {
+            if (!scannerAtivo) return;
+            classifier.classify(video, gotResult);
+        }
+
+        function gotResult(error, results) {
+            if (error) {
+                console.error(error);
+                return;
+            }
+            
+            const label = results[0].label.toLowerCase();
+            const resDiv = document.getElementById('resultado-ia');
+            
+            let objetoEncontrado = null;
+            for (let key in pegadaObjetos) {
+                if (label.includes(key)) {
+                    objetoEncontrado = pegadaObjetos[key];
+                    break;
+                }
+            }
+
+            if (objetoEncontrado) {
+                resDiv.style.display = 'block';
+                resDiv.innerHTML = `Detectado: ${objetoEncontrado.nome}<br>Pegada Hídrica: ${objetoEncontrado.litros} Litros 💧`;
+            } else {
+                resDiv.style.display = 'none';
+            }
+            
+            setTimeout(classifyVideo, 1000);
+        }
+
+        function fecharScanner() {
+            scannerAtivo = false;
+            if (video && video.srcObject) {
+                video.srcObject.getTracks().forEach(track => track.stop());
+            }
+            document.getElementById('ia-scanner').style.display = 'none';
+        }
+
         // --- NOVAS FUNCIONALIDADES JS ---
         let banhoInterval;
         let banhoSegundos = 0;
