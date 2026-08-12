@@ -578,6 +578,7 @@
         audioStream.loop = true;
         let estaTocando = false;
         
+        
         function toggleSomNovo() {
             const btn = document.getElementById('btn-som-novo');
             const icon = btn.querySelector('i');
@@ -587,8 +588,8 @@
                     btn.classList.add('playing');
                     estaTocando = true;
                 }).catch(e => {
-                    console.error("Erro ao tocar áudio. Talvez o link expirou ou o navegador bloqueou:", e);
-                    alert("O navegador bloqueou o áudio ou o link falhou. Tente clicar novamente!");
+                    console.error("Erro áudio:", e);
+                    // Removido o alert para não atrapalhar o usuário
                 });
             } else {
                 audioStream.pause();
@@ -596,6 +597,8 @@
                 btn.classList.remove('playing');
                 estaTocando = false;
             }
+        }
+
         }
 
 
