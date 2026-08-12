@@ -147,7 +147,7 @@
         @media (max-width: 768px) { #overlay-equipes-card .equipes-grid { grid-template-columns: repeat(2, 1fr); gap: 1.5rem; } }
     
         /* --- NOVAS ADIÇÕES (MISSÃO, FATOS E SOM) --- */
-        .home-features-container { max-width: 1200px; margin: 20px auto; padding: 0 40px; display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem; }
+        .home-features-container { max-width: 1200px; margin: 20px auto; padding: 0 40px; display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem; position: relative; z-index: 2; }
         .feature-card-new { background: rgba(0, 51, 102, 0.7); border: 2px solid var(--secondary); border-radius: 15px; padding: 1.5rem; transition: var(--transition); }
         .feature-card-new:hover { transform: translateY(-5px); box-shadow: 0 5px 15px rgba(0, 191, 255, 0.3); }
         .feature-card-new h3 { color: var(--secondary); margin-bottom: 0.8rem; font-size: 1.2rem; display: flex; align-items: center; gap: 10px; }
@@ -550,57 +550,6 @@
         let equipaAtual = null; let paginaAtual = 0; let currentQ = 0, quizScore = 0; let tipoTrabalhoAtual = 'gibi';
 
         function getIdiomaAtual() { return localStorage.getItem('idiomaSite') || 'pt'; }
-
-        
-        // --- LÓGICA DAS NOVAS FUNCIONALIDADES ---
-        const listaMissoes = [
-            "Feche a torneira ao escovar os dentes hoje!",
-            "Tome um banho de no máximo 5 minutos.",
-            "Use a vassoura para limpar a calçada, nunca a mangueira.",
-            "Junte o máximo de louça antes de abrir a torneira.",
-            "Regue suas plantas apenas no início da manhã ou fim da tarde."
-        ];
-        const listaFatos = [
-            "Apenas 1% da água da Terra é doce e acessível para consumo humano.",
-            "Uma calça jeans consome cerca de 10.000 litros de água para ser produzida.",
-            "O corpo humano de um adulto é composto por cerca de 60% a 70% de água.",
-            "Uma torneira pingando pode desperdiçar mais de 40 litros de água por dia.",
-            "A água que bebemos hoje é a mesma que circulava no planeta na época dos dinossauros."
-        ];
-        function atualizarNovidades() {
-            const d = new Date();
-            const m = listaMissoes[d.getDate() % listaMissoes.length];
-            const f = listaFatos[Math.floor(Math.random() * listaFatos.length)];
-            if(document.getElementById('missao-texto-novo')) document.getElementById('missao-texto-novo').innerText = m;
-            if(document.getElementById('fato-texto-novo')) document.getElementById('fato-texto-novo').innerText = f;
-        }
-        let audioStream = new Audio('https://www.soundjay.com/nature/river-1.mp3');
-        audioStream.loop = true;
-        let estaTocando = false;
-        
-        
-        function toggleSomNovo() {
-            const btn = document.getElementById('btn-som-novo');
-            const icon = btn.querySelector('i');
-            if (!estaTocando) {
-                audioStream.play().then(() => {
-                    icon.className = 'fas fa-volume-up';
-                    btn.classList.add('playing');
-                    estaTocando = true;
-                }).catch(e => {
-                    console.error("Erro áudio:", e);
-                    // Removido o alert para não atrapalhar o usuário
-                });
-            } else {
-                audioStream.pause();
-                icon.className = 'fas fa-volume-mute';
-                btn.classList.remove('playing');
-                estaTocando = false;
-            }
-        }
-
-        }
-
 
         function carregarItensAgua() {
             const container = document.getElementById('lista-itens-agua');
@@ -1078,6 +1027,50 @@
             aplicarTraducao();
             carregarItensAgua(); atualizarNovidades();
         };
+    
+        // --- NOVAS FUNÇÕES ---
+        const listaMissoes = [
+            "Feche a torneira ao escovar os dentes hoje!",
+            "Tome um banho de no máximo 5 minutos.",
+            "Use a vassoura para limpar a calçada, nunca a mangueira.",
+            "Junte o máximo de louça antes de abrir a torneira.",
+            "Regue suas plantas apenas no início da manhã ou fim da tarde."
+        ];
+        const listaFatos = [
+            "Apenas 1% da água da Terra é doce e acessível para consumo humano.",
+            "Uma calça jeans consome cerca de 10.000 litros de água para ser produzida.",
+            "O corpo humano de um adulto é composto por cerca de 60% a 70% de água.",
+            "Uma torneira pingando pode desperdiçar mais de 40 litros de água por dia.",
+            "A água que bebemos hoje é a mesma que circulava no planeta na época dos dinossauros."
+        ];
+        function atualizarNovidades() {
+            const d = new Date();
+            const m = listaMissoes[d.getDate() % listaMissoes.length];
+            const f = listaFatos[Math.floor(Math.random() * listaFatos.length)];
+            const mEl = document.getElementById('missao-texto-novo');
+            const fEl = document.getElementById('fato-texto-novo');
+            if(mEl) mEl.innerText = m;
+            if(fEl) fEl.innerText = f;
+        }
+        let audioStream = new Audio('https://www.soundjay.com/nature/river-1.mp3');
+        audioStream.loop = true;
+        let estaTocando = false;
+        function toggleSomNovo() {
+            const btn = document.getElementById('btn-som-novo');
+            const icon = btn.querySelector('i');
+            if (!estaTocando) {
+                audioStream.play().then(() => {
+                    icon.className = 'fas fa-volume-up';
+                    btn.classList.add('playing');
+                    estaTocando = true;
+                }).catch(e => console.log("Áudio bloqueado:", e));
+            } else {
+                audioStream.pause();
+                icon.className = 'fas fa-volume-mute';
+                btn.classList.remove('playing');
+                estaTocando = false;
+            }
+        }
     </script>
 </body>
 </html>
