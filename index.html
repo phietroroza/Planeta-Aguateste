@@ -236,17 +236,32 @@
         <section id="curiosidades" class="active">
             <h2 class="section-title" data-key="fatos_titulo">Fatos e Curiosidades</h2>
             
+            
             <div style="text-align:center; margin-bottom: 40px;">
-                <button class="scan-btn-main" onclick="iniciarScanner()">🚀 ABRIR SCANNER IA (BETA)</button>
+                <div style="display:flex; justify-content:center; gap:10px; flex-wrap:wrap;">
+                    <button class="scan-btn-main" onclick="abrirCamera()">📸 ABRIR CÂMERA</button>
+                    <button class="scan-btn-main" style="background:#4CAF50; color:white;" onclick="document.getElementById('file-upload').click()">📁 CARREGAR FOTO</button>
+                    <input type="file" id="file-upload" style="display:none;" accept="image/*" onchange="analisarArquivo(this)">
+                </div>
+
                 <div id="ia-scanner" class="scanner-container">
-                    <p style="margin-bottom:10px; color:var(--secondary);">Aponte a câmera para um objeto (ex: Maçã, Banana, Camiseta, Celular)</p>
-                    <video id="webcam" autoplay playsinline width="400" height="300" style="display:none;"></video>
-                    <canvas id="video-canvas"></canvas>
-                    <div id="status-ia" style="margin-bottom:10px; font-style:italic;">Carregando Inteligência Artificial...</div>
-                    <div id="resultado-ia" class="scanner-result"></div>
-                    <button class="btn" onclick="fecharScanner()" style="margin-top:15px; border-color:#fff; color:#fff;">Fechar Scanner</button>
+                    <div id="camera-view">
+                        <video id="webcam" autoplay playsinline width="400" height="300" style="width:100%; max-width:400px; border-radius:10px;"></video>
+                        <br>
+                        <button class="btn" id="btn-capturar" onclick="capturarEAnalisar()" style="margin-top:10px; background:#ffcc00; color:#333; border:none;">📸 TIRAR FOTO E ANALISAR</button>
+                    </div>
+                    
+                    <div id="result-view" style="display:none; width:100%; max-width:400px;">
+                        <canvas id="video-canvas" style="width:100%; border-radius:10px; border:3px solid #fff;"></canvas>
+                        <div id="status-ia" style="margin:10px 0; font-style:italic; color:var(--secondary);">IA Analisando...</div>
+                        <div id="resultado-ia" class="scanner-result" style="display:block; margin-bottom:15px;"></div>
+                        <button class="btn" onclick="novaFoto()" style="background:var(--secondary); color:var(--primary-dark); border:none;">TIRAR OUTRA FOTO</button>
+                    </div>
+
+                    <button class="btn" onclick="fecharScanner()" style="margin-top:20px; border-color:#fff; color:#fff;">FECHAR</button>
                 </div>
             </div>
+
 <div class="grid-container">
                 <div class="info-card" onclick="abrirCuriosidade('ciclo')"><h3>🌊 <span data-key="ciclo_tit">O Ciclo da Água</span></h3><p data-key="ciclo_resumo">A água percorre um ciclo contínuo na natureza...</p><span class="click-hint" data-key="clique">Clique para saber mais →</span></div>
                 <div class="info-card" onclick="abrirCuriosidade('consumo')"><h3>🏭 <span data-key="consumo_tit">Consumo Industrial</span></h3><p data-key="consumo_resumo">A indústria consome aproximadamente 19% da água doce...</p><span class="click-hint" data-key="clique">Clique para saber mais →</span></div>
@@ -270,17 +285,32 @@
         <section id="trabalhos">
             <h2 class="section-title" data-key="trabalhos_titulo">Nossos Trabalhos</h2>
             
+            
             <div style="text-align:center; margin-bottom: 40px;">
-                <button class="scan-btn-main" onclick="iniciarScanner()">🚀 ABRIR SCANNER IA (BETA)</button>
+                <div style="display:flex; justify-content:center; gap:10px; flex-wrap:wrap;">
+                    <button class="scan-btn-main" onclick="abrirCamera()">📸 ABRIR CÂMERA</button>
+                    <button class="scan-btn-main" style="background:#4CAF50; color:white;" onclick="document.getElementById('file-upload').click()">📁 CARREGAR FOTO</button>
+                    <input type="file" id="file-upload" style="display:none;" accept="image/*" onchange="analisarArquivo(this)">
+                </div>
+
                 <div id="ia-scanner" class="scanner-container">
-                    <p style="margin-bottom:10px; color:var(--secondary);">Aponte a câmera para um objeto (ex: Maçã, Banana, Camiseta, Celular)</p>
-                    <video id="webcam" autoplay playsinline width="400" height="300" style="display:none;"></video>
-                    <canvas id="video-canvas"></canvas>
-                    <div id="status-ia" style="margin-bottom:10px; font-style:italic;">Carregando Inteligência Artificial...</div>
-                    <div id="resultado-ia" class="scanner-result"></div>
-                    <button class="btn" onclick="fecharScanner()" style="margin-top:15px; border-color:#fff; color:#fff;">Fechar Scanner</button>
+                    <div id="camera-view">
+                        <video id="webcam" autoplay playsinline width="400" height="300" style="width:100%; max-width:400px; border-radius:10px;"></video>
+                        <br>
+                        <button class="btn" id="btn-capturar" onclick="capturarEAnalisar()" style="margin-top:10px; background:#ffcc00; color:#333; border:none;">📸 TIRAR FOTO E ANALISAR</button>
+                    </div>
+                    
+                    <div id="result-view" style="display:none; width:100%; max-width:400px;">
+                        <canvas id="video-canvas" style="width:100%; border-radius:10px; border:3px solid #fff;"></canvas>
+                        <div id="status-ia" style="margin:10px 0; font-style:italic; color:var(--secondary);">IA Analisando...</div>
+                        <div id="resultado-ia" class="scanner-result" style="display:block; margin-bottom:15px;"></div>
+                        <button class="btn" onclick="novaFoto()" style="background:var(--secondary); color:var(--primary-dark); border:none;">TIRAR OUTRA FOTO</button>
+                    </div>
+
+                    <button class="btn" onclick="fecharScanner()" style="margin-top:20px; border-color:#fff; color:#fff;">FECHAR</button>
                 </div>
             </div>
+
 <div class="grid-container">
                 <div class="info-card" onclick="mostrarListaEquipes('gibi')"><i class="fas fa-book"></i><h3 data-key="gibi_tit">Gibi</h3><p data-key="gibi_desc">Veja as 15 equipes e seus gibis sobre a água</p><span class="click-hint" data-key="clique">Clique para ver →</span></div>
                 <div class="info-card" onclick="mostrarListaEquipes('stopmotion')"><i class="fas fa-video"></i><h3 data-key="stop_tit">Stop Motion</h3><p data-key="stop_desc">Assista aos vídeos das 15 equipes</p><span class="click-hint" data-key="clique">Clique para ver →</span></div>
@@ -365,17 +395,32 @@
         <section id="comparativo">
             <h2 class="section-title">Comparativo Visual</h2>
             
+            
             <div style="text-align:center; margin-bottom: 40px;">
-                <button class="scan-btn-main" onclick="iniciarScanner()">🚀 ABRIR SCANNER IA (BETA)</button>
+                <div style="display:flex; justify-content:center; gap:10px; flex-wrap:wrap;">
+                    <button class="scan-btn-main" onclick="abrirCamera()">📸 ABRIR CÂMERA</button>
+                    <button class="scan-btn-main" style="background:#4CAF50; color:white;" onclick="document.getElementById('file-upload').click()">📁 CARREGAR FOTO</button>
+                    <input type="file" id="file-upload" style="display:none;" accept="image/*" onchange="analisarArquivo(this)">
+                </div>
+
                 <div id="ia-scanner" class="scanner-container">
-                    <p style="margin-bottom:10px; color:var(--secondary);">Aponte a câmera para um objeto (ex: Maçã, Banana, Camiseta, Celular)</p>
-                    <video id="webcam" autoplay playsinline width="400" height="300" style="display:none;"></video>
-                    <canvas id="video-canvas"></canvas>
-                    <div id="status-ia" style="margin-bottom:10px; font-style:italic;">Carregando Inteligência Artificial...</div>
-                    <div id="resultado-ia" class="scanner-result"></div>
-                    <button class="btn" onclick="fecharScanner()" style="margin-top:15px; border-color:#fff; color:#fff;">Fechar Scanner</button>
+                    <div id="camera-view">
+                        <video id="webcam" autoplay playsinline width="400" height="300" style="width:100%; max-width:400px; border-radius:10px;"></video>
+                        <br>
+                        <button class="btn" id="btn-capturar" onclick="capturarEAnalisar()" style="margin-top:10px; background:#ffcc00; color:#333; border:none;">📸 TIRAR FOTO E ANALISAR</button>
+                    </div>
+                    
+                    <div id="result-view" style="display:none; width:100%; max-width:400px;">
+                        <canvas id="video-canvas" style="width:100%; border-radius:10px; border:3px solid #fff;"></canvas>
+                        <div id="status-ia" style="margin:10px 0; font-style:italic; color:var(--secondary);">IA Analisando...</div>
+                        <div id="resultado-ia" class="scanner-result" style="display:block; margin-bottom:15px;"></div>
+                        <button class="btn" onclick="novaFoto()" style="background:var(--secondary); color:var(--primary-dark); border:none;">TIRAR OUTRA FOTO</button>
+                    </div>
+
+                    <button class="btn" onclick="fecharScanner()" style="margin-top:20px; border-color:#fff; color:#fff;">FECHAR</button>
                 </div>
             </div>
+
 <div class="grid-container">
                 <div class="info-card">
                     <h3>🍔 Hambúrguer</h3>
@@ -1037,105 +1082,137 @@
         function showQuestion() { const idioma = getIdiomaAtual(); const q = quizData[idioma][currentQ]; const curEl = document.getElementById('q-current'); const textEl = document.getElementById('q-text'); const optionsDiv = document.getElementById('q-options'); if(!q) return; if(curEl) curEl.innerText = currentQ + 1; if(textEl) textEl.innerText = q.q; if(optionsDiv) { optionsDiv.innerHTML = ''; q.a.forEach((opt, i) => { const div = document.createElement('div'); div.className = 'quiz-option'; div.innerText = opt; div.onclick = () => checkAnswer(i); optionsDiv.appendChild(div); }); } }
         
         
-        // --- LÓGICA DO SCANNER IA (ML5.JS) ---
+        
+        // --- LÓGICA DO SCANNER IA (FOTO E ARQUIVO) ---
         let classifier;
         let video;
         let canvas;
         let ctx;
-        let scannerAtivo = false;
+        let streamAtivo = null;
 
         const pegadaObjetos = {
             'apple': { nome: 'Maçã', litros: 70 },
             'banana': { nome: 'Banana', litros: 160 },
             't-shirt': { nome: 'Camiseta', litros: 2700 },
-            'jersey': { nome: 'Camiseta/Roupa', litros: 2700 },
+            'jersey': { nome: 'Roupa/Tecido', litros: 2500 },
             'jean': { nome: 'Calça Jeans', litros: 10000 },
             'coffee': { nome: 'Café', litros: 140 },
-            'cup': { nome: 'Xícara/Copo', litros: 140 },
+            'cup': { nome: 'Copo/Xícara', litros: 140 },
             'orange': { nome: 'Laranja', litros: 50 },
             'bread': { nome: 'Pão', litros: 40 },
             'cellphone': { nome: 'Celular', litros: 12000 },
             'laptop': { nome: 'Notebook', litros: 20000 },
             'paper': { nome: 'Papel', litros: 10 },
-            'bottle': { nome: 'Garrafa de Água', litros: 5 }
+            'bottle': { nome: 'Garrafa', litros: 5 },
+            'shoe': { nome: 'Sapato', litros: 8000 },
+            'hamburger': { nome: 'Hambúrguer', litros: 2400 },
+            'meat': { nome: 'Carne', litros: 15000 }
         };
 
-        function iniciarScanner() {
-            document.getElementById('ia-scanner').style.display = 'flex';
+        async function carregarModelo() {
             if (!classifier) {
-                classifier = ml5.imageClassifier('MobileNet', modelReady);
-            } else {
-                startVideo();
+                document.getElementById('status-ia').innerText = 'Carregando IA...';
+                classifier = await ml5.imageClassifier('MobileNet');
             }
         }
 
-        function modelReady() {
-            document.getElementById('status-ia').innerText = 'IA Pronta! Analisando...';
-            startVideo();
+        async function abrirCamera() {
+            document.getElementById('ia-scanner').style.display = 'flex';
+            document.getElementById('camera-view').style.display = 'block';
+            document.getElementById('result-view').style.display = 'none';
+            
+            video = document.getElementById('webcam');
+            try {
+                streamAtivo = await navigator.mediaDevices.getUserMedia({ video: { facingMode: 'environment' } });
+                video.srcObject = streamAtivo;
+                await carregarModelo();
+            } catch (err) {
+                alert("Erro na câmera: " + err);
+            }
         }
 
-        function startVideo() {
-            video = document.getElementById('webcam');
+        async function capturarEAnalisar() {
             canvas = document.getElementById('video-canvas');
             ctx = canvas.getContext('2d');
             
-            navigator.mediaDevices.getUserMedia({ video: { facingMode: 'environment' } })
-                .then(stream => {
-                    video.srcObject = stream;
-                    scannerAtivo = true;
-                    requestAnimationFrame(drawVideo);
-                    classifyVideo();
-                })
-                .catch(err => {
-                    alert("Erro ao acessar a câmera: " + err);
-                });
-        }
-
-        function drawVideo() {
-            if (!scannerAtivo) return;
+            // Ajusta canvas ao tamanho do vídeo
             canvas.width = video.videoWidth;
             canvas.height = video.videoHeight;
+            
+            // Desenha o frame atual
             ctx.drawImage(video, 0, 0, canvas.width, canvas.height);
-            requestAnimationFrame(drawVideo);
-        }
-
-        function classifyVideo() {
-            if (!scannerAtivo) return;
-            classifier.classify(video, gotResult);
-        }
-
-        function gotResult(error, results) {
-            if (error) {
-                console.error(error);
-                return;
+            
+            // Para a câmera
+            if (streamAtivo) {
+                streamAtivo.getTracks().forEach(track => track.stop());
             }
             
-            const label = results[0].label.toLowerCase();
-            const resDiv = document.getElementById('resultado-ia');
+            document.getElementById('camera-view').style.display = 'none';
+            document.getElementById('result-view').style.display = 'block';
             
-            let objetoEncontrado = null;
-            for (let key in pegadaObjetos) {
-                if (label.includes(key)) {
-                    objetoEncontrado = pegadaObjetos[key];
-                    break;
+            processarImagem(canvas);
+        }
+
+        async function analisarArquivo(input) {
+            if (input.files && input.files[0]) {
+                document.getElementById('ia-scanner').style.display = 'flex';
+                document.getElementById('camera-view').style.display = 'none';
+                document.getElementById('result-view').style.display = 'block';
+                
+                canvas = document.getElementById('video-canvas');
+                ctx = canvas.getContext('2d');
+                
+                const img = new Image();
+                img.onload = async () => {
+                    canvas.width = img.width;
+                    canvas.height = img.height;
+                    ctx.drawImage(img, 0, 0);
+                    await carregarModelo();
+                    processarImagem(canvas);
+                };
+                img.src = URL.createObjectURL(input.files[0]);
+            }
+        }
+
+        function processarImagem(elemento) {
+            document.getElementById('status-ia').innerText = 'Analisando imagem...';
+            document.getElementById('resultado-ia').style.display = 'none';
+            
+            classifier.classify(elemento, (error, results) => {
+                if (error) {
+                    console.error(error);
+                    return;
                 }
-            }
+                
+                const label = results[0].label.toLowerCase();
+                const resDiv = document.getElementById('resultado-ia');
+                
+                let objetoEncontrado = null;
+                for (let key in pegadaObjetos) {
+                    if (label.includes(key)) {
+                        objetoEncontrado = pegadaObjetos[key];
+                        break;
+                    }
+                }
 
-            if (objetoEncontrado) {
+                document.getElementById('status-ia').innerText = 'Análise Concluída!';
                 resDiv.style.display = 'block';
-                resDiv.innerHTML = `Detectado: ${objetoEncontrado.nome}<br>Pegada Hídrica: ${objetoEncontrado.litros} Litros 💧`;
-            } else {
-                resDiv.style.display = 'none';
-            }
-            
-            setTimeout(classifyVideo, 1000);
+                
+                if (objetoEncontrado) {
+                    resDiv.innerHTML = `Detectado: <strong>${objetoEncontrado.nome}</strong><br>Pegada Hídrica: <span style="font-size:1.5rem;">${objetoEncontrado.litros} Litros 💧</span>`;
+                } else {
+                    resDiv.innerHTML = `IA detectou: <i>${results[0].label}</i><br>Desculpe, não tenho a pegada hídrica exata deste item.`;
+                }
+            });
+        }
+
+        function novaFoto() {
+            if (streamAtivo) streamAtivo.getTracks().forEach(track => track.stop());
+            abrirCamera();
         }
 
         function fecharScanner() {
-            scannerAtivo = false;
-            if (video && video.srcObject) {
-                video.srcObject.getTracks().forEach(track => track.stop());
-            }
+            if (streamAtivo) streamAtivo.getTracks().forEach(track => track.stop());
             document.getElementById('ia-scanner').style.display = 'none';
         }
 
