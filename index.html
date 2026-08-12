@@ -146,18 +146,17 @@
         #overlay-equipes-card.tema-floresta .equipe-card:hover { background: rgba(34, 139, 34, 0.8); border-color: #7CFC00; transform: translateY(-8px) scale(1.03); }
         @media (max-width: 768px) { #overlay-equipes-card .equipes-grid { grid-template-columns: repeat(2, 1fr); gap: 1.5rem; } }
     
-        /* --- NOVAS ADIÇÕES (MISSÃO, FATOS E SOM) --- */
-        .home-features-container { max-width: 1200px; margin: 20px auto; padding: 0 40px; display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem; position: relative; z-index: 2; }
-        .feature-card-new { background: rgba(0, 51, 102, 0.7); border: 2px solid var(--secondary); border-radius: 15px; padding: 1.5rem; transition: var(--transition); }
-        .feature-card-new:hover { transform: translateY(-5px); box-shadow: 0 5px 15px rgba(0, 191, 255, 0.3); }
-        .feature-card-new h3 { color: var(--secondary); margin-bottom: 0.8rem; font-size: 1.2rem; display: flex; align-items: center; gap: 10px; }
-        .mission-text-new { font-size: 1rem; font-weight: 600; color: #fff; }
-        .fact-text-new { font-style: italic; font-size: 0.95rem; color: #ccc; }
-        .sound-btn-new { position: fixed; bottom: 25px; right: 90px; width: 55px; height: 55px; border-radius: 50%; background: var(--secondary); color: var(--primary-dark); display: flex; align-items: center; justify-content: center; font-size: 1.5rem; cursor: pointer; z-index: 1500; box-shadow: 0 5px 20px rgba(0,191,255,0.4); transition: var(--transition); border: none; }
-        .sound-btn-new.playing { animation: pulse-blue-new 2s infinite; }
-        @keyframes pulse-blue-new { 0% { box-shadow: 0 0 0 0 rgba(0, 191, 255, 0.7); } 70% { box-shadow: 0 0 0 15px rgba(0, 191, 255, 0); } 100% { box-shadow: 0 0 0 0 rgba(0, 191, 255, 0); } }
-        @media (max-width: 768px) { .home-features-container { padding: 0 20px; } .sound-btn-new { right: 25px; bottom: 90px; } }
-    </style>
+    /* ADIÇÕES MANUS */
+    .feature-container-manus { max-width: 1200px; margin: 20px auto; padding: 0 40px; display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem; position: relative; z-index: 10; }
+    .card-manus { background: rgba(0, 51, 102, 0.8); border: 2px solid var(--secondary); border-radius: 15px; padding: 1.5rem; transition: 0.3s; }
+    .card-manus:hover { transform: translateY(-5px); box-shadow: 0 5px 15px rgba(0, 191, 255, 0.4); }
+    .card-manus h3 { color: var(--secondary); margin-bottom: 10px; font-size: 1.2rem; }
+    .card-manus p { font-size: 1rem; color: #fff; line-height: 1.4; }
+    .btn-som-manus { position: fixed; bottom: 25px; right: 90px; width: 55px; height: 55px; border-radius: 50%; background: var(--secondary); color: var(--primary-dark); display: flex; align-items: center; justify-content: center; font-size: 1.5rem; cursor: pointer; z-index: 2000; border: none; box-shadow: 0 5px 15px rgba(0,0,0,0.3); }
+    .btn-som-manus.ativo { animation: pulse-manus 2s infinite; }
+    @keyframes pulse-manus { 0% { box-shadow: 0 0 0 0 rgba(0, 191, 255, 0.7); } 70% { box-shadow: 0 0 0 15px rgba(0, 191, 255, 0); } 100% { box-shadow: 0 0 0 0 rgba(0, 191, 255, 0); } }
+    @media (max-width: 768px) { .feature-container-manus { padding: 0 20px; } .btn-som-manus { right: 20px; bottom: 90px; } }
+</style>
 </head>
 <body>
   <aside class="sidebar">
@@ -174,8 +173,7 @@
             <a href="#" class="nav-link" data-section="quiz"><i class="fas fa-question-circle"></i> <span data-key="quiz">Quiz</span></a>
         </nav>
     </aside>
-        <button id="btn-som-novo" class="sound-btn-new" onclick="toggleSomNovo()"><i class="fas fa-volume-mute"></i></button>
-    <div class="config-btn" onclick="toggleConfig()"><i class="fas fa-ellipsis-vertical"></i></div>
+    <button id="som-btn" class="btn-som-manus" onclick="controleSom()"><i class="fas fa-volume-mute"></i></button><div class="config-btn" onclick="toggleConfig()"><i class="fas fa-ellipsis-vertical"></i></div>
     <div id="config-menu" class="config-menu">
         <h3><i class="fas fa-gear"></i> Configurações</h3>
         <div class="config-item">
@@ -195,17 +193,16 @@
             <div class="logo-circulo"></div>
             <p data-key="titulo">O PROJETO E A ÁGUA</p>
         </header>
-
-            <div class="home-features-container">
-                <div class="feature-card-new">
-                    <h3><i class="fas fa-bullseye"></i> Missão do Dia</h3>
-                    <p id="missao-texto-novo" class="mission-text-new">Carregando missão...</p>
-                </div>
-                <div class="feature-card-new">
-                    <h3><i class="fas fa-lightbulb"></i> Você Sabia?</h3>
-                    <p id="fato-texto-novo" class="fact-text-new">Carregando curiosidade...</p>
-                </div>
+        <div class="feature-container-manus">
+            <div class="card-manus">
+                <h3><i class="fas fa-bullseye"></i> Missão do Dia</h3>
+                <p id="txt-missao">Economize água hoje!</p>
             </div>
+            <div class="card-manus">
+                <h3><i class="fas fa-lightbulb"></i> Você Sabia?</h3>
+                <p id="txt-fato">A água é vida.</p>
+            </div>
+        </div>
 
 
         <section id="curiosidades" class="active">
@@ -831,7 +828,7 @@
                     target.scrollIntoView({ behavior: 'smooth' }); 
                 }
             }
-            if(sectionId === 'agua-virtual') carregarItensAgua(); atualizarNovidades();
+            if(sectionId === 'agua-virtual') carregarItensAgua();
         }); });
 
         const detalhesCuriosidades = {
@@ -1025,52 +1022,43 @@
             const idiomaSelect = document.getElementById('idioma-select');
             if(idiomaSelect) idiomaSelect.value = idiomaSalvo;
             aplicarTraducao();
-            carregarItensAgua(); atualizarNovidades();
+            carregarItensAgua();
         };
-    
-        // --- NOVAS FUNÇÕES ---
-        const listaMissoes = [
-            "Feche a torneira ao escovar os dentes hoje!",
-            "Tome um banho de no máximo 5 minutos.",
-            "Use a vassoura para limpar a calçada, nunca a mangueira.",
-            "Junte o máximo de louça antes de abrir a torneira.",
-            "Regue suas plantas apenas no início da manhã ou fim da tarde."
-        ];
-        const listaFatos = [
-            "Apenas 1% da água da Terra é doce e acessível para consumo humano.",
-            "Uma calça jeans consome cerca de 10.000 litros de água para ser produzida.",
-            "O corpo humano de um adulto é composto por cerca de 60% a 70% de água.",
-            "Uma torneira pingando pode desperdiçar mais de 40 litros de água por dia.",
-            "A água que bebemos hoje é a mesma que circulava no planeta na época dos dinossauros."
-        ];
-        function atualizarNovidades() {
+    </script>
+
+    <script>
+        const missoesD2 = ["Feche a torneira ao escovar os dentes!", "Tome banho de 5 minutos hoje.", "Não use mangueira para limpar a calçada.", "Junte a louça antes de lavar.", "Regue plantas de manhã cedo."];
+        const fatosD2 = ["Apenas 1% da água da Terra é potável.", "Uma calça jeans gasta 10 mil litros de água.", "O corpo humano é 70% água.", "Uma torneira pingando gasta 40L por dia.", "A água de hoje é a mesma dos dinossauros."];
+        
+        function initManus() {
             const d = new Date();
-            const m = listaMissoes[d.getDate() % listaMissoes.length];
-            const f = listaFatos[Math.floor(Math.random() * listaFatos.length)];
-            const mEl = document.getElementById('missao-texto-novo');
-            const fEl = document.getElementById('fato-texto-novo');
-            if(mEl) mEl.innerText = m;
-            if(fEl) fEl.innerText = f;
+            document.getElementById('txt-missao').innerText = missoesD2[d.getDate() % missoesD2.length];
+            document.getElementById('txt-fato').innerText = fatosD2[Math.floor(Math.random() * fatosD2.length)];
         }
-        let audioStream = new Audio('https://www.soundjay.com/nature/river-1.mp3');
-        audioStream.loop = true;
-        let estaTocando = false;
-        function toggleSomNovo() {
-            const btn = document.getElementById('btn-som-novo');
+
+        let somAgua = new Audio('https://codeskulptor-demos.commondatastorage.googleapis.com/descent/background%20music.mp3');
+        somAgua.loop = true;
+        let tocandoAgora = false;
+
+        function controleSom() {
+            const btn = document.getElementById('som-btn');
             const icon = btn.querySelector('i');
-            if (!estaTocando) {
-                audioStream.play().then(() => {
+            if(!tocandoAgora) {
+                somAgua.play().then(() => {
                     icon.className = 'fas fa-volume-up';
-                    btn.classList.add('playing');
-                    estaTocando = true;
-                }).catch(e => console.log("Áudio bloqueado:", e));
+                    btn.classList.add('ativo');
+                    tocandoAgora = true;
+                }).catch(err => console.log("Erro som:", err));
             } else {
-                audioStream.pause();
+                somAgua.pause();
                 icon.className = 'fas fa-volume-mute';
-                btn.classList.remove('playing');
-                estaTocando = false;
+                btn.classList.remove('ativo');
+                tocandoAgora = false;
             }
         }
+        
+        // Rodar ao carregar
+        window.addEventListener('load', initManus);
     </script>
 </body>
 </html>
