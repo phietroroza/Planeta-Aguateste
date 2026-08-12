@@ -145,6 +145,18 @@
         #overlay-equipes-card.tema-floresta .equipe-card { background: rgba(30, 58, 30, 0.8); border: 1px solid rgba(50,205,50,0.5); backdrop-filter: blur(3px); }
         #overlay-equipes-card.tema-floresta .equipe-card:hover { background: rgba(34, 139, 34, 0.8); border-color: #7CFC00; transform: translateY(-8px) scale(1.03); }
         @media (max-width: 768px) { #overlay-equipes-card .equipes-grid { grid-template-columns: repeat(2, 1fr); gap: 1.5rem; } }
+    
+        /* --- NOVAS ADIÇÕES (MISSÃO, FATOS E SOM) --- */
+        .home-features-container { max-width: 1200px; margin: 20px auto; padding: 0 40px; display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem; }
+        .feature-card-new { background: rgba(0, 51, 102, 0.7); border: 2px solid var(--secondary); border-radius: 15px; padding: 1.5rem; transition: var(--transition); }
+        .feature-card-new:hover { transform: translateY(-5px); box-shadow: 0 5px 15px rgba(0, 191, 255, 0.3); }
+        .feature-card-new h3 { color: var(--secondary); margin-bottom: 0.8rem; font-size: 1.2rem; display: flex; align-items: center; gap: 10px; }
+        .mission-text-new { font-size: 1rem; font-weight: 600; color: #fff; }
+        .fact-text-new { font-style: italic; font-size: 0.95rem; color: #ccc; }
+        .sound-btn-new { position: fixed; bottom: 25px; right: 90px; width: 55px; height: 55px; border-radius: 50%; background: var(--secondary); color: var(--primary-dark); display: flex; align-items: center; justify-content: center; font-size: 1.5rem; cursor: pointer; z-index: 1500; box-shadow: 0 5px 20px rgba(0,191,255,0.4); transition: var(--transition); border: none; }
+        .sound-btn-new.playing { animation: pulse-blue-new 2s infinite; }
+        @keyframes pulse-blue-new { 0% { box-shadow: 0 0 0 0 rgba(0, 191, 255, 0.7); } 70% { box-shadow: 0 0 0 15px rgba(0, 191, 255, 0); } 100% { box-shadow: 0 0 0 0 rgba(0, 191, 255, 0); } }
+        @media (max-width: 768px) { .home-features-container { padding: 0 20px; } .sound-btn-new { right: 25px; bottom: 90px; } }
     </style>
 </head>
 <body>
@@ -162,6 +174,7 @@
             <a href="#" class="nav-link" data-section="quiz"><i class="fas fa-question-circle"></i> <span data-key="quiz">Quiz</span></a>
         </nav>
     </aside>
+        <button id="btn-som-novo" class="sound-btn-new" onclick="toggleSomNovo()"><i class="fas fa-volume-mute"></i></button>
     <div class="config-btn" onclick="toggleConfig()"><i class="fas fa-ellipsis-vertical"></i></div>
     <div id="config-menu" class="config-menu">
         <h3><i class="fas fa-gear"></i> Configurações</h3>
@@ -182,6 +195,18 @@
             <div class="logo-circulo"></div>
             <p data-key="titulo">O PROJETO E A ÁGUA</p>
         </header>
+
+            <div class="home-features-container">
+                <div class="feature-card-new">
+                    <h3><i class="fas fa-bullseye"></i> Missão do Dia</h3>
+                    <p id="missao-texto-novo" class="mission-text-new">Carregando missão...</p>
+                </div>
+                <div class="feature-card-new">
+                    <h3><i class="fas fa-lightbulb"></i> Você Sabia?</h3>
+                    <p id="fato-texto-novo" class="fact-text-new">Carregando curiosidade...</p>
+                </div>
+            </div>
+
 
         <section id="curiosidades" class="active">
             <h2 class="section-title" data-key="fatos_titulo">Fatos e Curiosidades</h2>
@@ -335,7 +360,7 @@
                     { id: 11, nome: "Equipe 11", participantes: ["Hallana Oliveira ", "Luana Marcondes ", "Davi Peres"], totalPaginas: 4 },
                     { id: 12, nome: "Equipe 12", participantes: ["Maria Luiza Lara", "Larissa Lepeke", "Rafael", "Lyandra"], totalPaginas: 4 },
                     { id: 13, nome: "Equipe 13", participantes: ["Anihelly Faria Pinheiro"], totalPaginas: 1 },
-                    { id: 14, nome: "Equipe 14", participantes: ["Aluno 14-1", "Aluno 14-2"], totalPaginas: 2 },
+                    { id: 14, nome: "Equipe 14", participantes: ["lucas"], totalPaginas: 3 },
                     { id: 15, nome: "Equipe 15", participantes: ["Aluno 15-1", "Aluno 15-2"], totalPaginas: 8 }
                 ],
                 en: [
@@ -352,7 +377,7 @@
                     { id: 11, nome: "Team 11", participantes: ["Hallana Oliveira ", "Luana Marcondes ", "Davi Peres"], totalPaginas: 4 },
                     { id: 12, nome: "Team 12", participantes: ["Maria Luiza Lara", "Larissa Lepeke", "Rafael", "Lyandra"], totalPaginas: 4 },
                     { id: 13, nome: "Team 13", participantes: ["Anihelly Faria Pinheiro"], totalPaginas: 1 },
-                    { id: 14, nome: "Team 14", participantes: ["Student 14-1", "Student 14-2"], totalPaginas: 2 },
+                    { id: 14, nome: "Team 14", participantes: ["lucas"], totalPaginas: 3 },
                     { id: 15, nome: "Team 15", participantes: ["Student 15-1", "Student 15-2"], totalPaginas: 8 }
                 ],
                 es: [
@@ -369,7 +394,7 @@
                     { id: 11, nome: "Equipo 11", participantes: ["Hallana Oliveira ", "Luana Marcondes ", "Davi Peres"], totalPaginas: 4 },
                     { id: 12, nome: "Equipo 12", participantes: ["Maria Luiza Lara", "Larissa Lepeke", "Rafael", "Lyandra"], totalPaginas: 4 },
                     { id: 13, nome: "Equipo 13", participantes: ["Anihelly Faria Pinheiro"], totalPaginas: 1 },
-                    { id: 14, nome: "Equipo 14", participantes: ["Alumno 14-1", "Alumno 14-2"], totalPaginas: 2 },
+                    { id: 14, nome: "Equipo 14", participantes: ["lucas"], totalPaginas: 3 },
                     { id: 15, nome: "Equipo 15", participantes: ["Alumno 15-1", "Alumno 15-2"], totalPaginas: 8 }
                 ]
             },
@@ -386,7 +411,7 @@
                     { id: 9, nome: "Equipe 9", participantes: ["Henrique Machado Brisola", "Gabriel Machado" ], totalPaginas: 1 },
                     { id: 10, nome: "Equipe 10", participantes: ["Emilly Cézar Zampier", "Nicolas slominisk Mello ","Lyandra Garcia "], totalPaginas: 1 },
                     { id: 11, nome: "Equipe 11", participantes: ["Anihelly Faria Pinheiro"], totalPaginas: 1 },
-                    { id: 12, nome: "Equipe 12", participantes: ["Aluno 12-1", "Aluno 12-2"], totalPaginas: 1 },
+                    { id: 12, nome: "Equipe 12", participantes: ["lucas"], totalPaginas: 1 },
                     { id: 13, nome: "Equipe 13", participantes: ["Aluno 13-1", "Aluno 13-2"], totalPaginas: 1 },
                     { id: 14, nome: "Equipe 14", participantes: ["Aluno 14-1", "Aluno 14-2"], totalPaginas: 1 },
                     { id: 15, nome: "Equipe 15", participantes: ["Aluno 15-1", "Aluno 15-2"], totalPaginas: 1 }
@@ -403,7 +428,7 @@
                     { id: 9, nome: "Team 9", participantes: ["Henrique Machado Brisola", "Gabriel Machado" ], totalPaginas: 1 },
                     { id: 10, nome: "Team 10", participantes: ["Emilly Cézar Zampier", "Nicolas slominisk Mello ","Lyandra Garcia "], totalPaginas: 1 },
                     { id: 11, nome: "Team 11", participantes: ["Anihelly Faria Pinheiro"], totalPaginas: 1 },
-                    { id: 12, nome: "Team 12", participantes: ["Student 12-1", "Student 12-2"], totalPaginas: 1 },
+                    { id: 12, nome: "Team 12", participantes: ["lucas"], totalPaginas: 1 },
                     { id: 13, nome: "Team 13", participantes: ["Student 13-1", "Student 13-2"], totalPaginas: 1 },
                     { id: 14, nome: "Team 14", participantes: ["Student 14-1", "Student 14-2"], totalPaginas: 1 },
                     { id: 15, nome: "Team 15", participantes: ["Student 15-1", "Student 15-2"], totalPaginas: 1 }
@@ -420,7 +445,7 @@
                     { id: 9, nome: "Equipo 9", participantes: ["Henrique Machado Brisola", "Gabriel Machado" ], totalPaginas: 1 },
                     { id: 10, nome: "Equipo 10", participantes: ["Emilly Cézar Zampier", "Nicolas slominisk Mello ","Lyandra Garcia "], totalPaginas: 1 },
                     { id: 11, nome: "Equipo 11", participantes: ["Anihelly Faria Pinheiro"], totalPaginas: 1 },
-                    { id: 12, nome: "Equipo 12", participantes: ["Alumno 12-1", "Alumno 12-2"], totalPaginas: 1 },
+                    { id: 12, nome: "Equipo 12", participantes:["lucas"], totalPaginas: 1 },
                     { id: 13, nome: "Equipo 13", participantes: ["Alumno 13-1", "Alumno 13-2"], totalPaginas: 1 },
                     { id: 14, nome: "Equipo 14", participantes: ["Alumno 14-1", "Alumno 14-2"], totalPaginas: 1 },
                     { id: 15, nome: "Equipo 15", participantes: ["Alumno 15-1", "Alumno 15-2"], totalPaginas: 1 }
@@ -430,7 +455,7 @@
                 pt: [
                 { id: 1, nome: "Equipe 1", participantes: ["Phietro Emanuel","Henrique Brisola", "Juan", "Eduardo"], totalPaginas: 10 },
                     { id: 2, nome: "Equipe 2", participantes: ["Luana Marcondes", "Hallana Oliveira ", "Davi Peres"], totalPaginas: 13 },
-                    { id: 3, nome: "Equipe 3", participantes: ["Nicole horn da silva ", "Kayk pereira ", "Yasmin de Oliveira ", "Victor Henrique"], totalPaginas: 3 },
+                    { id: 3, nome: "Equipe 3", participantes: ["Nicole horn da silva ", "Kayk pereira ", "Yasmin de Oliveira ", "Victor Henrique"], totalPaginas: 4 },
                     { id: 4, nome: "Equipe 4", participantes: ["Nicole Cristine Castorino", "Ticiane"], totalPaginas: 2 },
                     { id: 5, nome: "Equipe 5", participantes: ["Larah", "João Antonio", "Gabi"], totalPaginas: 2 },
                     { id: 6, nome: "Equipe 6", participantes: ["Júlia Sanchez", "Nicoly Castro"], totalPaginas: 2 },
@@ -440,14 +465,14 @@
                     { id: 10, nome: "Equipe 10", participantes: ["Larissa Buture"], totalPaginas: 2 },
                     { id: 11, nome: "Equipe 11", participantes: ["Vitor Andrioli", "Anderson", "Luiz Fernando"], totalPaginas: 4 },
                     { id: 12, nome: "Equipe 12", participantes: ["Anihelly Faria Pinheiro ", "Emilly Zampieri ", "Nicolas slonoski"], totalPaginas: 1 },
-                    { id: 13, nome: "Equipe 13", participantes: ["Aluno 13-1", "Aluno 13-2"], totalPaginas: 6 },
+                    { id: 13, nome: "Equipe 13", participantes: ["João Victor", "Samuel"], totalPaginas: 8 },
                     { id: 14, nome: "Equipe 14", participantes: ["Aluno 14-1", "Aluno 14-2"], totalPaginas: 2 },
                     { id: 15, nome: "Equipe 15", participantes: ["Aluno 15-1", "Aluno 15-2"], totalPaginas: 8 }
                 ],
                 en: [
                     { id: 1, nome: "Team 1", participantes: ["Phietro Emanuel","Henrique Brisola", "Juan", "Eduardo"], totalPaginas: 10 },
                     { id: 2, nome: "Team 2", participantes: ["Luana Marcondes", "Hallana Oliveira ", "Davi Peres"], totalPaginas: 13 },
-                    { id: 3, nome: "Team 3", participantes: ["Nicole horn da silva ", "Kayk pereira ", "Yasmin de Oliveira ", "Victor Henrique"], totalPaginas: 3 },
+                    { id: 3, nome: "Team 3", participantes: ["Nicole horn da silva ", "Kayk pereira ", "Yasmin de Oliveira ", "Victor Henrique"], totalPaginas: 4 },
                     { id: 4, nome: "Team 4", participantes: ["Nicole Cristine Castorino", "Ticiane"], totalPaginas: 2 },
                     { id: 5, nome: "Team 5", participantes: ["Larah", "João Antonio", "Gabi"], totalPaginas: 2 },
                     { id: 6, nome: "Team 6", participantes: ["Júlia Sanchez", "Nicoly Castro"], totalPaginas: 2 },
@@ -457,14 +482,14 @@
                     { id: 10, nome: "Team 10", participantes: ["Larissa Buture"], totalPaginas: 2 },
                     { id: 11, nome: "Team 11", participantes: ["Vitor Andrioli", "Anderson", "Luiz Fernando"], totalPaginas: 4 },
                     { id: 12, nome: "Team 12", participantes: ["Anihelly Faria Pinheiro ", "Emilly Zampieri ", "Nicolas slonoski"], totalPaginas: 1 },
-                    { id: 13, nome: "Team 13", participantes: ["Student 13-1", "Student 13-2"], totalPaginas: 6 },
+                    { id: 13, nome: "Team 13", participantes: ["João Victor", "Samuel"], totalPaginas: 8 },
                     { id: 14, nome: "Team 14", participantes: ["Student 14-1", "Student 14-2"], totalPaginas: 2 },
                     { id: 15, nome: "Team 15", participantes: ["Student 15-1", "Student 15-2"], totalPaginas: 8 }
                 ],
                 es: [
                     { id: 1, nome: "Equipo 1", participantes: ["Phietro Emanuel","Henrique Brisola", "Juan", "Eduardo"], totalPaginas: 10 },
                     { id: 2, nome: "Equipo 2", participantes: ["Luana Marcondes", "Hallana Oliveira ", "Davi Peres"], totalPaginas: 13 },
-                    { id: 3, nome: "Equipo 3", participantes: ["Nicole horn da silva ", "Kayk pereira ", "Yasmin de Oliveira ", "Victor Henrique"], totalPaginas: 3 },
+                    { id: 3, nome: "Equipo 3", participantes: ["Nicole horn da silva ", "Kayk pereira ", "Yasmin de Oliveira ", "Victor Henrique"], totalPaginas: 4 },
                     { id: 4, nome: "Equipo 4", participantes: ["Nicole Cristine Castorino", "Ticiane"], totalPaginas: 2 },
                     { id: 5, nome: "Equipo 5", participantes: ["Larah", "João Antonio", "Gabi"], totalPaginas: 2 },
                     { id: 6, nome: "Equipo 6", participantes: ["Júlia Sanchez", "Nicoly Castro"], totalPaginas: 2 },
@@ -474,7 +499,7 @@
                     { id: 10, nome: "Equipo 10", participantes: ["Larissa Buture"], totalPaginas: 2 },
                     { id: 11, nome: "Equipo 11", participantes: ["Vitor Andrioli", "Anderson", "Luiz Fernando"], totalPaginas: 4 },
                     { id: 12, nome: "Equipo 12", participantes: ["Anihelly Faria Pinheiro ", "Emilly Zampieri ", "Nicolas slonoski"], totalPaginas: 1 },
-                    { id: 13, nome: "Equipo 13", participantes: ["Alumno 13-1", "Alumno 13-2"], totalPaginas: 6 },
+                    { id: 13, nome: "Equipo 13", participantes: ["João Victor", "Samuel"], totalPaginas: 8 },
                     { id: 14, nome: "Equipo 14", participantes: ["Alumno 14-1", "Alumno 14-2"], totalPaginas: 2 },
                     { id: 15, nome: "Equipo 15", participantes: ["Alumno 15-1", "Alumno 15-2"], totalPaginas: 8 }
                 ]
@@ -525,6 +550,47 @@
         let equipaAtual = null; let paginaAtual = 0; let currentQ = 0, quizScore = 0; let tipoTrabalhoAtual = 'gibi';
 
         function getIdiomaAtual() { return localStorage.getItem('idiomaSite') || 'pt'; }
+
+        
+        // --- LÓGICA DAS NOVAS FUNCIONALIDADES ---
+        const listaMissoes = [
+            "Feche a torneira ao escovar os dentes hoje!",
+            "Tome um banho de no máximo 5 minutos.",
+            "Use a vassoura para limpar a calçada, nunca a mangueira.",
+            "Junte o máximo de louça antes de abrir a torneira.",
+            "Regue suas plantas apenas no início da manhã ou fim da tarde."
+        ];
+        const listaFatos = [
+            "Apenas 1% da água da Terra é doce e acessível para consumo humano.",
+            "Uma calça jeans consome cerca de 10.000 litros de água para ser produzida.",
+            "O corpo humano de um adulto é composto por cerca de 60% a 70% de água.",
+            "Uma torneira pingando pode desperdiçar mais de 40 litros de água por dia.",
+            "A água que bebemos hoje é a mesma que circulava no planeta na época dos dinossauros."
+        ];
+        function atualizarNovidades() {
+            const d = new Date();
+            const m = listaMissoes[d.getDate() % listaMissoes.length];
+            const f = listaFatos[Math.floor(Math.random() * listaFatos.length)];
+            if(document.getElementById('missao-texto-novo')) document.getElementById('missao-texto-novo').innerText = m;
+            if(document.getElementById('fato-texto-novo')) document.getElementById('fato-texto-novo').innerText = f;
+        }
+        let audioStream = new Audio('https://assets.mixkit.co/sfx/preview/mixkit-water-stream-loop-1196.mp3');
+        audioStream.loop = true;
+        let estaTocando = false;
+        function toggleSomNovo() {
+            const btn = document.getElementById('btn-som-novo');
+            const icon = btn.querySelector('i');
+            if (!estaTocando) {
+                audioStream.play().catch(e => console.log("Erro áudio:", e));
+                icon.className = 'fas fa-volume-up';
+                btn.classList.add('playing');
+            } else {
+                audioStream.pause();
+                icon.className = 'fas fa-volume-mute';
+                btn.classList.remove('playing');
+            }
+            estaTocando = !estaTocando;
+        }
 
         function carregarItensAgua() {
             const container = document.getElementById('lista-itens-agua');
@@ -806,7 +872,7 @@
                     target.scrollIntoView({ behavior: 'smooth' }); 
                 }
             }
-            if(sectionId === 'agua-virtual') carregarItensAgua();
+            if(sectionId === 'agua-virtual') carregarItensAgua(); atualizarNovidades();
         }); });
 
         const detalhesCuriosidades = {
@@ -1000,7 +1066,7 @@
             const idiomaSelect = document.getElementById('idioma-select');
             if(idiomaSelect) idiomaSelect.value = idiomaSalvo;
             aplicarTraducao();
-            carregarItensAgua();
+            carregarItensAgua(); atualizarNovidades();
         };
     </script>
 </body>
