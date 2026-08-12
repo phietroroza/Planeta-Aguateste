@@ -156,6 +156,23 @@
     .btn-som-manus.ativo { animation: pulse-manus 2s infinite; }
     @keyframes pulse-manus { 0% { box-shadow: 0 0 0 0 rgba(0, 191, 255, 0.7); } 70% { box-shadow: 0 0 0 15px rgba(0, 191, 255, 0); } 100% { box-shadow: 0 0 0 0 rgba(0, 191, 255, 0); } }
     @media (max-width: 768px) { .feature-container-manus { padding: 0 20px; } .btn-som-manus { right: 20px; bottom: 90px; } }
+
+    /* --- NOVAS FUNCIONALIDADES (CERTIFICADO, BANHO, COMPARATIVO, GLOSSÁRIO) --- */
+    .timer-display { font-size: 4rem; font-weight: 800; color: var(--secondary); margin: 20px 0; font-family: 'Inter', sans-serif; }
+    .timer-liters { font-size: 1.5rem; color: #fff; margin-bottom: 20px; }
+    .glossary-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1.5rem; }
+    .glossary-card { background: rgba(0, 51, 102, 0.7); border: 1px solid var(--secondary); padding: 1.5rem; border-radius: 10px; cursor: help; transition: 0.3s; }
+    .glossary-card:hover { background: var(--secondary); color: var(--primary-dark); }
+    .glossary-card h4 { margin-bottom: 10px; font-size: 1.2rem; }
+    .visual-comparison { display: flex; flex-wrap: wrap; gap: 5px; justify-content: center; margin-top: 15px; }
+    .jug-icon { font-size: 1.2rem; color: #00bfff; }
+    .cert-overlay { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.95); z-index: 3000; align-items: center; justify-content: center; padding: 20px; }
+    .cert-box { background: #fff; color: #333; width: 100%; max-width: 800px; padding: 50px; border: 15px double #003366; position: relative; text-align: center; font-family: 'Poppins', sans-serif; }
+    .cert-box h1 { font-size: 2.5rem; color: #003366; margin-bottom: 20px; text-transform: uppercase; }
+    .cert-box p { font-size: 1.2rem; margin: 10px 0; }
+    .cert-name { font-size: 2rem; font-weight: 800; color: #00bfff; text-decoration: underline; margin: 20px 0; }
+    .cert-footer { margin-top: 40px; font-size: 0.9rem; border-top: 1px solid #ccc; padding-top: 20px; }
+    @media print { body * { visibility: hidden; } .cert-overlay, .cert-overlay * { visibility: visible; } .cert-overlay { position: absolute; left: 0; top: 0; background: white; } .cert-box { border: 5px solid #003366; } .close-btn-cert, .print-btn { display: none; } }
 </style>
 </head>
 <body>
@@ -171,7 +188,11 @@
             <a href="#" class="nav-link" data-section="agua-virtual"><i class="fas fa-calculator"></i> <span data-key="agua_virtual">Água Virtual</span></a>
             <a href="#" class="nav-link" data-section="hidratacao"><i class="fas fa-glass-water"></i> <span data-key="hidratacao">Hidratação</span></a>
             <a href="#" class="nav-link" data-section="quiz"><i class="fas fa-question-circle"></i> <span data-key="quiz">Quiz</span></a>
-        </nav>
+        
+            <a href="#" class="nav-link" data-section="banho"><i class="fas fa-stopwatch"></i> <span>Banho Consciente</span></a>
+            <a href="#" class="nav-link" data-section="comparativo"><i class="fas fa-th"></i> <span>Comparativo Visual</span></a>
+            <a href="#" class="nav-link" data-section="glossario"><i class="fas fa-book-atlas"></i> <span>Glossário</span></a>
+</nav>
     </aside>
     <button id="som-btn" class="btn-som-manus" onclick="controleSom()"><i class="fas fa-volume-mute"></i></button><div class="config-btn" onclick="toggleConfig()"><i class="fas fa-ellipsis-vertical"></i></div>
     <div id="config-menu" class="config-menu">
@@ -295,7 +316,54 @@
                 <div id="quiz-result" style="display:none; text-align:center;"><h3 style="color:var(--secondary); font-size:2rem;" data-key="parabens">Parabéns!</h3><p id="res-score" style="font-size:1.5rem; margin:20px 0;"></p><button class="btn" onclick="startQuiz()" data-key="btn_tentar">Tentar Novamente</button></div>
             </div>
         </section>
-    </main>
+    
+        <section id="banho">
+            <h2 class="section-title">Cronômetro de Banho</h2>
+            <div id="agua-virtual-container" style="text-align:center;">
+                <p>Veja quanta água você gasta em tempo real durante o banho.</p>
+                <div class="timer-display" id="banho-timer">00:00</div>
+                <div class="timer-liters" id="banho-litros">0.0 Litros</div>
+                <div style="display:flex; justify-content:center; gap:1rem;">
+                    <button class="btn" onclick="toggleBanho()" id="btn-banho">Iniciar Banho</button>
+                    <button class="btn" onclick="resetBanho()" style="border-color:#ccc; color:#ccc;">Resetar</button>
+                </div>
+                <p style="margin-top:20px; font-size:0.9rem; opacity:0.7;">*Baseado em uma média de 12 litros por minuto.</p>
+            </div>
+        </section>
+
+        <section id="comparativo">
+            <h2 class="section-title">Comparativo Visual</h2>
+            <div class="grid-container">
+                <div class="info-card">
+                    <h3>🍔 Hambúrguer</h3>
+                    <p>2.400 Litros</p>
+                    <div class="visual-comparison" id="comp-burger"></div>
+                    <small>Cada 💧 = 20L (1 galão)</small>
+                </div>
+                <div class="info-card">
+                    <h3>👖 Calça Jeans</h3>
+                    <p>10.000 Litros</p>
+                    <div class="visual-comparison" id="comp-jeans"></div>
+                </div>
+                <div class="info-card">
+                    <h3>☕ Xícara de Café</h3>
+                    <p>140 Litros</p>
+                    <div class="visual-comparison" id="comp-cafe"></div>
+                </div>
+            </div>
+        </section>
+
+        <section id="glossario">
+            <h2 class="section-title">Glossário da Água</h2>
+            <div class="glossary-grid">
+                <div class="glossary-card"><h4>Dessalinização</h4><p>Processo que remove o sal da água do mar para torná-la potável.</p></div>
+                <div class="glossary-card"><h4>Aquífero</h4><p>Reserva de água subterrânea armazenada em rochas porosas.</p></div>
+                <div class="glossary-card"><h4>Lençol Freático</h4><p>Camada superior da água subterrânea, mais próxima da superfície.</p></div>
+                <div class="glossary-card"><h4>Pegada Hídrica</h4><p>Volume total de água doce usado para produzir bens e serviços.</p></div>
+                <div class="glossary-card"><h4>Esgoto Tratado</h4><p>Água usada que passou por limpeza antes de voltar aos rios.</p></div>
+            </div>
+        </section>
+</main>
 
     <footer><p>&copy; 2026 Projeto Planeta Agua| <span data-key="footer">Gestão Sustentável da Água</span></p></footer>
     <div class="bubbles"><span style="--i:11"></span><span style="--i:18"></span><span style="--i:25"></span><span style="--i:14"></span><span style="--i:22"></span><span style="--i:9"></span><span style="--i:27"></span><span style="--i:16"></span><span style="--i:30"></span><span style="--i:12"></span><span style="--i:21"></span><span style="--i:15"></span><span style="--i:24"></span><span style="--i:19"></span><span style="--i:28"></span><span style="--i:13"></span><span style="--i:26"></span><span style="--i:17"></span><span style="--i:23"></span><span style="--i:10"></span></div>
@@ -924,9 +992,106 @@
 
         function startQuiz() { currentQ = 0; quizScore = 0; const startEl = document.getElementById('quiz-start'); const resultEl = document.getElementById('quiz-result'); const boxEl = document.getElementById('quiz-box'); if(startEl) startEl.style.display = 'none'; if(resultEl) resultEl.style.display = 'none'; if(boxEl) boxEl.style.display = 'block'; showQuestion(); }
         function showQuestion() { const idioma = getIdiomaAtual(); const q = quizData[idioma][currentQ]; const curEl = document.getElementById('q-current'); const textEl = document.getElementById('q-text'); const optionsDiv = document.getElementById('q-options'); if(!q) return; if(curEl) curEl.innerText = currentQ + 1; if(textEl) textEl.innerText = q.q; if(optionsDiv) { optionsDiv.innerHTML = ''; q.a.forEach((opt, i) => { const div = document.createElement('div'); div.className = 'quiz-option'; div.innerText = opt; div.onclick = () => checkAnswer(i); optionsDiv.appendChild(div); }); } }
-        function checkAnswer(idx) { const idioma = getIdiomaAtual(); const correct = quizData[idioma][currentQ].c; const options = document.querySelectorAll('.quiz-option'); options.forEach(opt => opt.onclick = null);
-            if (idx === correct) { options[idx].classList.add('correct'); quizScore++; } else { options[idx].classList.add('wrong'); options[correct].classList.add('correct'); }
-            setTimeout(() => { currentQ++; if (currentQ < quizData[idioma].length) showQuestion(); else { const boxEl = document.getElementById('quiz-box'); const resultEl = document.getElementById('quiz-result'); const scoreEl = document.getElementById('res-score'); if(boxEl) boxEl.style.display = 'none'; if(resultEl) resultEl.style.display = 'block'; if(scoreEl) scoreEl.innerText = `${quizScore} / ${quizData[idioma].length}`; } }, 1500); }
+        
+        // --- NOVAS FUNCIONALIDADES JS ---
+        let banhoInterval;
+        let banhoSegundos = 0;
+        let banhoAtivo = false;
+
+        function toggleBanho() {
+            const btn = document.getElementById('btn-banho');
+            if(!banhoAtivo) {
+                banhoAtivo = true;
+                btn.innerText = "Parar Banho";
+                btn.style.borderColor = "#ef476f";
+                btn.style.color = "#ef476f";
+                banhoInterval = setInterval(() => {
+                    banhoSegundos++;
+                    const min = Math.floor(banhoSegundos / 60).toString().padStart(2, '0');
+                    const seg = (banhoSegundos % 60).toString().padStart(2, '0');
+                    document.getElementById('banho-timer').innerText = `${min}:${seg}`;
+                    const litros = (banhoSegundos * 0.2).toFixed(1); // 12L/min = 0.2L/seg
+                    document.getElementById('banho-litros').innerText = `${litros} Litros`;
+                }, 1000);
+            } else {
+                clearInterval(banhoInterval);
+                banhoAtivo = false;
+                btn.innerText = "Continuar Banho";
+                btn.style.borderColor = "var(--secondary)";
+                btn.style.color = "var(--secondary)";
+            }
+        }
+
+        function resetBanho() {
+            clearInterval(banhoInterval);
+            banhoSegundos = 0;
+            banhoAtivo = false;
+            document.getElementById('banho-timer').innerText = "00:00";
+            document.getElementById('banho-litros').innerText = "0.0 Litros";
+            const btn = document.getElementById('btn-banho');
+            btn.innerText = "Iniciar Banho";
+            btn.style.borderColor = "var(--secondary)";
+            btn.style.color = "var(--secondary)";
+        }
+
+        function gerarComparativos() {
+            const burger = document.getElementById('comp-burger');
+            const jeans = document.getElementById('comp-jeans');
+            const cafe = document.getElementById('comp-cafe');
+            if(burger) burger.innerHTML = "💧".repeat(2400/20);
+            if(jeans) jeans.innerHTML = "💧".repeat(10000/200); // Usando 200L por gota para jeans não travar
+            if(cafe) cafe.innerHTML = "💧".repeat(140/20);
+        }
+
+        
+        function checkAnswer(idx) { 
+            const idioma = getIdiomaAtual(); 
+            const correct = quizData[idioma][currentQ].c; 
+            const options = document.querySelectorAll('.quiz-option'); 
+            options.forEach(opt => opt.onclick = null);
+            if (idx === correct) { options[idx].classList.add('correct'); quizScore++; } 
+            else { options[idx].classList.add('wrong'); options[correct].classList.add('correct'); }
+            
+            setTimeout(() => { 
+                currentQ++; 
+                if (currentQ < quizData[idioma].length) showQuestion(); 
+                else { 
+                    const boxEl = document.getElementById('quiz-box'); 
+                    const resultEl = document.getElementById('quiz-result'); 
+                    const scoreEl = document.getElementById('res-score'); 
+                    if(boxEl) boxEl.style.display = 'none'; 
+                    if(resultEl) resultEl.style.display = 'block'; 
+                    if(scoreEl) {
+                        scoreEl.innerHTML = `Pontuação: ${quizScore} / ${quizData[idioma].length}`;
+                        if(quizScore >= 8) {
+                            scoreEl.innerHTML += `
+                                <div style="margin-top:25px; background:rgba(0,191,255,0.1); padding:20px; border-radius:10px; border:1px dashed var(--secondary);">
+                                    <p style="margin-bottom:10px; font-weight:600;">Você é um Guardião da Água! 🏆</p>
+                                    <input type="text" id="nome-certificado-input" placeholder="Seu nome completo" 
+                                        style="width:100%; padding:12px; border-radius:8px; border:1px solid var(--secondary); background:#002244; color:#fff; margin-bottom:15px; text-align:center;">
+                                    <button class="btn" style="background:var(--secondary); color:var(--primary-dark); width:100%;" onclick="prepararCertificado()">Gerar Meu Certificado</button>
+                                </div>`;
+                        }
+                    }
+                } 
+            }, 1500); 
+        }
+
+        function prepararCertificado() {
+            const input = document.getElementById('nome-certificado-input');
+            const nome = input ? input.value.trim() : "";
+            if(!nome) {
+                alert("Por favor, digite seu nome para o certificado!");
+                if(input) input.focus();
+                return;
+            }
+            document.getElementById('cert-user-name').innerText = nome;
+            document.getElementById('cert-date').innerText = new Date().toLocaleDateString();
+            document.getElementById('cert-overlay').style.display = 'flex';
+        }
+
+        function fecharCert() { document.getElementById('cert-overlay').style.display = 'none'; }
+
         function toggleConfig() { const menu = document.getElementById('config-menu'); if(menu) menu.classList.toggle('active'); }
         document.addEventListener('click', (e) => { const menu = document.getElementById('config-menu'); const btn = document.querySelector('.config-btn'); if (!menu || !btn) return; if (!menu.contains(e.target) && !btn.contains(e.target)) { menu.classList.remove('active'); } });
         function hexToRgb(hex) { let r = parseInt(hex.slice(1, 3), 16); let g = parseInt(hex.slice(3, 5), 16); let b = parseInt(hex.slice(5, 7), 16); return {r, g, b}; }
@@ -1060,5 +1225,20 @@
         // Rodar ao carregar
         window.addEventListener('load', initManus);
     </script>
+
+    <div id="cert-overlay" class="cert-overlay">
+        <div class="cert-box">
+            <button class="close-btn-cert" onclick="fecharCert()" style="position:absolute; top:10px; right:20px; font-size:2rem; border:none; background:none; cursor:pointer;">&times;</button>
+            <h1>Certificado de Guardião</h1>
+            <p>Certificamos que</p>
+            <div class="cert-name" id="cert-user-name">SEU NOME AQUI</div>
+            <p>concluiu com excelência o desafio do <strong>Planeta Água</strong></p>
+            <p>e compromete-se a proteger este recurso vital.</p>
+            <div class="cert-footer">
+                <p>Data: <span id="cert-date"></span></p>
+                <button class="btn print-btn" onclick="window.print()" style="margin-top:20px;">Imprimir Certificado</button>
+            </div>
+        </div>
+    </div>
 </body>
 </html>
