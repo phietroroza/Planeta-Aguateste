@@ -174,13 +174,20 @@
     .cert-footer { margin-top: 40px; font-size: 0.9rem; border-top: 1px solid #ccc; padding-top: 20px; }
     @media print { body * { visibility: hidden; } .cert-overlay, .cert-overlay * { visibility: visible; } .cert-overlay { position: absolute; left: 0; top: 0; background: white; } .cert-box { border: 5px solid #003366; } .close-btn-cert, .print-btn { display: none; } }
 
-    .scanner-container { display: none; flex-direction: column; align-items: center; background: rgba(0,0,0,0.9); padding: 20px; border-radius: 15px; margin-top: 20px; border: 2px solid var(--secondary); }
-    #video-canvas { width: 100%; max-width: 400px; border-radius: 10px; border: 3px solid #fff; margin-bottom: 15px; }
-    .scanner-result { background: var(--secondary); color: var(--primary-dark); padding: 15px; border-radius: 10px; font-weight: 800; text-align: center; width: 100%; max-width: 400px; display: none; }
-    .scan-btn-main { background: #ffcc00; color: #333; font-weight: 800; border: none; padding: 15px 30px; border-radius: 50px; cursor: pointer; margin-bottom: 20px; transition: 0.3s; }
-    .scan-btn-main:hover { transform: scale(1.05); background: #fff; }
+    /* --- CHATBOT AQUA --- */
+    .chat-bubble { position: fixed; bottom: 25px; right: 160px; width: 60px; height: 60px; background: var(--secondary); color: var(--primary-dark); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 1.8rem; cursor: pointer; z-index: 2500; box-shadow: 0 5px 20px rgba(0,191,255,0.5); transition: 0.3s; border: none; }
+    .chat-bubble:hover { transform: scale(1.1); }
+    .chat-window { position: fixed; bottom: 100px; right: 25px; width: 350px; height: 450px; background: #002244; border: 2px solid var(--secondary); border-radius: 15px; display: none; flex-direction: column; z-index: 2500; box-shadow: 0 10px 40px rgba(0,0,0,0.6); overflow: hidden; }
+    .chat-header { background: var(--secondary); color: var(--primary-dark); padding: 15px; font-weight: 800; display: flex; justify-content: space-between; align-items: center; }
+    .chat-messages { flex: 1; padding: 15px; overflow-y: auto; display: flex; flex-direction: column; gap: 10px; background: rgba(0,0,0,0.2); }
+    .msg { max-width: 80%; padding: 10px 15px; border-radius: 15px; font-size: 0.9rem; line-height: 1.4; }
+    .msg-bot { align-self: flex-start; background: #003366; color: #fff; border-bottom-left-radius: 2px; }
+    .msg-user { align-self: flex-end; background: var(--secondary); color: var(--primary-dark); border-bottom-right-radius: 2px; font-weight: 600; }
+    .chat-input-area { padding: 10px; background: #001a33; display: flex; gap: 5px; }
+    .chat-input-area input { flex: 1; padding: 10px; border-radius: 20px; border: 1px solid var(--secondary); background: #002244; color: #fff; outline: none; }
+    .chat-send { background: var(--secondary); color: var(--primary-dark); border: none; width: 40px; height: 40px; border-radius: 50%; cursor: pointer; }
+    @media (max-width: 768px) { .chat-window { width: 90%; right: 5%; bottom: 80px; } .chat-bubble { right: 20px; bottom: 160px; } }
 </style>
-<script src="https://unpkg.com/ml5@latest/dist/ml5.min.js"></script>
 </head>
 <body>
   <aside class="sidebar">
@@ -235,34 +242,7 @@
 
         <section id="curiosidades" class="active">
             <h2 class="section-title" data-key="fatos_titulo">Fatos e Curiosidades</h2>
-            
-            
-            <div style="text-align:center; margin-bottom: 40px;">
-                <div style="display:flex; justify-content:center; gap:10px; flex-wrap:wrap;">
-                    <button class="scan-btn-main" onclick="abrirCamera()">📸 ABRIR CÂMERA</button>
-                    <button class="scan-btn-main" style="background:#4CAF50; color:white;" onclick="document.getElementById('file-upload').click()">📁 CARREGAR FOTO</button>
-                    <input type="file" id="file-upload" style="display:none;" accept="image/*" onchange="analisarArquivo(this)">
-                </div>
-
-                <div id="ia-scanner" class="scanner-container">
-                    <div id="camera-view">
-                        <video id="webcam" autoplay playsinline width="400" height="300" style="width:100%; max-width:400px; border-radius:10px;"></video>
-                        <br>
-                        <button class="btn" id="btn-capturar" onclick="capturarEAnalisar()" style="margin-top:10px; background:#ffcc00; color:#333; border:none;">📸 TIRAR FOTO E ANALISAR</button>
-                    </div>
-                    
-                    <div id="result-view" style="display:none; width:100%; max-width:400px;">
-                        <canvas id="video-canvas" style="width:100%; border-radius:10px; border:3px solid #fff;"></canvas>
-                        <div id="status-ia" style="margin:10px 0; font-style:italic; color:var(--secondary);">IA Analisando...</div>
-                        <div id="resultado-ia" class="scanner-result" style="display:block; margin-bottom:15px;"></div>
-                        <button class="btn" onclick="novaFoto()" style="background:var(--secondary); color:var(--primary-dark); border:none;">TIRAR OUTRA FOTO</button>
-                    </div>
-
-                    <button class="btn" onclick="fecharScanner()" style="margin-top:20px; border-color:#fff; color:#fff;">FECHAR</button>
-                </div>
-            </div>
-
-<div class="grid-container">
+            <div class="grid-container">
                 <div class="info-card" onclick="abrirCuriosidade('ciclo')"><h3>🌊 <span data-key="ciclo_tit">O Ciclo da Água</span></h3><p data-key="ciclo_resumo">A água percorre um ciclo contínuo na natureza...</p><span class="click-hint" data-key="clique">Clique para saber mais →</span></div>
                 <div class="info-card" onclick="abrirCuriosidade('consumo')"><h3>🏭 <span data-key="consumo_tit">Consumo Industrial</span></h3><p data-key="consumo_resumo">A indústria consome aproximadamente 19% da água doce...</p><span class="click-hint" data-key="clique">Clique para saber mais →</span></div>
                 <div class="info-card" onclick="abrirCuriosidade('contaminacao')"><h3>☠️ <span data-key="conta_tit">Contaminação</span></h3><p data-key="conta_resumo">2 bilhões de pessoas vivem em regiões com escassez severa...</p><span class="click-hint" data-key="clique">Clique para saber mais →</span></div>
@@ -284,34 +264,7 @@
         </div>
         <section id="trabalhos">
             <h2 class="section-title" data-key="trabalhos_titulo">Nossos Trabalhos</h2>
-            
-            
-            <div style="text-align:center; margin-bottom: 40px;">
-                <div style="display:flex; justify-content:center; gap:10px; flex-wrap:wrap;">
-                    <button class="scan-btn-main" onclick="abrirCamera()">📸 ABRIR CÂMERA</button>
-                    <button class="scan-btn-main" style="background:#4CAF50; color:white;" onclick="document.getElementById('file-upload').click()">📁 CARREGAR FOTO</button>
-                    <input type="file" id="file-upload" style="display:none;" accept="image/*" onchange="analisarArquivo(this)">
-                </div>
-
-                <div id="ia-scanner" class="scanner-container">
-                    <div id="camera-view">
-                        <video id="webcam" autoplay playsinline width="400" height="300" style="width:100%; max-width:400px; border-radius:10px;"></video>
-                        <br>
-                        <button class="btn" id="btn-capturar" onclick="capturarEAnalisar()" style="margin-top:10px; background:#ffcc00; color:#333; border:none;">📸 TIRAR FOTO E ANALISAR</button>
-                    </div>
-                    
-                    <div id="result-view" style="display:none; width:100%; max-width:400px;">
-                        <canvas id="video-canvas" style="width:100%; border-radius:10px; border:3px solid #fff;"></canvas>
-                        <div id="status-ia" style="margin:10px 0; font-style:italic; color:var(--secondary);">IA Analisando...</div>
-                        <div id="resultado-ia" class="scanner-result" style="display:block; margin-bottom:15px;"></div>
-                        <button class="btn" onclick="novaFoto()" style="background:var(--secondary); color:var(--primary-dark); border:none;">TIRAR OUTRA FOTO</button>
-                    </div>
-
-                    <button class="btn" onclick="fecharScanner()" style="margin-top:20px; border-color:#fff; color:#fff;">FECHAR</button>
-                </div>
-            </div>
-
-<div class="grid-container">
+            <div class="grid-container">
                 <div class="info-card" onclick="mostrarListaEquipes('gibi')"><i class="fas fa-book"></i><h3 data-key="gibi_tit">Gibi</h3><p data-key="gibi_desc">Veja as 15 equipes e seus gibis sobre a água</p><span class="click-hint" data-key="clique">Clique para ver →</span></div>
                 <div class="info-card" onclick="mostrarListaEquipes('stopmotion')"><i class="fas fa-video"></i><h3 data-key="stop_tit">Stop Motion</h3><p data-key="stop_desc">Assista aos vídeos das 15 equipes</p><span class="click-hint" data-key="clique">Clique para ver →</span></div>
                 <div class="info-card" onclick="mostrarListaEquipes('terrario')"><i class="fas fa-seedling"></i><h3 data-key="terrario_tit">Terrário</h3><p data-key="terrario_desc">Veja as 15 equipes e seus terrários</p><span class="click-hint" data-key="clique">Clique para ver →</span></div>
@@ -394,34 +347,7 @@
 
         <section id="comparativo">
             <h2 class="section-title">Comparativo Visual</h2>
-            
-            
-            <div style="text-align:center; margin-bottom: 40px;">
-                <div style="display:flex; justify-content:center; gap:10px; flex-wrap:wrap;">
-                    <button class="scan-btn-main" onclick="abrirCamera()">📸 ABRIR CÂMERA</button>
-                    <button class="scan-btn-main" style="background:#4CAF50; color:white;" onclick="document.getElementById('file-upload').click()">📁 CARREGAR FOTO</button>
-                    <input type="file" id="file-upload" style="display:none;" accept="image/*" onchange="analisarArquivo(this)">
-                </div>
-
-                <div id="ia-scanner" class="scanner-container">
-                    <div id="camera-view">
-                        <video id="webcam" autoplay playsinline width="400" height="300" style="width:100%; max-width:400px; border-radius:10px;"></video>
-                        <br>
-                        <button class="btn" id="btn-capturar" onclick="capturarEAnalisar()" style="margin-top:10px; background:#ffcc00; color:#333; border:none;">📸 TIRAR FOTO E ANALISAR</button>
-                    </div>
-                    
-                    <div id="result-view" style="display:none; width:100%; max-width:400px;">
-                        <canvas id="video-canvas" style="width:100%; border-radius:10px; border:3px solid #fff;"></canvas>
-                        <div id="status-ia" style="margin:10px 0; font-style:italic; color:var(--secondary);">IA Analisando...</div>
-                        <div id="resultado-ia" class="scanner-result" style="display:block; margin-bottom:15px;"></div>
-                        <button class="btn" onclick="novaFoto()" style="background:var(--secondary); color:var(--primary-dark); border:none;">TIRAR OUTRA FOTO</button>
-                    </div>
-
-                    <button class="btn" onclick="fecharScanner()" style="margin-top:20px; border-color:#fff; color:#fff;">FECHAR</button>
-                </div>
-            </div>
-
-<div class="grid-container">
+            <div class="grid-container">
                 <div class="info-card">
                     <h3>🍔 Hambúrguer</h3>
                     <p>2.400 Litros</p>
@@ -1082,138 +1008,55 @@
         function showQuestion() { const idioma = getIdiomaAtual(); const q = quizData[idioma][currentQ]; const curEl = document.getElementById('q-current'); const textEl = document.getElementById('q-text'); const optionsDiv = document.getElementById('q-options'); if(!q) return; if(curEl) curEl.innerText = currentQ + 1; if(textEl) textEl.innerText = q.q; if(optionsDiv) { optionsDiv.innerHTML = ''; q.a.forEach((opt, i) => { const div = document.createElement('div'); div.className = 'quiz-option'; div.innerText = opt; div.onclick = () => checkAnswer(i); optionsDiv.appendChild(div); }); } }
         
         
-        
-        // --- LÓGICA DO SCANNER IA (FOTO E ARQUIVO) ---
-        let classifier;
-        let video;
-        let canvas;
-        let ctx;
-        let streamAtivo = null;
+        // --- INTELIGÊNCIA DO AQUA ---
+        const baseConhecimento = [
+            { chaves: ['oi', 'olá', 'ola', 'bom dia', 'boa tarde'], resposta: 'Olá! Sou o Aqua, seu assistente hídrico. Como posso ajudar?' },
+            { chaves: ['economizar', 'dicas', 'poupar', 'ajudar'], resposta: 'Para economizar, você pode tomar banhos mais curtos, fechar a torneira ao escovar os dentes e reaproveitar a água da chuva! Veja mais na nossa seção de Dicas.' },
+            { chaves: ['pegada hídrica', 'agua virtual', 'o que é'], resposta: 'Pegada hídrica é o volume total de água doce usado para produzir os bens que consumimos. Por exemplo, um hambúrguer gasta 2.400 litros!' },
+            { chaves: ['quiz', 'jogo', 'perguntas'], resposta: 'Nosso Quiz tem 10 perguntas. Se você acertar 8 ou mais, ganha um Certificado de Guardião da Água! Quer tentar?' },
+            { chaves: ['banho', 'tempo', 'litros'], resposta: 'Um banho de 15 minutos gasta cerca de 180 litros. Use nosso Cronômetro de Banho para medir seu gasto real!' },
+            { chaves: ['certificado', 'ganhar', 'nome'], resposta: 'O certificado é liberado no final do Quiz para quem demonstra ser um verdadeiro mestre da água.' },
+            { chaves: ['hambúrguer', 'carne', 'comida'], resposta: 'A produção de carne gasta muita água. Um quilo de carne bovina pode chegar a 15 mil litros!' },
+            { chaves: ['jeans', 'calça', 'roupa'], resposta: 'Uma única calça jeans consome cerca de 10 mil litros de água em sua produção.' },
+            { chaves: ['quem criou', 'autor', 'site'], resposta: 'Este site foi criado para educar sobre a importância da gestão sustentável da água. Espero que esteja gostando!' },
+            { chaves: ['obrigado', 'valeu', 'tchau'], resposta: 'De nada! Lembre-se: cada gota conta. Até logo! 🌊' }
+        ];
 
-        const pegadaObjetos = {
-            'apple': { nome: 'Maçã', litros: 70 },
-            'banana': { nome: 'Banana', litros: 160 },
-            't-shirt': { nome: 'Camiseta', litros: 2700 },
-            'jersey': { nome: 'Roupa/Tecido', litros: 2500 },
-            'jean': { nome: 'Calça Jeans', litros: 10000 },
-            'coffee': { nome: 'Café', litros: 140 },
-            'cup': { nome: 'Copo/Xícara', litros: 140 },
-            'orange': { nome: 'Laranja', litros: 50 },
-            'bread': { nome: 'Pão', litros: 40 },
-            'cellphone': { nome: 'Celular', litros: 12000 },
-            'laptop': { nome: 'Notebook', litros: 20000 },
-            'paper': { nome: 'Papel', litros: 10 },
-            'bottle': { nome: 'Garrafa', litros: 5 },
-            'shoe': { nome: 'Sapato', litros: 8000 },
-            'hamburger': { nome: 'Hambúrguer', litros: 2400 },
-            'meat': { nome: 'Carne', litros: 15000 }
-        };
+        function toggleChat() {
+            const win = document.getElementById('chat-window');
+            win.style.display = win.style.display === 'flex' ? 'none' : 'flex';
+            if(win.style.display === 'flex') document.getElementById('chat-input').focus();
+        }
 
-        async function carregarModelo() {
-            if (!classifier) {
-                document.getElementById('status-ia').innerText = 'Carregando IA...';
-                classifier = await ml5.imageClassifier('MobileNet');
+        function enviarMensagem() {
+            const input = document.getElementById('chat-input');
+            const texto = input.value.trim();
+            if(!texto) return;
+
+            adicionarMensagem(texto, 'user');
+            input.value = '';
+
+            setTimeout(() => {
+                const resposta = processarResposta(texto);
+                adicionarMensagem(resposta, 'bot');
+            }, 600);
+        }
+
+        function adicionarMensagem(texto, tipo) {
+            const area = document.getElementById('chat-messages');
+            const div = document.createElement('div');
+            div.className = `msg msg-${tipo}`;
+            div.textContent = texto;
+            area.appendChild(div);
+            area.scrollTop = area.scrollHeight;
+        }
+
+        function processarResposta(pergunta) {
+            const p = pergunta.toLowerCase();
+            for (let item of baseConhecimento) {
+                if (item.chaves.some(c => p.includes(c))) return item.resposta;
             }
-        }
-
-        async function abrirCamera() {
-            document.getElementById('ia-scanner').style.display = 'flex';
-            document.getElementById('camera-view').style.display = 'block';
-            document.getElementById('result-view').style.display = 'none';
-            
-            video = document.getElementById('webcam');
-            try {
-                streamAtivo = await navigator.mediaDevices.getUserMedia({ video: { facingMode: 'environment' } });
-                video.srcObject = streamAtivo;
-                await carregarModelo();
-            } catch (err) {
-                alert("Erro na câmera: " + err);
-            }
-        }
-
-        async function capturarEAnalisar() {
-            canvas = document.getElementById('video-canvas');
-            ctx = canvas.getContext('2d');
-            
-            // Ajusta canvas ao tamanho do vídeo
-            canvas.width = video.videoWidth;
-            canvas.height = video.videoHeight;
-            
-            // Desenha o frame atual
-            ctx.drawImage(video, 0, 0, canvas.width, canvas.height);
-            
-            // Para a câmera
-            if (streamAtivo) {
-                streamAtivo.getTracks().forEach(track => track.stop());
-            }
-            
-            document.getElementById('camera-view').style.display = 'none';
-            document.getElementById('result-view').style.display = 'block';
-            
-            processarImagem(canvas);
-        }
-
-        async function analisarArquivo(input) {
-            if (input.files && input.files[0]) {
-                document.getElementById('ia-scanner').style.display = 'flex';
-                document.getElementById('camera-view').style.display = 'none';
-                document.getElementById('result-view').style.display = 'block';
-                
-                canvas = document.getElementById('video-canvas');
-                ctx = canvas.getContext('2d');
-                
-                const img = new Image();
-                img.onload = async () => {
-                    canvas.width = img.width;
-                    canvas.height = img.height;
-                    ctx.drawImage(img, 0, 0);
-                    await carregarModelo();
-                    processarImagem(canvas);
-                };
-                img.src = URL.createObjectURL(input.files[0]);
-            }
-        }
-
-        function processarImagem(elemento) {
-            document.getElementById('status-ia').innerText = 'Analisando imagem...';
-            document.getElementById('resultado-ia').style.display = 'none';
-            
-            classifier.classify(elemento, (error, results) => {
-                if (error) {
-                    console.error(error);
-                    return;
-                }
-                
-                const label = results[0].label.toLowerCase();
-                const resDiv = document.getElementById('resultado-ia');
-                
-                let objetoEncontrado = null;
-                for (let key in pegadaObjetos) {
-                    if (label.includes(key)) {
-                        objetoEncontrado = pegadaObjetos[key];
-                        break;
-                    }
-                }
-
-                document.getElementById('status-ia').innerText = 'Análise Concluída!';
-                resDiv.style.display = 'block';
-                
-                if (objetoEncontrado) {
-                    resDiv.innerHTML = `Detectado: <strong>${objetoEncontrado.nome}</strong><br>Pegada Hídrica: <span style="font-size:1.5rem;">${objetoEncontrado.litros} Litros 💧</span>`;
-                } else {
-                    resDiv.innerHTML = `IA detectou: <i>${results[0].label}</i><br>Desculpe, não tenho a pegada hídrica exata deste item.`;
-                }
-            });
-        }
-
-        function novaFoto() {
-            if (streamAtivo) streamAtivo.getTracks().forEach(track => track.stop());
-            abrirCamera();
-        }
-
-        function fecharScanner() {
-            if (streamAtivo) streamAtivo.getTracks().forEach(track => track.stop());
-            document.getElementById('ia-scanner').style.display = 'none';
+            return "Interessante! Não tenho certeza sobre isso agora, mas lembre-se: economizar água é sempre a melhor escolha. Tente perguntar sobre 'dicas', 'quiz' ou 'pegada hídrica'.";
         }
 
         // --- NOVAS FUNCIONALIDADES JS ---
@@ -1461,6 +1304,21 @@
                 <p>Data: <span id="cert-date"></span></p>
                 <button class="btn print-btn" onclick="window.print()" style="margin-top:20px;">Imprimir Certificado</button>
             </div>
+        </div>
+    </div>
+
+    <button class="chat-bubble" onclick="toggleChat()"><i class="fas fa-robot"></i></button>
+    <div id="chat-window" class="chat-window">
+        <div class="chat-header">
+            <span><i class="fas fa-droplet"></i> Aqua - Assistente IA</span>
+            <button onclick="toggleChat()" style="background:none; border:none; color:inherit; cursor:pointer; font-size:1.2rem;">&times;</button>
+        </div>
+        <div id="chat-messages" class="chat-messages">
+            <div class="msg msg-bot">Olá! Eu sou o <strong>Aqua</strong>. Como posso te ajudar a salvar o planeta hoje? 🌊</div>
+        </div>
+        <div class="chat-input-area">
+            <input type="text" id="chat-input" placeholder="Pergunte algo..." onkeypress="if(event.key==='Enter') enviarMensagem()">
+            <button class="chat-send" onclick="enviarMensagem()"><i class="fas fa-paper-plane"></i></button>
         </div>
     </div>
 </body>
