@@ -574,23 +574,30 @@
             if(document.getElementById('missao-texto-novo')) document.getElementById('missao-texto-novo').innerText = m;
             if(document.getElementById('fato-texto-novo')) document.getElementById('fato-texto-novo').innerText = f;
         }
-        let audioStream = new Audio('https://assets.mixkit.co/sfx/preview/mixkit-water-stream-loop-1196.mp3');
+        let audioStream = new Audio('https://www.soundjay.com/nature/river-1.mp3');
         audioStream.loop = true;
         let estaTocando = false;
+        
         function toggleSomNovo() {
             const btn = document.getElementById('btn-som-novo');
             const icon = btn.querySelector('i');
             if (!estaTocando) {
-                audioStream.play().catch(e => console.log("Erro áudio:", e));
-                icon.className = 'fas fa-volume-up';
-                btn.classList.add('playing');
+                audioStream.play().then(() => {
+                    icon.className = 'fas fa-volume-up';
+                    btn.classList.add('playing');
+                    estaTocando = true;
+                }).catch(e => {
+                    console.error("Erro ao tocar áudio. Talvez o link expirou ou o navegador bloqueou:", e);
+                    alert("O navegador bloqueou o áudio ou o link falhou. Tente clicar novamente!");
+                });
             } else {
                 audioStream.pause();
                 icon.className = 'fas fa-volume-mute';
                 btn.classList.remove('playing');
+                estaTocando = false;
             }
-            estaTocando = !estaTocando;
         }
+
 
         function carregarItensAgua() {
             const container = document.getElementById('lista-itens-agua');
